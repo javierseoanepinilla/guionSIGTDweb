@@ -1,0 +1,12 @@
+name: "guionSIGTDweb"
+title: "Guion de SIG-TD"
+description: |
+  guion de prácticas de la asignatura "Aplicaciones de SIG y TD en ecología"
+output_dir: "docs"
+navbar:
+  right:
+    - text: "Inicio"
+      href: index.html
+    - text: "Sobre la web"
+      href: about.html
+output: distill::distill_article

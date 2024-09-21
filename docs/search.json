@@ -1,0 +1,21 @@
+{
+  "articles": [
+    {
+      "path": "about.html",
+      "title": "About this site",
+      "description": "Some additional details about the website",
+      "author": [],
+      "contents": "\n\n\n\n",
+      "last_modified": "2024-09-21T17:12:30+02:00"
+    },
+    {
+      "path": "index.html",
+      "title": "guionSIGTD",
+      "description": "Bienvenido a este guion en construcción de la asignatura \"Aplicaciones SIG y TD en Ecología\", del Máster en Ecología (UAM/UCM)\n",
+      "author": [],
+      "contents": "\n\n\n\n",
+      "last_modified": "2024-09-21T17:12:31+02:00"
+    }
+  ],
+  "collections": []
+}
