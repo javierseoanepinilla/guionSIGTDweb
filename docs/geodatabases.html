@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 6 Geodatabases | Aplicaciones de SIG y TD en Ecología</title>
+<meta name="author" content="Javier Seoane Pinilla, Pablo Acebes Vives">
+<meta name="description" content="En este capítulo vamos a trabajar, exclusivamente, con capas vectoriales. Estas tienen asociadas una serie de datos alfanuméricos, que se organizan en tablas de atributos. Para acceder a ellas,...">
+<meta name="generator" content="bookdown 0.40 with bs4_book()">
+<meta property="og:title" content="Capítulo 6 Geodatabases | Aplicaciones de SIG y TD en Ecología">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/2014-06-07-Aneto.png">
+<meta property="og:description" content="En este capítulo vamos a trabajar, exclusivamente, con capas vectoriales. Estas tienen asociadas una serie de datos alfanuméricos, que se organizan en tablas de atributos. Para acceder a ellas,...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 6 Geodatabases | Aplicaciones de SIG y TD en Ecología">
+<meta name="twitter:description" content="En este capítulo vamos a trabajar, exclusivamente, con capas vectoriales. Estas tienen asociadas una serie de datos alfanuméricos, que se organizan en tablas de atributos. Para acceder a ellas,...">
+<meta name="twitter:image" content="/2014-06-07-Aneto.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-binding-2.2.2/leaflet.js"></script><script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script><script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script><link href="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet">
+<script src="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.js"></script><script src="libs/leaflet-minimap-3.3.1/Minimap-binding.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Manual de prácticas en QGIS">Aplicaciones de SIG y TD en Ecología</a>:
+        <small class="text-muted">Manual de prácticas en QGIS</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Sobre este libro</a></li>
+<li class="book-part">PRELIMINARES</li>
+<li><a class="" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
+<li><a class="" href="organizaci%C3%B3n-del-guion-de-pr%C3%A1cticas.html"><span class="header-section-number">2</span> Organización del guion de prácticas</a></li>
+<li class="book-part">SIG Y CARTOGRAFÍA</li>
+<li><a class="" href="introducci%C3%B3n-a-los-sig.html"><span class="header-section-number">3</span> Introducción a los SIG</a></li>
+<li><a class="" href="fundamentos-cartograf%C3%ADa.html"><span class="header-section-number">4</span> Fundamentos cartografía</a></li>
+<li class="book-part">OPERACIONES SIG</li>
+<li><a class="" href="presentaci%C3%B3n-de-qgis.html"><span class="header-section-number">5</span> Presentación de QGIS</a></li>
+<li><a class="active" href="geodatabases.html"><span class="header-section-number">6</span> Geodatabases</a></li>
+<li><a class="" href="geoprocesamiento-vectorial.html"><span class="header-section-number">7</span> Geoprocesamiento vectorial</a></li>
+<li><a class="" href="geoprocesamiento-r%C3%A1ster.html"><span class="header-section-number">8</span> Geoprocesamiento ráster</a></li>
+<li><a class="" href="geoprocesamiento-miscel%C3%A1nea.html"><span class="header-section-number">9</span> Geoprocesamiento (miscelánea)</a></li>
+<li class="book-part">TELEDETECCIÓN</li>
+<li><a class="" href="teledetecci%C3%B3n.html"><span class="header-section-number">10</span> Teledetección</a></li>
+<li class="book-part">PAISAJE</li>
+<li><a class="" href="an%C3%A1lisis-de-la-estructura-del-paisaje.html"><span class="header-section-number">11</span> Análisis de la estructura del paisaje</a></li>
+<li class="book-part">MODELOS DE DISTRIBUCIÓN DE ESPECIES</li>
+<li><a class="" href="captura-y-preparaci%C3%B3n-de-la-informaci%C3%B3n.html"><span class="header-section-number">12</span> Captura y preparación de la información</a></li>
+<li><a class="" href="elaboraci%C3%B3n-del-modelo-predictivo.html"><span class="header-section-number">13</span> Elaboración del modelo predictivo</a></li>
+<li class="book-part">CIERRE</li>
+<li><a class="" href="referencias-para-aprender-m%C3%A1s.html"><span class="header-section-number">14</span> Referencias para aprender más</a></li>
+<li><a class="" href="informaci%C3%B3n-de-la-sesi%C3%B3n.html"><span class="header-section-number">15</span> Información de la sesión</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="geodatabases" class="section level1" number="6">
+<h1>
+<span class="header-section-number">Capítulo 6</span> Geodatabases<a class="anchor" aria-label="anchor" href="#geodatabases"><i class="fas fa-link"></i></a>
+</h1>
+<div class="inline-figure">En este capítulo vamos a trabajar, exclusivamente, con capas vectoriales. Estas tienen asociadas una serie de datos alfanuméricos, que se organizan en tablas de atributos. Para acceder a ellas, pinchamos en “Capa” y “Abrir tabla de atributos”. También se puede acceder a ella directamente desde la barra de herramientas, pinchando sobre
+<img src="imagenes/icono_tabla_atributos.png" width="14">
+teniendo seleccionada la capa en la leyenda.</div>
+<p>Las tablas de atributos se organizan en filas y columnas:</p>
+<ul>
+<li>Campos: variables o atributos asociados a cada elemento. Se corresponden con las columnas.</li>
+<li>Registros: los elementos de la base de datos. Se corresponden con las filas. Pinchando sobre ellas, se seleccionan los registros en el proyecto, quedando marcados en amarillo.</li>
+</ul>
+<p>Por el momento, abriremos dos capas en un nuevo proyecto: <span style="color: red;">Observac_VT_17042001_Project_ETRS89.shp</span>, y <span style="color: red;">parcelario_2001_VT_ETRS89.shp</span>. Abre la tabla de atributos de la capa de parcelario y selecciona algunas filas haciendo clic en el número que las identifica a la izquierda de la tabla. Quedarán resaltadas en azul en la tabla y los polígonos correspondientes se marcarán en amarillo en la imagen, como se muestra por ejemplo a continuación:</p>
+<div class="inline-figure"><img src="imagenes/selecciona_algunas_filas.png" width="454"></div>
+<div id="herramientas-asociadas-a-las-tablas-de-atributos" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> Herramientas asociadas a las tablas de atributos<a class="anchor" aria-label="anchor" href="#herramientas-asociadas-a-las-tablas-de-atributos"><i class="fas fa-link"></i></a>
+</h2>
+<p>En este apartado, nos centraremos en aprender a manejar las opciones que aparecen en la barra de herramientas de la tabla de atributos:</p>
+<div class="inline-figure"><img src="imagenes/barra_herramientas_tabla.png" width="430"></div>
+<div id="selección-de-elementos-desde-la-vista" class="section level3" number="6.1.1">
+<h3>
+<span class="header-section-number">6.1.1</span> Selección de elementos desde la vista<a class="anchor" aria-label="anchor" href="#selecci%C3%B3n-de-elementos-desde-la-vista"><i class="fas fa-link"></i></a>
+</h3>
+<p>Si queremos seleccionar elementos de una capa concreta, debemos cerciorarnos de que esta se encuentra seleccionada en el menú de capas. Solo entonces, podemos pinchar sobre el botón “Seleccionar objetos espaciales por área o por clic único”, en la barra de herramientas de la pantalla principal. Si pinchas en la flecha adyacente se despliega un menú en el que puedes elegir otro tipo de selección: por polígono, a mano alzada o por radio.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_seleccionar_objetos.png" width="456"></div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-7" class="exercise"><strong>Exercise 6.1  </strong></span>Probar las distintas opciones: seleccionar a mano alzada, por círculo, por polígono, con clic único para una selección ‘quirúrgica’.</p>
+</div>
+<p>También es posible seleccionar los objetos según su valor, para lo cual, pinchamos sobre el primer botón a la derecha. Si deseamos quitar la selección de los objetos en todas las capas, haremos clic en el segundo botón hacia la derecha.
+Desde la tabla de atributos también podemos seleccionar todo el conjunto de datos e invertir o deshacer la selección, pinchando sobre los botones correspondientes de su propia barra de herramientas.</p>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-8" class="exercise"><strong>Exercise 6.2  </strong></span>Seleccionar parcelas con SUST_DEF = BR:</p>
+<ul>
+<li>hacer ‘flash a objetos’</li>
+<li>seleccionar objetos</li>
+<li>exportar selección (una capa con barbecho, p.e.)</li>
+</ul>
+</div>
+</div>
+<div id="selección-por-localización" class="section level3" number="6.1.2">
+<h3>
+<span class="header-section-number">6.1.2</span> Selección por localización<a class="anchor" aria-label="anchor" href="#selecci%C3%B3n-por-localizaci%C3%B3n"><i class="fas fa-link"></i></a>
+</h3>
+<div class="inline-figure">Otra manera de realizar una selección se basa en la relación espacial entre los objetos de dos capas distintas. Para acceder a estas herramientas, pinchamos sobre el botón “Caja de herramientas” en la barra de herramientas
+<img src="imagenes/icono_caja_herramientas.png" width="20">
+</div>
+<p>A la derecha de la pantalla se despliega un menú, en el cual seleccionamos “Selección vectorial” &gt; “Selección por localización”. Es fundamental que los elementos de la capa que servirá para hacer la selección estén previamente seleccionados. En este caso, buscamos visualizar los polígonos del terreno, dentro de los cuales se han realizado observaciones de sisón; por lo tanto, la capa <span style="color: red;">Observac_VT_17042001_Project_ETRS89</span> ha de estar seleccionada.</p>
+<p>En el nuevo menú que aparece en pantalla, seleccionamos la capa <span style="color: red;">parcelario_2001_VT_ETRS89</span>, y el predicado geométrico “contienen”, para comparar los elementos de esta capa con la de <span style="color: red;">Observac_VT_17042001_Project_ETRS89</span>. Por último, creamos una nueva selección, y pinchamos en “ejecutar”. El visor nos mostrará entonces una selección de aquellas parcelas, en las que se han registrado observaciones de sisón.</p>
+<p>Si se desean extraer las parcelas, la selección se puede exportar después como un archivo (botón derecho &gt; exportar) o bien, para hacerlo directamente, en la caja de herramientas se puede localizar el módulo ‘extraer por ubicación’.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_seleccionar_localizacion.png" width="125%" style="display: block; margin: auto;"></div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-9" class="exercise"><strong>Exercise 6.3  </strong></span>¿Cómo se llama el LIC donde se centra este trabajo?: seleccionar los LICs donde se registraron sisones.</p>
+</div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-10" class="exercise"><strong>Exercise 6.4  </strong></span>¿Cómo se llama la ZEPA donde se centra este trabajo?: Seleccionar las ZEPAs donde se registraron sisones.</p>
+</div>
+</div>
+<div id="selección-por-filtro" class="section level3" number="6.1.3">
+<h3>
+<span class="header-section-number">6.1.3</span> Selección por filtro<a class="anchor" aria-label="anchor" href="#selecci%C3%B3n-por-filtro"><i class="fas fa-link"></i></a>
+</h3>
+<p>Una tercera forma de realizar una selección es a través de los atributos de la capa, por lo que es necesario volver a abrir la tabla de atributos de la capa <span style="color: red;">Observac_VT_17042001_Project_ETRS89</span>. En la barra de herramientas, pinchamos sobre el botón “Seleccionar/filtrar objetos utilizando formulario”, para establecer los criterios deseados para realizar la selección. Se realiza mediante expresiones lógicas en lenguaje SQL, con las que se debe rellenar el formulario.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_seleccionar_filtro.png" width="125%" style="display: block; margin: auto;"></div>
+<p>Si hacemos clic sobre “Mostrar todos los objetos espaciales” &gt; “Filtro avanzado (expresión)”, podremos introducir nuestras propias expresiones lógicas, además de poder navegar entre una gran cantidad de funciones que ofrece el programa.</p>
+<p>Otra manera de filtrar los datos es pinchando sobre la pestaña “Capa” &gt; “Filtrar…”. En la nueva ventana, nos encontramos con todos los campos, operadores y valores que podemos filtrar, en la capa seleccionada previamente en el menú de capas.</p>
+<p>Para seleccionar los valores que deseamos filtrar, simplemente los escribimos en el formulario, en el campo en el que se encuentren, y pulsamos sobre el botón “Filtrar objetos”. Si necesitamos hacer una selección de varios, debemos especificarlo. En lugar de hacer clic sobre este botón, pinchamos sobre la flecha adyacente, abriéndose un desplegable que nos da la opción de “Filtrar dentro (Y)” o “Extender campo (O)” (es decir, de emplear los marcadores logísticos IN u OR). Finalmente, en la barra inferior, se irá perfilando la expresión logística que necesitamos, la cual será del tipo: <span style="color: blue;">((“SUST_DEF” ILIKE ‘%B%’)) OR ((“SUST_DEF” ILIKE ‘%BR%’))</span>. Su
+resultado se aplica directamente; en cualquier caso, siempre podemos pinchar sobre “Aplicar”.</p>
+<p>Nótese que la diferencia entre seleccionar y filtrar es que mientras que el filtrado muestra los registros que cumplen un criterio y oculta el resto, la selección resalta con un color los registros en el mapa y las correspondientes filas en la tabla.</p>
+<p>Una buena práctica es duplicar las capas que se quieren filtrar y mostrar el número de objetos (botón derecho sobre el nombre de la capa &gt; mostrar número de objetos) tanto de la capa original como de la filtrada para comprobar el efecto del filtro.</p>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-11" class="exercise"><strong>Exercise 6.5  </strong></span>Duplicar la capa del parcelario y mostrar el número de objetos en ambas capas. En la duplicada, filtrar las parcelas con barbecho viejo (BV)</p>
+</div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-12" class="exercise"><strong>Exercise 6.6  </strong></span>¿Cuáles son los LICs de la Comunidad de Madrid? ¿Cuáles son las ZEPAs de la Comunidad de Madrid?</p>
+</div>
+<div class="infobox caution">
+<p>¡IMPORTANTE!
+Al filtrar varios registros empleando operadores logísticos, se deben seleccionar DE UNO EN UNO antes de dar al botón “Filtrar objetos”. Si no, el programa no reconocerá la selección.</p>
+</div>
+</div>
+<div id="añadir-área-y-perímetro-de-polígonos" class="section level3" number="6.1.4">
+<h3>
+<span class="header-section-number">6.1.4</span> Añadir área y perímetro de polígonos<a class="anchor" aria-label="anchor" href="#a%C3%B1adir-%C3%A1rea-y-per%C3%ADmetro-de-pol%C3%ADgonos"><i class="fas fa-link"></i></a>
+</h3>
+<p>Una herramienta muy útil es la que nos permite calcular información geométrica de los elementos de las capas, tales como el área o el perímetro (si la capa en cuestión está compuesta por polígonos), o la longitud (en el caso de que esté compuesta por líneas).</p>
+<p>Empleando la capa vectorial de <span style="color: red;">parcelario_2001_VT_ETRS89</span>, al igual que para la selección por localización, para emplear esta herramienta debemos ir a la caja de herramientas, localizar “Geometría vectorial” &gt; “Agregar atributos de geometría”. Se creará una nueva capa llamada <span style="color: blue;">Información de geometría añadida</span>, en cuya tabla de atributos se habrá incluido información geométrica (esta dependerá del tipo de capa sobre la que se hayan agregado dichos atributos). En caso de calcular las áreas y perímetros, recordad que las unidades que estamos trabajando están en metros (se puede ver en propiedades del proyecto como se indica al inicio del guion).</p>
+<p>Este fichero de parcelario se irá modificando con las operaciones que vayamos haciendo más adelante, así que es mejor renombrarlo a <span style="color: red;">parcelario_2001_VT_ETRS89_ext.shp</span> (de ‘extendido’, para entendernos). Iremos trabajando (y modificando) sobre este.</p>
+<p>También se pueden añadir estos atributos de las geometrías mediante la calculadora de campos, actualizando un campo, yendo a las funciones de geometría de la calculadora y añadiendo <span style="color: blue;">“$area”</span> –si lo que se quiere incluir es el área–.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_agregar_geometria.png" width="328"></div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-13" class="exercise"><strong>Exercise 6.7  </strong></span>Añadir atributos de geometría a un fichero vectorial de líneas (carreteras: <span style="color: red;">carreteras04_ETRS89.shp</span>) y de puntos (observaciones: <span style="color: red;">Observac_VT_17042001_Project_ETRS89.shp</span>) mediante el algoritmo de ‘agregar atributos de geometría’. ¿Qué atributos se incluyen en cada caso?</p>
+</div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-14" class="exercise"><strong>Exercise 6.8  </strong></span>¿Cuál es el área de los LICs de la Comunidad de Madrid (de cada uno de ellos)? ¿Qué área tiene el LIC en el que se centra el estudio?</p>
+</div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-15" class="exercise"><strong>Exercise 6.9  </strong></span>¿Cuál es el área de las ZEPAs de la Comunidad de Madrid (de cada una de ellas)? ¿Qué área tiene la ZEPA en el que se centra el estudio?</p>
+</div>
+</div>
+<div id="estadísticas-de-campos" class="section level3" number="6.1.5">
+<h3>
+<span class="header-section-number">6.1.5</span> Estadísticas de campos<a class="anchor" aria-label="anchor" href="#estad%C3%ADsticas-de-campos"><i class="fas fa-link"></i></a>
+</h3>
+<p>Otra de las opciones que se nos brinda, es la posibilidad de calcular estadísticos de campos numéricos, si bien esta herramienta solo está disponible si se ha seleccionado, previamente, un campo numérico. Para accionarla, debemos hacer clic sobre el botón “Mostrar resumen estadístico”. Debajo del menú de capas, aparecerá el menú de estadística.</p>
+<p>Para abrir las herramientas estadísticas, nos basta con pinchar sobre “Vectorial” en la barra superior &gt; “Herramientas de análisis” &gt; “Estadísticas básicas para campos”. Nos genera un archivo de “estadísticas” que si seleccionamos con doble clic, nos abre el enlace con los datos de estadísticas básicas asociadas a la capa.</p>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-16" class="exercise"><strong>Exercise 6.10  </strong></span></p>
+<ul>
+<li>¿Cuántos LICs y cuántas ZEPAs hay en la Comunidad de Madrid?</li>
+<li>¿Qué tamaño medio tienen los LICs y las ZEPAs en la Comunidad de Madrid?</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="edición-de-tablas-de-atributos" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> Edición de tablas de atributos<a class="anchor" aria-label="anchor" href="#edici%C3%B3n-de-tablas-de-atributos"><i class="fas fa-link"></i></a>
+</h2>
+<p>Antes de comenzar, debemos cerciorarnos de que la capa en la que queremos trabajar se encuentra seleccionada en el menú de capas. Posteriormente, pulsamos sobre “Caja de herramientas de procesos” &gt; “Tabla vectorial” &gt; “Rehacer campos”, tras lo cual, se abrirá una nueva ventana, desde la cual tendremos la capacidad de modificar la estructura de la tabla de atributos (añadiendo, renombrando o eliminando campos). También podemos modificar un atributo, directamente sobre la tabla, pinchando sobre el botón “Conmutar edición”.</p>
+<p>Tras las modificaciones se nos crea una nueva capa que deberemos guardar exportándola.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_rehacer_campos.png" width="125%" style="display: block; margin: auto;"></div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-17" class="exercise"><strong>Exercise 6.11  </strong></span>Crea nueva capa basada en “Observac_…”, donde renombres las columnas X e Y a Lon y Lat, elimines el campo N_MACH y añadas un campo de texto; llama a la capa tmp, cárgala e inspecciónala.</p>
+</div>
+<div class="rmdnote">
+<p>La capa que estamos editando NO se modifica, sino que se genera una nueva capa con una tabla de atributos modificada.</p>
+</div>
+<div id="calculadora-de-campos" class="section level3" number="6.2.1">
+<h3>
+<span class="header-section-number">6.2.1</span> Calculadora de campos<a class="anchor" aria-label="anchor" href="#calculadora-de-campos"><i class="fas fa-link"></i></a>
+</h3>
+<p>Para la creación de nuevos campos o modificación de estos, también podemos emplear la “calculadora de campos”. Esta función se puede abrir desde la barra de herramientas de la tabla de atributos, o bien directamente desde la pantalla principal, pinchando sobre el botón “Abrir calculadora de campos”. En la ventana emergente aparecerán los campos con los que podemos operar, así como los comandos con los que componer una expresión lógica, la cual se adecuará al campo seleccionado.</p>
+<div class="infobox caution">
+<p>¡IMPORTANTE!
+Si una parte de los registros está seleccionada previamente, las operaciones se realizarán únicamente sobre estos.</p>
+</div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-18" class="exercise"><strong>Exercise 6.12  </strong></span></p>
+<ol style="list-style-type: decimal">
+<li>duplicar la capa de Observaciones (por seguridad)</li>
+<li>en esa nueva capa, crear un campo numérico entero (‘nmac2’) que sea N_MACH + 1</li>
+<li>Veamos qué pasa si unos registros están seleccionados. Crear campo nuevo entero (‘nmac3’), seleccionar por expresión desde la tabla de atributos (“SUSTRATO” = ‘BR’ ), actualizar el campo nuevo (‘nmac3’) con nmac3 +1. El resultado es que el nuevo campo adquiere el valor de 2 para los registros seleccionados.</li>
+</ol>
+</div>
+</div>
+<div id="creación-de-un-campo-identificador-único" class="section level3" number="6.2.2">
+<h3>
+<span class="header-section-number">6.2.2</span> Creación de un campo identificador único<a class="anchor" aria-label="anchor" href="#creaci%C3%B3n-de-un-campo-identificador-%C3%BAnico"><i class="fas fa-link"></i></a>
+</h3>
+<p>Supongamos que queremos crear un identificador único para cada registro de la base de datos (aunque ya existe uno en el parcelario, denominado “ID”, vamos a ver cómo podríamos crearlo nosotros mismos, lo que nos puede resultar útil en otras ocasiones cuando no lo tengamos). Para crear este nuevo campo, debemos modificar, nuevamente, la tabla de atributos (véase introducción del capítulo 2). Una vez en la ventana “Rehacer campos”, creamos uno nuevo, al que vamos a nombrar ID2. Será de tipo integer (numero entero) y tendrá una longitud de 8. Otra opción estriba en la modificación de los valores de un campo ya existente, con el objetivo de crear este campo identificador único.</p>
+<p>Siguiendo con nuestro ejemplo, ejecutamos los cambios realizados en el capa (que aparecerá, en el menú de capas, con el nombre ”Rehecho”), y abrimos la calculadora de atributos. En ella, seleccionamos la opción “Actualizar campo existente”, para poder seleccionar el que acabamos de crear.</p>
+<p>En el centro de la ventana, aparece un menú en el cual los comandos aparecen clasificados según su función. Sin embargo, para encontrar uno de forma rápida, podemos teclearlo en la barra de búsqueda situada en la parte superior. Para este caso, vamos a buscar <span style="color: blue;">rec()+1</span>. Alternativamente, si éste no funciona, podemos hacer un identificador único con la expresión <em>@row_number</em>.</p>
+<div class="rmdnote">
+<p>¡RECUERDA!
+También existe la posibilidad de crear un campo nuevo, directamente desde la calculadora de campos.</p>
+</div>
+<div class="inline-figure"><img src="imagenes/Pantallazo_calculadora_campos.png" width="110%" style="display: block; margin: auto;"></div>
+</div>
+<div id="creación-de-un-campo-numérico-derivado" class="section level3" number="6.2.3">
+<h3>
+<span class="header-section-number">6.2.3</span> Creación de un campo numérico derivado<a class="anchor" aria-label="anchor" href="#creaci%C3%B3n-de-un-campo-num%C3%A9rico-derivado"><i class="fas fa-link"></i></a>
+</h3>
+<p>En capas formadas por polígonos, como <span style="color: red;">parcelario_2001_VT_ETRS89_ext</span>, una opción muy interesante es añadir la dimensión fractal de estos. Para ello, primero tenemos que modificar la tabla de atributos, incluyendo un campo llamado D.FRACTAL, de tipo <em>double</em> (numero decimal), tamaño 8 y precisión 2.</p>
+<p>Para calcular los valores de este nuevo campo, abrimos la calculadora de campos, seleccionamos D.FRACTAL en la actualización de campos, y escribimos la operación <span style="color: blue;">area/perimeter</span> (previamente calculado). Si le damos a “Aceptar”, los datos se añadirán automáticamente a la tabla de atributos, aunque no hayamos activado el modo “edición”. Si estamos trabajando sobre la capa temporal “Rehecho”, debemos exportarla a un nuevo shapefile.</p>
+<div class="infobox caution">
+<p>¡IMPORTANTE!
+Previamente, se ha debido añadir la información geométrica correspondiente a la capa; si no, la operación dará error.</p>
+</div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-19" class="exercise"><strong>Exercise 6.13  </strong></span></p>
+<ul>
+<li>¿Cuál es el LIC de la Comunidad de Madrid con una menor relación área/perímetro? (e.d., cuál es el que tiene una menor dimensión fractal)</li>
+<li>¿Y cuál es la ZEPA con menor relación área/perímetro en la Comunidad de Madrid?</li>
+</ul>
+</div>
+</div>
+<div id="reclasificación-de-un-campo" class="section level3" number="6.2.4">
+<h3>
+<span class="header-section-number">6.2.4</span> Reclasificación de un campo<a class="anchor" aria-label="anchor" href="#reclasificaci%C3%B3n-de-un-campo"><i class="fas fa-link"></i></a>
+</h3>
+<p>Esta acción será de vital importancia cuando necesitemos reclasificar las categorías de usos del suelo en otras más sintéticas. En nuestro modelo de distribución potencial del sisón, lo más interesante radica en obtener datos de la estructura espacial de la cobertura del suelo, por lo que, algunas de las clases actuales resultan redundantes para este fin. Por tanto, vamos a reagruparlas de la siguiente manera:</p>
+<ul>
+<li>“Barbecho joven” (BJ): en ella se incluirán “barbecho” (B), “barbecho en rastrojo” (BR), y “barbecho labrado” (BL).</li>
+<li>“Barbecho viejo”: formada por “barbecho viejo” (BV) y “erial (E)”.</li>
+</ul>
+<p>El resto de categorías mantendrá su nomenclatura actual.</p>
+<p>Los pasos para proceder a realizar este cambio, son los siguientes:</p>
+<ol style="list-style-type: decimal">
+<li>Crear un nuevo campo SUST_DEF2 en la tabla de atributos de <span style="color: red;">parcelario_2001_VT_ETRS89_ext</span>, de tipo string (texto) y tamaño 8.</li>
+<li>Filtrar todos los registros que correspondan a “B”, “BL” o “BR” de SUST_DEF o bien como se indica antes, o bien mediante “seleccionar los objetos espaciales mediante una expresión”: al pinchar sobre esta herramienta, se abre una ventana similar a la calculadora de atributos. En ella, debemos plasmar la expresión lógica, resultado de la filtración de registros. La expresión es: <span style="color: blue;">(“SUST_DEF” ILIKE ‘B’)
+OR (“SUST_DEF” ILIKE ‘%BR%’) OR (“SUST_DEF” ILIKE ‘%BL%’)</span>. Después haz clic sobre “Seleccionar objetos espaciales”. Los polígonos seleccionados se deberían mostrar en diferente color en la pantalla principal.</li>
+</ol>
+<div class="rmdnote">
+<p>ILIKE ‘B’ selecciona los ‘B’</p>
+<p>ILIKE ‘%BR% selecciona los registros ’BR’ y los valores que tuvieran ‘BR’ con alguna letra de más al comienzo o al final (no los hay)</p>
+</div>
+<ol start="3" style="list-style-type: decimal">
+<li>En la barra de herramientas de la pantalla principal, pinchamos sobre “Modificar los atributos de todos los objetos seleccionados de manera simultánea” Para que se active esta opción, primero debemos cerciorarnos de que el modo edición está encendido . En la nueva ventana, escribimos “BJ” en la línea correspondiente al campo <em>SUST_DEF2</em>.</li>
+<li>Comprobamos en la tabla de atributos, que los valores seleccionados han tomado el valor “BJ” en la columna <em>SUST_DEF2</em>.</li>
+</ol>
+<p>Repite los mismos pasos para reclasificar la categoría “BV”.</p>
+<p>Como resultado de este proceso, verás que hay casillas vacías (“NULL”) en la columna SUST_DEF2. Para evitar esta incongruencia, vamos a trasladar los datos de SUST_DEF a SUST_DEF2. Lo único que tienes que hacer es seleccionar las filas con casillas rellenas para este campo (repitiendo los pasos anteriores), e invertir la selección (de esta manera, quedarán seleccionadas las vacías). Por último, en la barra superior de la tabla de atributos, seleccionamos SUST_DEF2 = <span style="color: blue;">SUST_DEF</span> y pinchamos sobre “Actualizar lo seleccionado”. Nota que también podríamos seleccionar los valores nulos (con <span style="color: blue;">SUST_DEF2 is NULL</span>) y después actualizar el campo.</p>
+<p>Una estrategia alternativa es comenzar creando SUST_DEF2 y copiar el contenido de SUST_DEF. Entonces no habrá ningún valor NULL. Después, hacer las dos selecciones por el valor de SUST_DEF y actualzar los registros correspondientes de SUST_DEF2 primero a BJ y luego a BV. Esto evita el problema de encontrarse con valores NULL.</p>
+<p>Este es el resultado:</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_reclasificacion.png" width="125%" style="display: block; margin: auto;"></div>
+<p>Alternativamente, se puede reclasificar un campo con una expresión lógica de tipo ‘Case when’ en la tabla de atributos. Queremos reclasificar el parcelario así:</p>
+<ul>
+<li>B+BL+BR = BJ (“barbecho joven”)</li>
+<li>BV + E = BV (“barbecho viejo”)</li>
+<li>V + IMP = O (“otros”)</li>
+<li>C = C (“cultivo”)</li>
+<li>L = L (“labrado”)</li>
+</ul>
+<p>Esto se puede hacer eficientemente usando una sentencia lógica en la calculadora de campos.
+Abre la tabla de atributos en modo de edición y crea un nuevo campo que actualizarás así:
+CASE
+WHEN (“SUST_DEF” = ‘B’ OR “SUST_DEF” = ‘BL’ OR”SUST_DEF” = ‘BR’) THEN ‘BJ’
+WHEN (“SUST_DEF” = ‘BV’ OR “SUST_DEF” = ‘E’) THEN ‘BV’
+WHEN (“SUST_DEF” = ‘V’ OR “SUST_DEF” = ‘IMP’) THEN ‘O’
+WHEN (“SUST_DEF” = ‘C’) THEN ‘C’
+WHEN (“SUST_DEF” = ‘L’) THEN ‘L’
+END</p>
+<div class="rmdnote">
+<p>¡RECUERDA!
+No te olvides de guardar las modificaciones que has realizado en la tabla de atributos antes de salir del modo edición. De otra manera, se borrarán.</p>
+</div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-20" class="exercise"><strong>Exercise 6.14  </strong></span></p>
+<ul>
+<li><p>Clasifica los LICs de la Comunidad de Madrid en ‘grandes’, ‘medianos’ y ‘pequeños’ de acuerdo a si tienen, respectivamente, &gt; <span class="math inline">\(100km^2\)</span>, &gt; <span class="math inline">\(30km^2\)</span>, &lt; <span class="math inline">\(30Km^2\)</span> (genera primero un campo y después actualízalo). Nota que esto es más una clasificación que una reclasificación.</p></li>
+<li><p>Repite el proceso con las ZEPAs.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="resumen-de-tablas" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> Resumen de tablas<a class="anchor" aria-label="anchor" href="#resumen-de-tablas"><i class="fas fa-link"></i></a>
+</h2>
+<p>Podemos obtener síntesis de tablas de atributos obteniendo distintos estadísticos del campo deseado. Para practicar esta función, vamos a abrir un nuevo proyecto, con la capa <span style="color: red;">zp_junio04_ETRS89.shp</span>.</p>
+<p>Algunas capas, como la que presenta la tabla de ZEPAs DE 2004, contienen una gran cantidad de registros que podríamos querer resumir, por ejemplo, para saber la superficie ocupada por ZEPAs en cada comunidad autónoma (e.d., la suma de las hectáreas en ZEPAs para cada comunidad autónoma).</p>
+<p>Para hacerlo podríamos ir a la <strong>calculadora de campos</strong> y operar desde allí. Seleccionamos la opción de crear un campo nuevo de cualquier tipo numérico y le damos el nombre de salida <span style="color: blue;">SumaHa</span>. Usamos la expresión:<span style="color: blue;">sum(“HECTARES”, “CA”)</span>, que indica que sume el contenido del campo “HECTARES” para cada nivel del factor “CA”. Damos a aceptar y verás que la capa se dispone en modo de edición.</p>
+<p>Abre la tabla de atributos. Verás que se ha creado el campo <em>SumaHa</em> y este devuelve la suma que esperamos… excepto en algunos registros donde se lee 0. Estos casos corresponden a los registros donde el nombre de la comunidad autónoma (el valor en ‘CA’) se lee incorrectamente en la tabla. Son nombres con tildes (p.e., Aragón) o eñes (p.e., Cataluña).</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_6_3_1_resumenTablas.png" width="125%" style="display: block; margin: auto;"></div>
+<p>Para conseguir nuestro propósito, la suma de superficies por comunidad autónoma, tenemos tres vías, cada una de las cuales ilustra sobre algunos aspectos de funcionamiento de QGIS, así que las mencionaremos todas aquí:</p>
+<ol style="list-style-type: decimal">
+<li>Cambiar la <strong>codificación de caracteres</strong> de la capa<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;La codificación de caracteres es la forma en que los caracteres del lenguaje se representan en la máquina. Véase: &lt;a href="https://es.wikipedia.org/wiki/Codificaci%C3%B3n_de_caracteres" class="uri"&gt;https://es.wikipedia.org/wiki/Codificaci%C3%B3n_de_caracteres&lt;/a&gt;&lt;/p&gt;'><sup>1</sup></a>. Por defecto, esta es “System” (la del sistema operativo) o UTF-8” (UTF – Unicode Transformation Format), pero estas podrían no representar adecuadamente nuestras tildes y eñes. La norma ISO 8859-1 (también conocida como <em>Latin1</em>) define la codificación del alfabeto español. Vamos a Propiedades de la capa &gt; Fuente &gt; Configurción &gt; Codificación de la fuente de datos y seleccionamos <span style="color: blue;">latin1</span>. Abre la tabla de atributos para comprobar que ahora se leen bien los nombres con tilde.</li>
+</ol>
+<div class="inline-figure"><img src="imagenes/Pantallazo_6_3_2_resumenTablas.png" width="125%" style="display: block; margin: auto;"></div>
+<p>Vuelve a la calculadora de campos para repetir los pasos anteriores (crea un campo SumaHa que editarás con la expresión <span style="color: red;">sum(“HECTARES”, “CA”)</span>). Abre la tabla de atributos para comprobar que esta vez sí que todo ha ido bien.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_6_3_3_resumenTablas.png" width="568"></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Podemos generar un <strong>campo de referencia</strong> que actúe como “CA” pero que en lugar de ser de texto sea <strong>numérico</strong>, y así obviar el problema de los caracteres que no se reconocen. Vamos a la caja de herramientas,y localizar “Tabla vectorial” &gt; “Añadir campo índice de valor único”. En la nueva ventana, indicamos como capa de entrada
+<span style="color: red;">zp_junio04_ETRS89.shp</span>, seleccionamos como campo de clase “CA” y como nombre del campo de salida <span style="color: red;">NUM_FIELD</span>. Como resultado, aparecerá una nueva capa en cuya tabla de atributos se ha añadido el campo <em>NUM_FIELD</em>, que sirve para clasificar numéricamente las autonomías.</li>
+</ol>
+<div class="inline-figure"><img src="imagenes/Pantallazo_indice_unico.png" width="110%" style="display: block; margin: auto;"></div>
+<p>Para calcular la superficie de cada región dedicada a ZEPAs ahora podemos ir a la calculadora de campos y crear un campo <em>SumaHa</em> que editaremos con la expresión <span style="color: red;">sum(“HECTARES”, “NUM_FIELD”)</span>. Como resultado, en la tabla de atributos aparece una nueva columna con este campo, que indicará el área asociada a ZEPAs en función del número otorgado a cada autonomía.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_suma_ha.png" width="125%" style="display: block; margin: auto;"></div>
+<p>El resultado se puede exportar como un fichero .xlsx (botón derecho sobre nombre de la capa, exportar objetos como…) o bien crear una nueva capa.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Podríamos también <strong>corregir los nombres</strong> que se leen mal en <span style="color: red;">zp_junio04_ETRS89.shp</span>. Es una solución factible si hay pocas correcciones que hacer y, de paso, recuerda como seleccionar registros de acuerdo a sus atributos, así que vamos a practicarla.</li>
+</ol>
+<p>Se trata de <em>seleccionar por expresión</em> desde la tabla de atributos los registros correspondientes a comunidades autónomas cuyos nombres se lean mal, una a una. Empecemos por las de Castilla y León. Vamos a seleccionar por expresión, localizamos el campo ‘CA’ y lo añadimos a la ventana de la expresión, buscamos los valores únicos de ese campo y en la lista que se ofrece escogemos el que queremos cambiar. Clicamos sobre Seleccionar objetos espaciales. Después, en la calculadora de campos, actualizaríamos el campo ‘CA’ sólo <em>para los registros seleccionados</em> con el nombre “Castilla y Leon” (sin tilde, el que aparece en la capa de comunidades autónomas). Este paso habría que repetirlo para cada comunidad autónoma cuyo nombre quisiéramos corregir.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_6_3_4_CambiarNombre.png" width="125%" style="display: block; margin: auto;"></div>
+<p>Después de estas correcciones, volveríamos a la calculadora de campos para repetir los pasos anteriores (crea un campo SumaHa que editarás con la expresión <span style="color: red;">sum(“HECTARES”, “CA”)</span>). Abre la tabla de atributos para comprobar que esta vez sí que todo ha ido bien.</p>
+<div class="rmdnote">
+<p>OJO. La selección de registros en la tercera vía que se propone aquí podría no funcionar.</p>
+</div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-21" class="exercise"><strong>Exercise 6.15  </strong></span>¿Qué superficie ocupan los LICs de las distintas regiones biogeográficas (‘BIO_REGION’) en España?</p>
+</div>
+</div>
+<div id="unión-de-tablas" class="section level2" number="6.4">
+<h2>
+<span class="header-section-number">6.4</span> Unión de tablas<a class="anchor" aria-label="anchor" href="#uni%C3%B3n-de-tablas"><i class="fas fa-link"></i></a>
+</h2>
+<p>Existe la posibilidad de unir dos tablas a través de un campo común entre ellas, mediante relaciones de tipo 1:1 (vinculando cada registro a otro procedente de una tabla distinta).</p>
+<p>Para este ejercicio vamos a seguir empleando la capa <span style="color: red;">ZEPA_area.dbf</span> generada anteriormente, así como otras dos nuevas: <span style="color: red;">ccaa_ETRS89.shp</span>, que una capa vectorial de polígonos para las comunidades autónomas (CCAA) y <span style="color: red;">lic_jul04_ETRS89.shp</span>, que es una capa vectorial de polígonos para los Lugares de Importancia Comunitaria (LIC). En primer lugar, nos interesa unir la tabla de la capa de CCAA con la tabla resumen generada en el apartado anterior, para pasar la información sobre la superficie ocupada por ZEPAs en cada CCAA a la capa con los polígonos de las CCAA. ¡OJO! Para que la unión de tablas se haga bien, es MUY IMPORTANTE que los nombres de las Comunidades Autónomas sean idénticos en todas las capas (idénticos hasta en las tildes).</p>
+<p>Lo primero que debemos hacer es abrir el menú “Propiedades de la capa” para la capa a la que queremos unir información (CCAA), y seleccionar la pestaña “Uniones” &gt; “Añadir unión nueva”.</p>
+<p>En la nueva ventana emergente, tenemos que ajustar algunos parámetros:</p>
+<ul>
+<li>“Unir capa”: seleccionamos la capa con los datos a unir (<span style="color: red;">ZEPA_area.shp</span>).</li>
+<li>“Unir campo”: CA será el campo que actuará de nexo de unión entre ambas tablas.</li>
+<li>“Campo objetivo”: CA será el campo de unión, junto con los otros campos que comparten las mismas celdas en ambas tablas.</li>
+<li>Se pueden seleccionar los campos de la tabla que se unirán a la capa (para hacerlo, desplegar las opciones de ‘Joined fields’).</li>
+</ul>
+<div class="rmdnote">
+<p>NOTA: al realizar la unión, se va a generar un campo nuevo en la tabla de la capa de destino, por lo que puede resultar interesante modificar el prefijo del nuevo campo para distinguir su origen. Podemos realizar esta operación desde la ventana “Añadir unión nueva”, seleccionando la opción “Custom Field Name Prefix”.</p>
+</div>
+<div class="inline-figure"><img src="imagenes/Pantallazo_union_vectorial.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="infobox caution">
+<p>Los registros de los campos utilizados para realizar la unión de tablas han de ser IDÉNTICOS, por lo que, pequeñas diferencias, como tildes o espacios, pueden causar estragos durante el proceso.</p>
+</div>
+<p>Te darás cuenta de que la unión de nuestras tablas no ha salido correctamente: ello se debe a la presencia de diferencias en la compilación de algunos de los registros (p.e. la Comunidad de Castilla y León aparece como “CASTILLA Y LEÓN” en la tabla ZEPA_area pero como “CASTILLA Y LEON” (sin tilde) en la capa ‘ccaa_ETRS89.shp’). Para solucionarlo, primero debemos deshacer la unión haciendo clic sobre “Eliminar unión seleccionada”, y proceder a la modificación de la tabla de atributos, para corregir esas pequeñas diferencias. Por último, repetimos el proceso, el cual debería realizarse correctamente. Nombramos a la capa final como <span style="color: blue;">ccaa_zp</span>.</p>
+<p>Para modificar la tabla de atributos así,</p>
+<ol style="list-style-type: decimal">
+<li>Abre la tabla de atributos de la capa que quieres modificar.</li>
+<li>Haz clic en el botón de la calculadora de campos (el icono con el signo igual).</li>
+<li>Selecciona el campo de texto donde quieres reemplazar los valores y marca la opción “Actualizar campo existente”.</li>
+<li>En la pestaña “Funciones”, busca la función “replace” en el grupo “Cadena”.</li>
+<li>Haz doble clic en la función “replace” para insertarla en la expresión. La función “replace” tiene tres argumentos: la cadena original, la subcadena que quieres reemplazar y la subcadena por la que quieres reemplazarla. Por ejemplo, si quieres reemplazar la letra “á” por “a”, puedes escribir: replace(“campo”, ‘á’, ‘a’)</li>
+</ol>
+<div class="rmdnote">
+<p>¡RECUERDA!
+Las uniones establecidas hasta ahora son provisionales, por lo que no se guardarán si cerramos la sesión en QGIS. Si queremos hacerlas permanentes, debemos exportar la capa a *.shp, creando, así, una capa nueva que podamos recuperar en el futuro.</p>
+</div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-22" class="exercise"><strong>Exercise 6.16  </strong></span>Para practicar, vamos a repetir el proceso explicado en los dos últimos apartados, para la capa <span style="color: red;">lic_jul04.shp</span>, que indica los Lugares de Importancia Comunitaria en España (LIC). Los pasos a seguir son los siguientes:</p>
+<ol style="list-style-type: decimal">
+<li>Resumir la tabla de atributos en base al campo “CA”, de tal manera que podamos obtener la suma de “AREA_LIC”.</li>
+<li>Unir la tabla resultante de la unión entre <span style="color: red;">ccaa</span> y <span style="color: red;">zp_junio04</span>, con la tabla resumen de los LICs creada en el paso anterior.</li>
+</ol>
+</div>
+</div>
+<div id="relación-de-tablas" class="section level2" number="6.5">
+<h2>
+<span class="header-section-number">6.5</span> Relación de tablas<a class="anchor" aria-label="anchor" href="#relaci%C3%B3n-de-tablas"><i class="fas fa-link"></i></a>
+</h2>
+<p>Esta herramienta es muy similar a la anterior, ya que permite vincular dos tablas a través de un campo común, manifestándose los cambios en ambas tablas. La única diferencia es la relación 1:varios (o varios:1) que presentan sus registros (p.e., la tabla de origen contiene un registro que se corresponda con varios en la tabla de destino).</p>
+<p>Para este apartado, vamos a trabajar sobre las capas <span style="color: red;">ccaa_ETRS89.shp</span> y <span style="color: red;">zp_junio04_ETRS89.shp</span> sin modificar (por lo que, seguramente, tengas que cargar las capas de nuevo). A diferencia del anterior, en este caso debemos abrir el menú “Propiedades de proyecto” (en la pestaña “Proyecto”) &gt;“Relaciones”. Entonces, tendremos que comprobar que los campos a rellenar son correctos:</p>
+<ul>
+<li>“Nombre”: nueva denominación que deseamos poner a la capa de salida.</li>
+<li>“Capa referida (Padre)”: capa origen de los datos (en nuestro caso, <span style="color: red;">ccaa_ETRS89.shp</span>).</li>
+<li>“Campo referido”: campo del que se va a extraer la relación, perteneciente a la capa de origen.</li>
+<li>“Capa que hace referencia (Hija)”: capa de destino de los datos (para nosotros, <span style="color: red;">zp_junio04_ETRS89.shp</span>).</li>
+<li>“Campo de referencia”: campo al que se van a asociar los datos del campo referido.</li>
+</ul>
+<div class="inline-figure"><img src="imagenes/Pantallazo_relaciones.png" width="110%" style="display: block; margin: auto;"></div>
+<p>Para visualizar la relación, abrimos la capa <span style="color: red;">ccaa_ETRS89.shp</span> y, en la tabla de atributos seleccionamos la vista de ‘formulario’ (botón inferior izquierdo), donde podremos visualizar qué zonas ZEPA se incluían dentro de cada una, en 2004. La capa final la guardamos como <span style="color: blue;">zp_junio04_ETRS89_ext.shp</span>.</p>
+<div class="rmdnote">
+<p>¡IMPORTANTE!
+A diferencia de las uniones, las relaciones NO pueden hacerse permanentes, al ser únicamente vínculos virtuales.</p>
+</div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-23" class="exercise"><strong>Exercise 6.17  </strong></span>¿Cuántas ZEPAs hay en Andalucía, Aragón y Asturias? (menciona tres de ellas)
+(compruébalo en la vista de formulario)</p>
+</div>
+
+</div>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="presentaci%C3%B3n-de-qgis.html"><span class="header-section-number">5</span> Presentación de QGIS</a></div>
+<div class="next"><a href="geoprocesamiento-vectorial.html"><span class="header-section-number">7</span> Geoprocesamiento vectorial</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#geodatabases"><span class="header-section-number">6</span> Geodatabases</a></li>
+<li>
+<a class="nav-link" href="#herramientas-asociadas-a-las-tablas-de-atributos"><span class="header-section-number">6.1</span> Herramientas asociadas a las tablas de atributos</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#selecci%C3%B3n-de-elementos-desde-la-vista"><span class="header-section-number">6.1.1</span> Selección de elementos desde la vista</a></li>
+<li><a class="nav-link" href="#selecci%C3%B3n-por-localizaci%C3%B3n"><span class="header-section-number">6.1.2</span> Selección por localización</a></li>
+<li><a class="nav-link" href="#selecci%C3%B3n-por-filtro"><span class="header-section-number">6.1.3</span> Selección por filtro</a></li>
+<li><a class="nav-link" href="#a%C3%B1adir-%C3%A1rea-y-per%C3%ADmetro-de-pol%C3%ADgonos"><span class="header-section-number">6.1.4</span> Añadir área y perímetro de polígonos</a></li>
+<li><a class="nav-link" href="#estad%C3%ADsticas-de-campos"><span class="header-section-number">6.1.5</span> Estadísticas de campos</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#edici%C3%B3n-de-tablas-de-atributos"><span class="header-section-number">6.2</span> Edición de tablas de atributos</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#calculadora-de-campos"><span class="header-section-number">6.2.1</span> Calculadora de campos</a></li>
+<li><a class="nav-link" href="#creaci%C3%B3n-de-un-campo-identificador-%C3%BAnico"><span class="header-section-number">6.2.2</span> Creación de un campo identificador único</a></li>
+<li><a class="nav-link" href="#creaci%C3%B3n-de-un-campo-num%C3%A9rico-derivado"><span class="header-section-number">6.2.3</span> Creación de un campo numérico derivado</a></li>
+<li><a class="nav-link" href="#reclasificaci%C3%B3n-de-un-campo"><span class="header-section-number">6.2.4</span> Reclasificación de un campo</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#resumen-de-tablas"><span class="header-section-number">6.3</span> Resumen de tablas</a></li>
+<li><a class="nav-link" href="#uni%C3%B3n-de-tablas"><span class="header-section-number">6.4</span> Unión de tablas</a></li>
+<li><a class="nav-link" href="#relaci%C3%B3n-de-tablas"><span class="header-section-number">6.5</span> Relación de tablas</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/03-Geodatabases.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/03-Geodatabases.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Aplicaciones de SIG y TD en Ecología</strong>: Manual de prácticas en QGIS" was written by <a href="http://teguam.es/miembros/javier-seoane/">Javier Seoane Pinilla</a>, <a href="https://teguam.es/miembros/pablo-acebes-vives/">Pablo Acebes Vives</a>. It was last built on 20 September, 2024.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

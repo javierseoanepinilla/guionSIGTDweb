@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 8 Geoprocesamiento ráster | Aplicaciones de SIG y TD en Ecología</title>
+<meta name="author" content="Javier Seoane Pinilla, Pablo Acebes Vives">
+<meta name="description" content="8.1 Modelos digital de elevaciones (MDE) Un modelo digital de elevaciones (MDE) puede definirse como una composición de datos numéricos en formato de capa ráster, en la cual está representada la...">
+<meta name="generator" content="bookdown 0.40 with bs4_book()">
+<meta property="og:title" content="Capítulo 8 Geoprocesamiento ráster | Aplicaciones de SIG y TD en Ecología">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/2014-06-07-Aneto.png">
+<meta property="og:description" content="8.1 Modelos digital de elevaciones (MDE) Un modelo digital de elevaciones (MDE) puede definirse como una composición de datos numéricos en formato de capa ráster, en la cual está representada la...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 8 Geoprocesamiento ráster | Aplicaciones de SIG y TD en Ecología">
+<meta name="twitter:description" content="8.1 Modelos digital de elevaciones (MDE) Un modelo digital de elevaciones (MDE) puede definirse como una composición de datos numéricos en formato de capa ráster, en la cual está representada la...">
+<meta name="twitter:image" content="/2014-06-07-Aneto.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-binding-2.2.2/leaflet.js"></script><script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script><script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script><link href="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet">
+<script src="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.js"></script><script src="libs/leaflet-minimap-3.3.1/Minimap-binding.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Manual de prácticas en QGIS">Aplicaciones de SIG y TD en Ecología</a>:
+        <small class="text-muted">Manual de prácticas en QGIS</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Sobre este libro</a></li>
+<li class="book-part">PRELIMINARES</li>
+<li><a class="" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
+<li><a class="" href="organizaci%C3%B3n-del-guion-de-pr%C3%A1cticas.html"><span class="header-section-number">2</span> Organización del guion de prácticas</a></li>
+<li class="book-part">SIG Y CARTOGRAFÍA</li>
+<li><a class="" href="introducci%C3%B3n-a-los-sig.html"><span class="header-section-number">3</span> Introducción a los SIG</a></li>
+<li><a class="" href="fundamentos-cartograf%C3%ADa.html"><span class="header-section-number">4</span> Fundamentos cartografía</a></li>
+<li class="book-part">OPERACIONES SIG</li>
+<li><a class="" href="presentaci%C3%B3n-de-qgis.html"><span class="header-section-number">5</span> Presentación de QGIS</a></li>
+<li><a class="" href="geodatabases.html"><span class="header-section-number">6</span> Geodatabases</a></li>
+<li><a class="" href="geoprocesamiento-vectorial.html"><span class="header-section-number">7</span> Geoprocesamiento vectorial</a></li>
+<li><a class="active" href="geoprocesamiento-r%C3%A1ster.html"><span class="header-section-number">8</span> Geoprocesamiento ráster</a></li>
+<li><a class="" href="geoprocesamiento-miscel%C3%A1nea.html"><span class="header-section-number">9</span> Geoprocesamiento (miscelánea)</a></li>
+<li class="book-part">TELEDETECCIÓN</li>
+<li><a class="" href="teledetecci%C3%B3n.html"><span class="header-section-number">10</span> Teledetección</a></li>
+<li class="book-part">PAISAJE</li>
+<li><a class="" href="an%C3%A1lisis-de-la-estructura-del-paisaje.html"><span class="header-section-number">11</span> Análisis de la estructura del paisaje</a></li>
+<li class="book-part">MODELOS DE DISTRIBUCIÓN DE ESPECIES</li>
+<li><a class="" href="captura-y-preparaci%C3%B3n-de-la-informaci%C3%B3n.html"><span class="header-section-number">12</span> Captura y preparación de la información</a></li>
+<li><a class="" href="elaboraci%C3%B3n-del-modelo-predictivo.html"><span class="header-section-number">13</span> Elaboración del modelo predictivo</a></li>
+<li class="book-part">CIERRE</li>
+<li><a class="" href="referencias-para-aprender-m%C3%A1s.html"><span class="header-section-number">14</span> Referencias para aprender más</a></li>
+<li><a class="" href="informaci%C3%B3n-de-la-sesi%C3%B3n.html"><span class="header-section-number">15</span> Información de la sesión</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="geoprocesamiento-ráster" class="section level1" number="8">
+<h1>
+<span class="header-section-number">Capítulo 8</span> Geoprocesamiento ráster<a class="anchor" aria-label="anchor" href="#geoprocesamiento-r%C3%A1ster"><i class="fas fa-link"></i></a>
+</h1>
+<div id="modelos-digital-de-elevaciones-mde" class="section level2" number="8.1">
+<h2>
+<span class="header-section-number">8.1</span> Modelos digital de elevaciones (MDE)<a class="anchor" aria-label="anchor" href="#modelos-digital-de-elevaciones-mde"><i class="fas fa-link"></i></a>
+</h2>
+<p>Un modelo digital de elevaciones (MDE) puede definirse como una composición de datos numéricos en formato de capa ráster, en la cual está representada la altitud del terreno, atendiendo a su distribución espacial. Para poder construirlo, es preciso contar con una capa vectorial, que contenga información sobre la altitud de la zona de estudio. En nuestro caso, utilizaremos una capa de curvas de nivel de la Comunidad de Madrid (<span style="color: red;">curvas_20_Project_ETRS89.shp</span>), en la cual, la equidistancia entre ellas será de 20 m.</p>
+<p>El primer paso estriba en la transformación de la capa vectorial en una capa ráster, para lo cual, debemos “rasterizarla”. Nuevamente, en la caja de herramientas, buscamos un complemento GDAL, “Rasterizar (vectorial a ráster)” y ajustamos la resolución del raster a 100x100m, y completamos la información correspondiente a todos los campos. Nota que la extensión del ráster se puede ajustar recortándolo con la máscara de capa que proporciona <span style="color: red;">prov_cam_ETRS89</span> :</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_16_DEM.png" width="125%" style="display: block; margin: auto;"></div>
+<p>El resultado es una capa ráster cuyos píxeles coincidentes con las curvas de nivel de la capa vectorial presentan el valor (altitud) de dicha curva de nivel. No obstante, salta a la vista que QGIS no ha sido capaz de asignar un valor a todas las celdas, por lo que la capa todavía está incompleta (faltan los valores intermedios a las alturas designadas por las curvas de nivel). Para solucionarlo, acudimos a “Ráster” &gt; “Análisis” &gt; “Rellenar sin datos”.</p>
+<div class="rmdnote">
+<p>¡IMPORTANTE!
+Aunque la extensión de la capa se ajuste a la medida de la vectorial, es necesario seleccionar las unidades de tamaño del ráster de salida (píxeles), así como el tamaño de las celdas (100 m). Asimismo, no es necesario guardar esta capa, puesto que se trata de un paso intermedio del proceso, por lo que se mantendrá como archivo temporal.</p>
+</div>
+<p>La capa resultante será el MDE de la extensión de la Comunidad de Madrid, por lo que guardaremos el archivo con el nombre <span style="color: blue;">MDE_madrid</span> (se guardará en formato .tiff por defecto). Si precisamos el MDE de nuestra zona de estudio (Valdetorres de Jarama), los pasos a seguir serán exactamente los mismos, con la salvedad de que la extensión de salida de la capa ráster debe estar delimitada por una de las capas que corresponde a esa zona (ej.: <span style="color: red;">malla_puntos.shp</span>).</p>
+</div>
+<div id="mapa-de-pendientes-y-orientaciones" class="section level2" number="8.2">
+<h2>
+<span class="header-section-number">8.2</span> Mapa de pendientes y orientaciones<a class="anchor" aria-label="anchor" href="#mapa-de-pendientes-y-orientaciones"><i class="fas fa-link"></i></a>
+</h2>
+<p>A partir de los MDE (podemos usar el generado anteriormente de 100x100m o el de mayor resolución disponible para la CAM), se pueden generar capas que muestran distintas rampas, como la pendiente del terreno o la orientación.</p>
+<div id="pendiente" class="section level3" number="8.2.1">
+<h3>
+<span class="header-section-number">8.2.1</span> Pendiente<a class="anchor" aria-label="anchor" href="#pendiente"><i class="fas fa-link"></i></a>
+</h3>
+<p>En este caso, la herramienta “Pendiente” se encuentra en el menú “Ráster” &gt; “Análisis”. Como esta va a ser medida en grados por defecto, no es necesario modificar ningún parámetro de la ventana emergente. Simplemente, nos limitamos a ejecutar el proceso usando el raster de MDE como capa de entrada.</p>
+<p>Llamaremos a la capa definitiva <span style="color: blue;">pendiente.tiff</span>. A la hora de guardar los rasters, si nos da problemas puede ser debido a que es necesario especificar la salida “.tif” en el nombre.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_17_pendiente.png" width="196"></div>
+</div>
+<div id="orientación" class="section level3" number="8.2.2">
+<h3>
+<span class="header-section-number">8.2.2</span> Orientación<a class="anchor" aria-label="anchor" href="#orientaci%C3%B3n"><i class="fas fa-link"></i></a>
+</h3>
+<p>Al igual que para calcular la pendiente, la herramienta “Aspecto” se halla siguiendo la misma ruta de comandos, y seleccionarla implica la aparición de una ventana emergente muy similar a la anterior. El método que debemos especificar para dicha operación es “Ajuste a polinomio de grado 3”. Las unidades, por defecto, también serán especificadas en grados.</p>
+<p>A su vez, para poder incluir esta capa dentro del modelo MDE, debemos tener en cuenta 5 categorías: norte, sur, este, oeste y plano, para lo cual las seleccionamos todas en la misma ventana. Para la reclasificación del raster debemos usar la herramienta “Reclasificar por tabal” que nos aparece en la caja de herramientas -&gt; Análisis raster -&gt; Reclasificar por tabla. En esta herramienta especificamos el raster que queremos reclasificar y añadimos los rangos en la “Tabla de reclasificación”. En dicha tabla ponemos los rangos de orientación que aparecen a continuación y les asignamos un número a cada, el cual modificaremos luego por su nombre con la simbología del raster. En caso de que solo quisiéramos clasificar la imagen atendiendo a las direcciones cardinales, el valor numérico para la categoría plano sería igual a 0, quedando los valores limitados a un rango 0-360. Por lo tanto, la distribución numérica quedaría de esta manera:</p>
+<ul>
+<li>1 - Norte: 0-45 y 315.001-360.</li>
+<li>2 - Este: 45.001-135.</li>
+<li>3 - Sur: 135.001-225.</li>
+<li>4 - Oeste: 225.001-315</li>
+</ul>
+<p>Para una correcta visualización del resultado, cargamos una leyenda de colores con la categoría correspondiente (numérica), modificando el nombre del rango de valores de esta si fuera necesario. El nombre final con el que guardaremos este archivo es <span style="color: blue;">orient_reclas.tiff</span>.</p>
+<div class="infobox caution">
+<p>Esta función solo se encuentra disponible en versiones de QGIS posteriores a la 3.10.12. Dado que esta es la última versión estable del programa creada hasta el momento, es posible que otras opciones no funcionen correctamente en versiones posteriores (dependerá del equipo informático que estés utilizando).</p>
+</div>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="geoprocesamiento-vectorial.html"><span class="header-section-number">7</span> Geoprocesamiento vectorial</a></div>
+<div class="next"><a href="geoprocesamiento-miscel%C3%A1nea.html"><span class="header-section-number">9</span> Geoprocesamiento (miscelánea)</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#geoprocesamiento-r%C3%A1ster"><span class="header-section-number">8</span> Geoprocesamiento ráster</a></li>
+<li><a class="nav-link" href="#modelos-digital-de-elevaciones-mde"><span class="header-section-number">8.1</span> Modelos digital de elevaciones (MDE)</a></li>
+<li>
+<a class="nav-link" href="#mapa-de-pendientes-y-orientaciones"><span class="header-section-number">8.2</span> Mapa de pendientes y orientaciones</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#pendiente"><span class="header-section-number">8.2.1</span> Pendiente</a></li>
+<li><a class="nav-link" href="#orientaci%C3%B3n"><span class="header-section-number">8.2.2</span> Orientación</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/05-GeoprocesamientoRaster.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/05-GeoprocesamientoRaster.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Aplicaciones de SIG y TD en Ecología</strong>: Manual de prácticas en QGIS" was written by <a href="http://teguam.es/miembros/javier-seoane/">Javier Seoane Pinilla</a>, <a href="https://teguam.es/miembros/pablo-acebes-vives/">Pablo Acebes Vives</a>. It was last built on 20 September, 2024.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

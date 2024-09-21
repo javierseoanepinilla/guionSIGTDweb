@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 7 Geoprocesamiento vectorial | Aplicaciones de SIG y TD en Ecología</title>
+<meta name="author" content="Javier Seoane Pinilla, Pablo Acebes Vives">
+<meta name="description" content="En este capítulo, vamos a familiarizarnos con las operaciones de análisis y geoprocesamiento, las cuales se localizan en la caja de herramientas de procesos. Ya hemos trabajado con algunas de...">
+<meta name="generator" content="bookdown 0.40 with bs4_book()">
+<meta property="og:title" content="Capítulo 7 Geoprocesamiento vectorial | Aplicaciones de SIG y TD en Ecología">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/2014-06-07-Aneto.png">
+<meta property="og:description" content="En este capítulo, vamos a familiarizarnos con las operaciones de análisis y geoprocesamiento, las cuales se localizan en la caja de herramientas de procesos. Ya hemos trabajado con algunas de...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 7 Geoprocesamiento vectorial | Aplicaciones de SIG y TD en Ecología">
+<meta name="twitter:description" content="En este capítulo, vamos a familiarizarnos con las operaciones de análisis y geoprocesamiento, las cuales se localizan en la caja de herramientas de procesos. Ya hemos trabajado con algunas de...">
+<meta name="twitter:image" content="/2014-06-07-Aneto.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-binding-2.2.2/leaflet.js"></script><script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script><script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script><link href="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet">
+<script src="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.js"></script><script src="libs/leaflet-minimap-3.3.1/Minimap-binding.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Manual de prácticas en QGIS">Aplicaciones de SIG y TD en Ecología</a>:
+        <small class="text-muted">Manual de prácticas en QGIS</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Sobre este libro</a></li>
+<li class="book-part">PRELIMINARES</li>
+<li><a class="" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
+<li><a class="" href="organizaci%C3%B3n-del-guion-de-pr%C3%A1cticas.html"><span class="header-section-number">2</span> Organización del guion de prácticas</a></li>
+<li class="book-part">SIG Y CARTOGRAFÍA</li>
+<li><a class="" href="introducci%C3%B3n-a-los-sig.html"><span class="header-section-number">3</span> Introducción a los SIG</a></li>
+<li><a class="" href="fundamentos-cartograf%C3%ADa.html"><span class="header-section-number">4</span> Fundamentos cartografía</a></li>
+<li class="book-part">OPERACIONES SIG</li>
+<li><a class="" href="presentaci%C3%B3n-de-qgis.html"><span class="header-section-number">5</span> Presentación de QGIS</a></li>
+<li><a class="" href="geodatabases.html"><span class="header-section-number">6</span> Geodatabases</a></li>
+<li><a class="active" href="geoprocesamiento-vectorial.html"><span class="header-section-number">7</span> Geoprocesamiento vectorial</a></li>
+<li><a class="" href="geoprocesamiento-r%C3%A1ster.html"><span class="header-section-number">8</span> Geoprocesamiento ráster</a></li>
+<li><a class="" href="geoprocesamiento-miscel%C3%A1nea.html"><span class="header-section-number">9</span> Geoprocesamiento (miscelánea)</a></li>
+<li class="book-part">TELEDETECCIÓN</li>
+<li><a class="" href="teledetecci%C3%B3n.html"><span class="header-section-number">10</span> Teledetección</a></li>
+<li class="book-part">PAISAJE</li>
+<li><a class="" href="an%C3%A1lisis-de-la-estructura-del-paisaje.html"><span class="header-section-number">11</span> Análisis de la estructura del paisaje</a></li>
+<li class="book-part">MODELOS DE DISTRIBUCIÓN DE ESPECIES</li>
+<li><a class="" href="captura-y-preparaci%C3%B3n-de-la-informaci%C3%B3n.html"><span class="header-section-number">12</span> Captura y preparación de la información</a></li>
+<li><a class="" href="elaboraci%C3%B3n-del-modelo-predictivo.html"><span class="header-section-number">13</span> Elaboración del modelo predictivo</a></li>
+<li class="book-part">CIERRE</li>
+<li><a class="" href="referencias-para-aprender-m%C3%A1s.html"><span class="header-section-number">14</span> Referencias para aprender más</a></li>
+<li><a class="" href="informaci%C3%B3n-de-la-sesi%C3%B3n.html"><span class="header-section-number">15</span> Información de la sesión</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="geoprocesamiento-vectorial" class="section level1" number="7">
+<h1>
+<span class="header-section-number">Capítulo 7</span> Geoprocesamiento vectorial<a class="anchor" aria-label="anchor" href="#geoprocesamiento-vectorial"><i class="fas fa-link"></i></a>
+</h1>
+<p>En este capítulo, vamos a familiarizarnos con las operaciones de análisis y geoprocesamiento, las cuales se localizan en la caja de herramientas de procesos. Ya hemos trabajado con algunas de ellas, por lo que llegar hasta aquí no debería resultarnos complicado. No obstante, si deseamos realizar una búsqueda más rápida y precisa, en el menú “Vectorial” aparecen las funciones más comunes, clasificadas según su finalidad. En la mayoría de los casos emplearemos este acceso directo.</p>
+<p>A continuación, reseñaremos las acciones fundamentales para comenzar a funcionar con el geoprocesamiento:</p>
+<div id="unión" class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> Unión<a class="anchor" aria-label="anchor" href="#uni%C3%B3n"><i class="fas fa-link"></i></a>
+</h2>
+<p>Los censos de aves pueden realizarse por varias personas simultáneamente, en aras de cubrir una mayor superficie de observación. En el caso que nos ocupa, el censo de sisón, vamos a realizar un ejercicio con los datos de dos observadores que censaron sisones en la zonas norte y sur del terreno seleccionado, respectivamente. Para unificar los datos de ambos, emplearemos la herramienta “Combinar capas vectoriales”, que permite fusionar distintos tipos de geometrías (tales como puntos, líneas o polígonos) procedentes de dos capas vectoriales distintas.</p>
+<p>Lo primero, como siempre, es abrir las dos capas sobre las que queremos trabajar: <span style="color: red;">Observaciones_VT06_Norte_ETRS89.shp</span> y <span style="color: red;">Observaciones_VT06_Sur_ETRS89.shp</span>. A continuación, pinchamos sobre “Vectorial” &gt; “Herramientas de gestión de datos” &gt; “Combinar capas vectoriales”, tras lo cual, se abrirá una nueva ventana. En ella, debemos elegir las capas que queremos fusionar (capas de entrada) y pinchamos en “Ejecutar”. Por último, renombramos la capa temporal de salida, como <span style="color: blue;">Observaciones_VT06_Final.shp</span>.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_union.png" width="336"></div>
+<div class="rmdnote">
+<p>¡IMPORTANTE!
+El número y nombre de los campos de ambas capas debe ser idéntico, para que el solapamiento de datos se realice correctamente.</p>
+</div>
+</div>
+<div id="cortar" class="section level2" number="7.2">
+<h2>
+<span class="header-section-number">7.2</span> Cortar<a class="anchor" aria-label="anchor" href="#cortar"><i class="fas fa-link"></i></a>
+</h2>
+<p>En el entorno de la zona de estudio, situada en Valdetorres de Jarama (Madrid), se dispone de una red de caminos, la cual solo nos resulta de interés si atraviesa el área seleccionada. Para limitarla a este espacio, utilizamos la herramienta “Cortar”, que se encuentra en “Vectorial” &gt; “Herramientas de geoproceso”. Antes, no debemos olvidarnos de abrir las capas <span style="color: red;">caminos_VT.shp</span> y <span style="color: red;">area_estudioVT.shp</span>.</p>
+<p>Al igual que en el apartado anterior, debemos seleccionar la capa de entrada que queremos recortar, y la capa de recorte con la cual queremos recortar la anterior (es decir, el área de estudio que queremos que delimite la capa de la red de caminos). Pinchamos sobre “Ejecutar” y obtenemos la nueva capa recortada, que ahora ya podemos renombrar y guardar.</p>
+<p>El nombre final será: <span style="color: blue;">caminos_areaestVT.shp</span>.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_cortar.png" width="125%" style="display: block; margin: auto;"></div>
+</div>
+<div id="área-de-influencia-o-buffer" class="section level2" number="7.3">
+<h2>
+<span class="header-section-number">7.3</span> Área de influencia o <em>buffer</em><a class="anchor" aria-label="anchor" href="#%C3%A1rea-de-influencia-o-buffer"><i class="fas fa-link"></i></a>
+</h2>
+<p>La creación de “zonas de influencia” en torno a los elementos de las capas vectoriales es muy útil, ya que nos permite generar polígonos alrededor de ellas que nos indiquen el alcance de su influencia, como puede ser el área de campeo de una especie, su movimiento territorial o el efecto borde. A nosotros nos interesa crear una circundante a los avistamientos de sisón, la cual se materializará en forma de capa de polígonos.</p>
+<p>Teniendo en cuenta el área de campeo de la especie, se antoja necesario generar <em>buffers</em> de 100 m de radio en torno a cada observación. Para ello, primero abrimos la capa <span style="color: red;">Observac_VT_17042001_Project_ETRS89.shp</span>, y, posteriormente, pinchamos nuevamente en “Vectorial” &gt; “Herramientas de geoproceso” &gt; “Buffer”.</p>
+<p>En la nueva ventana, seleccionamos la capa de entrada (los avistamientos de sisón), y la distancia del área de influencia (100 m). Al pinchar sobre “Ejecutar”, obtenemos nuestra capa buffer, la cual renombramos como <span style="color: blue;">Buffer2001_100.shp</span>.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_buffer.png" width="125%" style="display: block; margin: auto;"></div>
+</div>
+<div id="intersección" class="section level2" number="7.4">
+<h2>
+<span class="header-section-number">7.4</span> Intersección<a class="anchor" aria-label="anchor" href="#intersecci%C3%B3n"><i class="fas fa-link"></i></a>
+</h2>
+<p>Además de localizar las áreas de influencia, un paso más en el estudio consistiría en identificar la superficie de cada uso del suelo que se presenta en dichas zonas, para cada uno de los avistamientos. Podríamos preguntarnos si en esas áreas de influencia (los <em>buffer</em>) hay una gran superficie de barbechos –que sospechamos que son positivos para la especie–. Afinando la pregunta, podríamos comparar la proporción de barbechos en los <em>buffer</em> de los avistamientos con la que encontraríamos en un mismo número de <em>buffers</em> dispuestos sobre puntos elegidos al azar en la zona de estudio<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Esto sería un ejemplo de un estudio de preferencias de hábitat basado en un análisis de &lt;em&gt;uso&lt;/em&gt; frente a &lt;em&gt;disponibilidad&lt;/em&gt;&lt;/p&gt;"><sup>2</sup></a>.</p>
+<p>El primer paso para resolver esta cuestión, lo daremos con la herramienta “Intersección”, localizada en “Vectorial” &gt; “Herramientas de geoproceso”.</p>
+<p>Una vez que abrimos las capas <span style="color: red;">Buffer2001_100.shp</span> y <span style="color: red;">parcelario_2001_VT_ETRS89_ext.shp</span> (ésta última la que generamos en la sesión anterior, donde calculamos las áreas, perímetros, dimensión fractal y SUT_DEF2), ejecutamos la herramienta. En la nueva ventana emergente, seleccionamos, nuevamente, la capa de entrada (el parcelario) y la de superposición (el área de influencia). A la capa resultante, la denominamos <span style="color: blue;">Intersec_buffer_parc.shp</span>.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_interseccion.png" width="422"></div>
+<p>Como se puede observar en esta figura, al utilizar la herramienta “Intersección” las áreas de influencia muestran los límites de las parcelas que las atraviesan, facilitando la identificación de posibles usos del suelo afectados. Esto se traduce también en una modificación de la tabla de atributos de la nueva capa, en la que aparecen más filas<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Pídele a QGIS que muestre el número de registros: botón derecho sobre el nombre de la capa &amp;gt; mostrar número de objetos&lt;/p&gt;"><sup>3</sup></a> debido a la presencia de distintos usos de suelo dentro de cada buffer:</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_interseccion2.png" width="604"></div>
+<p>Nota que en la capa resultante <span style="color: blue;">Intersec_buffer_parc.shp</span> se identifica con <em>ID</em> el identificador de la parcela y con <em>ID_2</em> el identificador del área de influencia. En <em>SUST_DEF2</em> se muestran ahora los usos del suelo (según nuestra previa reclasificación) que confluyen en cada área de influencia.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_interseccion_tabla.png" width="464"></div>
+<div class="rmdnote">
+<p>¡RECUERDA!
+Debes recalcular los campos de área y perímetro para los nuevos polígonos, puesto que los campos antiguos no reflejan las geometrías recién creadas.</p>
+</div>
+<p>:: {.rmdnote}
+Nota que el cuadro de diálogo de la herramienta permite elegir los campos de la capa de superposición a incluir en la de destino, en lugar de trasladarlas todas.
+:::</p>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-24" class="exercise"><strong>Exercise 7.1  </strong></span></p>
+<ol style="list-style-type: decimal">
+<li>abrir tabla de atributos y ordenar por ID (e.d. por cada parcela)</li>
+<li>seleccionar todos los registros correspondientes a un ID dado (p.e., ID = 2) y comprobar la selección en la vista del proyecto.</li>
+<li>Deseleccionar los registros, ordenar por ID_2 (e.d., por el área de influencia) y seleccionar por un ID_2 dado (p.e., ID_2 = 2), comprobar la selección en la vista del proyecto.</li>
+<li>Deseleccionar los registros y representar la capa con colores aleatorios para cada categoría de SUST_DEF2. Comprobar visualmente que el resultado es coherente con lo que vio en los pasos 2 y 3.</li>
+</ol>
+</div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-25" class="exercise"><strong>Exercise 7.2  </strong></span>Reconocimiento del campo identificador correspondiente al número de buffer: se localiza en la tabla de atributos, después del último campo de la capa de parcelario. Se llama “ID_2”. Vamos a renombrarlo, para que nos sea más fácil distinguirlo, como “IDbuffer”. Para ello, ejecutamos el algoritmo “Rehacer campos” (en la caja de herramientas de procesos). Con el mismo propósito organizativo, renombremos “ID” a “IDparcela”.
+RECUERDA: cada modificación que se ejecute generará una nueva capa con los datos actualizados, que NO es definitiva (debes guardarla si no quieres perder tu progreso).
+SUGERENCIA: nombra a la capa resultante <span style="color: blue;">Intersec_buffer_parc_0</span></p>
+</div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-26" class="exercise"><strong>Exercise 7.3  </strong></span>Comprobación de que la intersección de los <em>buffers</em> que solapan espacialmente es correcta: en la tabla de atributos de la capa de salida, seleccionamos todos los polígonos de uno de los <em>buffers</em> que solapan y los exportamos como una nueva capa <em>shapefile</em>. Al cargarla de nuevo en el proyecto, las fronteras del <em>buffer</em> intersectado deben coincidir con las del parcelario, ya que es la capa desde la que se ha recortado.</p>
+</div>
+</div>
+<div id="disolver" class="section level2" number="7.5">
+<h2>
+<span class="header-section-number">7.5</span> Disolver<a class="anchor" aria-label="anchor" href="#disolver"><i class="fas fa-link"></i></a>
+</h2>
+<p>Si nos fijamos bien, en la capa <span style="color: red;">parcelario_2001_VT_ETRS89.shp</span> encontramos varios polígonos adyacentes cuya categoría de sustrato es la misma. Sería muy útil simplificar esta capa, disolviendo las fronteras entre terrenos similares. Para ello, empleamos la herramienta “Disolver”, que se localiza en “Vectorial” &gt; “Herramienta de geoprocesos”.</p>
+<p>Podemos seguir dos estrategias para ello.</p>
+<p>En la primera generaremos archivos intermedios para cada tipo de sustrato. Para que se disuelvan las fronteras únicamente entre los campos adyacentes con igual tipo de sustrato, debemos seleccionarlos previamente en la tabla de atributos. Posteriormente, hacemos clic en “disolver”, y en la ventana emergente que aparece seleccionamos como capa de entrada el parcelario, y en campo, seleccionamos “SUST_DEF2”. Además, debe estar activada la casilla “objetos seleccionados solamente”, para asegurarnos de que no se disuelvan todos los polígonos.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_disolver_0.png" width="372"></div>
+<p>Repetimos el proceso con todos los tipo de sustrato, nos aseguramos de grabar las capas intermedias con un nombre reconocible (p.e., diss_BV), y, finalmente, unimos las capas resultantes (empleando la combinación de capas vectoriales o unión). Llamaremos a la capa de salida: <span style="color: blue;">Disol_parcelario.shp</span>.</p>
+<p>Existe una segunda estrategia, abreviada. Se trata de correr el algoritmo de disolver mediante el campo SUST_DEF2, sin haber seleccionado previamente los polígonos que corresponden a un tipo de SUST_DEF2. El resultado final es el mismo que la unión de las capas intermedias (diss_BV + diss_BJ +…). No obstante, con este procedimiento abreviado no se obtienen las capas intermedias, que podrían ser de interés para alguna aplicación.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_disolver.png" width="522"></div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-27" class="exercise"><strong>Exercise 7.4  </strong></span>Como tarea adicional a este ejercicio, añadir a cada sustrato ‘disuelto’ el área (e.d., usar ‘añadir atributos de geometría’) para poder responder a la pregunta de ¿cuál son los dos tipos de sustrato con mayor representación espacial en la zona de estudio?.</p>
+</div>
+<p>Nota que, si estamos haciendo un análisis de <em>preferencias de hábitat</em> del sisón, querríamos comparar el uso que hacen los sisones de los distintos sustratos agrícolas con su disponibilidad en el área de estudio (análisis ‘uso vs disponibilidad’). Para ello querríamos comparar la superficie ocupada por los distintos sustratos en las áreas de influencia (los ‘<em>buffer</em>’) con la que ocupan en puntos aleatorios. En una misma área de influencia puede haber varios polígonos correspondientes al mismo sustrato y nos interesa saber cuánta superficie ocupan en total (p.e., ¿cuántos m2 de barbecho joven hay en total en el área de influencia 2 que tiene varios polígonos de barbecho joven?). Para eso o bien más adelante sumamos la superficie de los polígonos correspondientes a cada sustrato, o bien en este paso primero agregamos espacialmente esos polígonos (con la herramienta ‘disolver’) y después calculamos el área de esos polígonos agregados (con la herramienta ‘agregar atributos de geometría’). Procedamos de esta última manera:</p>
+<ol style="list-style-type: decimal">
+<li>Vectorial &gt; Geoproceso &gt; disolver, capa de entrada <span style="color: red;">Intersec_buffer_parc_0.shp</span>, indicar en ‘disolver campos’ que la disolución de los bordes ha de hacerse teniendo en cuenta (a) el campo de identificación del área de influencia (‘IDBuffer’) y (b) el del tipo de sustrato (‘SUST_DEF2’).</li>
+<li>Grabar capa como <span style="color: blue;">Intersec_buffer_parc_b.shp</span>
+</li>
+<li>Procesos &gt; agregar atributos de geometría, grabar como <span style="color: blue;">Intersec_buffer_parc_c.shp</span>
+</li>
+<li>Comprobar que la suma de las áreas de cada tipo de sustrato (SUST_DEF2) en cada buffer (IDBuffer) de Intersec_buffer_parc_0.shp corresponde a las que se calculan en Intersec_buffer_parc_c)</li>
+<li>Comprobar que el número de registros (e.d., de polígonos) en <span style="color: red;">Intersec_buffer_parc.shp</span> es mayor que en <span style="color: red;">Intersec_buffer_parc_c.shp</span> (125 vs 70)</li>
+<li>Evaluar cualitativamente el resultado: representar <span style="color: red;">Intersec_buffer_parc_c.shp</span> mediante colores categorizados por SUST_DEF2 (se aprecia un predominio de BJ y BV en las áreas de influencia, que sugiere preferencias de hábitat hacia estos sustratos, aunque han de evaluarse cuantitativamente)</li>
+<li>Y hacer limpieza: eliminar los campos obsoletos area_2 y permiter_2 de <span style="color: red;">Intersec_buffer_parc_d</span> (esos correspondían a cada polígono dentro de cada <em>buffer</em> antes de la disolución de acuerdo con el tipo de sustrato).</li>
+</ol>
+</div>
+<div id="enlace-espacial" class="section level2" number="7.6">
+<h2>
+<span class="header-section-number">7.6</span> Enlace espacial<a class="anchor" aria-label="anchor" href="#enlace-espacial"><i class="fas fa-link"></i></a>
+</h2>
+<p>Otra función es la vinculación de tablas de atributos entre sí, en función de relaciones espaciales. Gracias a la herramienta “Enlace espacial”, vamos a comprobar el porcentaje de coincidencia entre los sustratos que declaran los observadores correspondientes a cada avistamiento de sisón con respecto a la información recogida en el parcelario, e.d., entre las observaciones en campo y las información en la capa SIG.</p>
+<p>Para ello, nuevamente desplegamos el menú “Vectorial” &gt; “Herramientas de gestión de datos” &gt; “Unir atributos por localización”. En la ventana emergente, seleccionamos como capa de entrada <span style="color: red;">Observac_VT_17042001_Project_ETRS89</span>, y, como capa de recorte, <span style="color: red;">parcelario_2001_VT_ETRS89</span>. Además, debemos seleccionar la opción “tomar solo los atributos del primer objeto localizado (uno a uno)” en “tipo de unión”, y cerciorarnos de que solo se mantienen los registros coincidentes seleccionados (predicado geométrico: “intersecta”).</p>
+<p>Esta función se habrá realizado correctamente si, al abrir la tabla de atributos, nos encontramos con dos campos distintos referentes al sustrato: “SUSTRATO” y “SUST_DEF”.</p>
+<p>Nótese que este es un enlace espacial en que a cada punto de observación de sisón (n = 22) se le asigna la parcela que lo incluye, que tiene un tipo de sustrato definido. Se podría hacer un enlace inverso, de forma que a cada parcela se le asignen los puntos donde se observó sisón dentro de ella.</p>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-28" class="exercise"><strong>Exercise 7.5  </strong></span>Esta función nos permite comprobar el nivel de coincidencia entre observadores (p. ej. entre la asignación de sustratos que ha realizado la persona que censaba y el que ha elaborado el parcelario). Existen al menos dos formas de hacerlo; una mediante ‘filtro’ y otra mediante ‘selección’ de elementos de la tabla de atributos (así se aprecian las diferencias de ambas operaciones), así:</p>
+<ol style="list-style-type: decimal">
+<li>tabla atributos &gt; filtro avanzado (expresión) &gt; “SUSTRATO” &lt;&gt; “SUST_DEF” [atención al tipo de comillas, QGIS podría no aceptar las comillas ‘inclinadas’]. Recuérdese que “SUSTRATO” es la categoría dada por el observador y “SUST_DEF” la extraída del parcelario.</li>
+<li>tabla atributos &gt; seleccionar por expresión &gt; “SUSTRATO” &lt;&gt; “SUST_DEF” &gt; seleccionar objetos y desplazar seleccionados arriba (con el botón ‘mover la selección arriba del todo’), hacer matriz de comparación de sustratos a mano, lo que permite calcular acierto (% de cada categoría y en total).</li>
+</ol>
+</div>
+</div>
+<div id="diseño-del-muestreo" class="section level2" number="7.7">
+<h2>
+<span class="header-section-number">7.7</span> Diseño del muestreo<a class="anchor" aria-label="anchor" href="#dise%C3%B1o-del-muestreo"><i class="fas fa-link"></i></a>
+</h2>
+<div id="generar-puntos-aleatorios" class="section level3" number="7.7.1">
+<h3>
+<span class="header-section-number">7.7.1</span> Generar puntos aleatorios<a class="anchor" aria-label="anchor" href="#generar-puntos-aleatorios"><i class="fas fa-link"></i></a>
+</h3>
+<p>Esta función nos será muy útil para, por ejemplo, comprobar si, en nuestro estudio, las parcelas en las que se ha avistado sisón poseen una mayor superficie de algún uso del suelo de lo que cabría esperar por azar. Para ello, generaremos una serie de puntos aleatorios en la zona de estudio, y realizaremos un análisis estadístico equilibrado. Es requisito fundamental para este último paso el haber creado el mismo número de puntos que observaciones de sisón, y se realizan las mismas operaciones expuestas anteriormente en este capítulo. El objetivo es obtener datos para la comprobación de nuestra hipótesis de partida.</p>
+<p>Para comenzar, abrimos la capa <span style="color: red;">area_estudioVT.shp</span>, y procedemos a crear los puntos aleatorios, con la herramienta “Puntos aleatorios dentro de polígonos”, en “Vectorial” <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;ojo, hay una herramienta con nombre muy parecido (‘puntos aleatorios en polígonos’)&lt;/p&gt;"><sup>4</sup></a> &gt; “Herramientas de investigación”. Tras seleccionar la capa de entrada, indicamos el número de puntos que precisamos (22), que se distribuirán de manera aleatoria. Si usamos como capa de entrada el parcelario o la malla, nos creará 22 puntos dentro de cada uno de los polígonos, que NO es lo que buscamos. Nótese que los límites del área de estudio no coinciden exactamente con los del parcelario. Si esto nos incomoda, podemos crear un nuevo polígono del área de estudio disolviendo los límites de todos los polígonos del parcelario (herramienta ‘disolver’).</p>
+<p>En la ventana de selección, podemos modificar la estrategia de muestreo para generar los nuevos puntos (cuenta o densidad), y establecer una distancia mínima, si fuera necesario. Finalmente, se obtiene un mapa con los puntos observados (<span style="color: violet;">morado</span>) y los nuevos puntos generados aleatoriamente (<span style="color: yellow;">amarillo</span>).</p>
+<p>Nos convendrá exportar esta capa temporal y hacerla permanente. Expórtala como <span style="color: blue;">“Puntos_aleatorios.shp”</span>. También será útil añadir un campo de tipo texto denominado ‘SoyAleatorio’ que se rellene con la cadena de caracteres ‘sí’.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_puntos_aleatorios.png" width="125%" style="display: block; margin: auto;"></div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-29" class="exercise"><strong>Exercise 7.6  </strong></span>Crear área de influencia para estos puntos e intersectarlos con el parcelario; comparar proporción de usos (1) o bien cualitativamente (2) o bien t-Student comparación medias de cada tipo de sustrato fuera de QGIS, o (3) aún más complejo, comparar las proporciones de cada tipo de sustrato con un prop.test en R, p.e.:
+<a href="https://digibug.ugr.es/bitstream/handle/10481/71607/Pr%C3%A1ctica8_Bioestad%C3%ADsticaR.pdf?sequence=1&amp;isAllowed=y" class="uri">https://digibug.ugr.es/bitstream/handle/10481/71607/Pr%C3%A1ctica8_Bioestad%C3%ADsticaR.pdf?sequence=1&amp;isAllowed=y</a>)</p>
+</div>
+</div>
+<div id="creación-de-retícula-o-malla" class="section level3" number="7.7.2">
+<h3>
+<span class="header-section-number">7.7.2</span> Creación de retícula o malla<a class="anchor" aria-label="anchor" href="#creaci%C3%B3n-de-ret%C3%ADcula-o-malla"><i class="fas fa-link"></i></a>
+</h3>
+<p>Para la elaboración de un modelo de distribución potencial del sisón es conveniente emplear un diseño muestral en forma de retícula o malla. Esto permitirá asignar a cada celda de la malla, formada por una capa de polígonos, información correspondiente a la presencia/ausencia (o abundancia, si se dispone de la información) de la especie que se pretende modelar, y de las variables descriptivas que se consideren que pueden influir en dicha presencia o abundancia (superficie de cada sustrato, pendiente, presencia de carreteras, etc.). En su tabla de atributos, se añadirá información ambiental de las distintas parcelas, que detallen las características del hábitat, así como las observaciones de sisón. Es decir, la malla va a ser nuestra unidad de muestreo. Los campos (que se corresponden con las variables que se consideran influyentes) a añadir son:</p>
+<ul>
+<li>Presencia/ausencia de sisón.</li>
+<li>NDVI (Índice de Vegetación de Diferencia Normalizada).</li>
+<li>Sustrato agrario.</li>
+<li>Cota.</li>
+<li>Pendiente.</li>
+<li>Orientación.</li>
+<li>Presencia de carreteras.</li>
+<li>Proximidad a otros sisones (estimada a través de funciones de densidad kernel, ver más adelante).</li>
+</ul>
+<p>Comenzamos pinchando sobre “Herramientas de investigación” (en el menú “Vectorial) &gt; “Crear cuadrícula”. Una vez en la nueva ventana, configuramos la cuadrícula para que esté organizada en rectángulos, y el espaciado sea de 250 m por cada lado. El nombre de la nueva capa será <span style="color: blue;">Malla_250.shp</span>.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_crear_malla.png" width="125%" style="display: block; margin: auto;"></div>
+<div class="rmdnote">
+<p>¡IMPORTANTE!
+Utiliza como referencia para la superficie de la nueva capa, el área de estudio preestablecida con anterioridad.</p>
+</div>
+</div>
+<div id="recorte-de-la-malla" class="section level3" number="7.7.3">
+<h3>
+<span class="header-section-number">7.7.3</span> Recorte de la malla<a class="anchor" aria-label="anchor" href="#recorte-de-la-malla"><i class="fas fa-link"></i></a>
+</h3>
+<p>Una vez conseguida la malla, el siguiente paso es recortarla, para eliminar todas aquellas celdas en las que no esté contenida el área de estudio. En este caso, en el desplegable “Herramientas de investigación”, pinchamos sobre “Seleccionar por localización”.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_recortar_malla.png" width="125%" style="display: block; margin: auto;"></div>
+<p>A continuación, aparecerán seleccionados todos aquellos rectángulos que contienen un fragmento del área de estudio. Para eliminar los que no cumplen estos requisitos, abrimos la tabla de atributos de la capa <span style="color: red;">Malla_250</span>, e invertimos la selección. Por último, borramos esos registros (ve al icono de la papelera) y renombramos a la capa como <span style="color: blue;">Malla_250_obs.shp</span>. Es recomendable renombrar el campo ‘id’ a ‘IDMalla’ (puedes hacerlo con ‘rehacer campos’).</p>
+<div class="rmdnote">
+<p>¡RECUERDA!
+Para poder llevar a cabo modificaciones en la tabla de atributos, es necesario abrir el menú “Edición”. No te olvides de cerrarlo y guardar los cambios tras finalizar la tarea.</p>
+</div>
+</div>
+<div id="asociación-de-las-observaciones-de-sisón-y-los-puntos-control-a-la-malla." class="section level3" number="7.7.4">
+<h3>
+<span class="header-section-number">7.7.4</span> Asociación de las observaciones de sisón y los puntos control a la malla.<a class="anchor" aria-label="anchor" href="#asociaci%C3%B3n-de-las-observaciones-de-sis%C3%B3n-y-los-puntos-control-a-la-malla."><i class="fas fa-link"></i></a>
+</h3>
+<p>El último paso radicaría en asociar los puntos a cada celda de la malla (tanto los que indican observación como los generados aleatoriamente). Es muy sencillo, puesto que solo necesitamos volver a usar la opción “Unir atributos por localización” (menú “Vectorial” &gt; “Herramientas de gestión de datos”).</p>
+<p>En la nueva ventana, seleccionamos como capa de entrada <span style="color: red;">Malla_250_obs</span>, y, como capa de unión, <span style="color: red;">Observac_VT_17042001_Project</span>. Aceptar la capa temporal que se crea, porque a esa le añadiremos después la información de los puntos aleatorios. Nota, además, que se pueden seleccionar los campos de la capa de puntos que se unirán a la capa de la malla. El <em>predicado geométrico</em> debe ser “interseca” y “contiene”, para evitar la omisión de ninguna de las observaciones. Una vez realizada la acción, en la nueva capa unida, aparecerá un nuevo campo en la tabla de atributos, llamado “N_MATCH”, indicando la presencia o ausencia de sisón en las distintas cuadrículas. Repetimos el mismo proceso para asociar a la cuadrícula los puntos aleatorios (<span style="color: red;">Puntos_aleatorios.shp</span>), conformando una nueva retícula llamada <span style="color: blue;">Malla_250_obs_y_alea.shp</span><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;A la malla que resulta de una unión de tipo ‘uno a uno’ la llamaremos: ‘Malla_250_obs_y_alea_b.shp’. Esta tiene n = 247 registros en lugar de los n = 250 registros de ‘Malla_250_obs_y_alea’)&lt;/p&gt;"><sup>5</sup></a></p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_unir_por_localizacion.png" width="125%" style="display: block; margin: auto;"></div>
+<div class="rmdnote">
+<p>La <em>topología</em> trata con las propiedades espaciales y estructurales de objetos geométricos, como los polígonos que estamos considerando aquí. Son muy prolijas. Los <em>predicados espaciales</em> (o <em>geométricos</em>) describen relaciones topológicas entre objetos geométricos.</p>
+<p>A los usuarios habituales de los SIG nos basta con conocer los predicados más comunes y leer la descripción de los algoritmos (p.e., la que da QSIG en los cuadros de diálogo de cada herramienta de geoprocesos). No obstante, para tener una idea de la complejidad de las relaciones topológicas, puedes echar un vistazo a: <a href="http://www.gitta.info/SpatialQueries/en/html/TopoBasedOps_learningObject1.html" class="uri">http://www.gitta.info/SpatialQueries/en/html/TopoBasedOps_learningObject1.html</a>), y para una síntesis de esos predicados puedes ir a este apartado de la descripción de un modelo topológico estándar: <a href="https://en.wikipedia.org/wiki/DE-9IM#Interpretation" class="uri">https://en.wikipedia.org/wiki/DE-9IM#Interpretation</a>.</p>
+</div>
+<div class="rmdnote">
+<p>La combinación de <em>predicados geométricos</em> y <em>tipos de unión</em> permite hacer uniones sofisticadas. En este ejemplo necesitaremos ‘contienen’ + ‘uno a muchos’ porque:<br>
+a) añadir la información de la capa puntos a las cuadrículas de la malla que los contienen; si se indica también el predicado geométrico ‘intersecta’, entonces se añadirán los puntos que justamente caigan en el límite entre dos cuadrículas (altamente improbable y, además, ¿a qué cuadrícula se debería asignar?)<br>
+b) creamos un objeto separado (e.d., un registro en la base de datos o un polígono separado) para cada punto que esté contenido en una cuadrícula. Hay puntos que se dan en la misma cuadrícula y una estrategia posible es mantener un registro para cada uno (duplicando las cuadrículas). Otra es simplemente indicar en qué cuadrículas se detectó sisón, y en ese caso necesitaríamos un tipo de unión de ‘uno a uno’ (tomar información solamente del primer objeto coincidente). Esta última estrategia está enfocada en un análisis por cuadrículas y evita tenerlas duplicadas después, lo que nos ahorrará problemas.</p>
+</div>
+<p>Los <strong>predicados geométricos</strong> son los siguientes:</p>
+<ul>
+<li>
+<strong>Intersección</strong>: Une los atributos de la capa a unir a los de la capa objetivo cuando sus geometrías se intersectan o se tocan. Es el tipo de unión más común y se puede usar con cualquier tipo de geometría.</li>
+<li>
+<strong>Contiene</strong>: Une los atributos de la capa a unir a los de la capa objetivo cuando la geometría de la capa objetivo contiene completamente a la geometría de la capa a unir. Este tipo de unión solo se puede usar cuando la capa objetivo es de tipo polígono y la capa a unir es de tipo punto o polígono.</li>
+<li>
+<strong>Está contenido en</strong>: Une los atributos de la capa a unir a los de la capa objetivo cuando la geometría de la capa a unir está completamente contenida en la geometría de la capa objetivo. Este tipo de unión es el inverso del anterior y se puede usar cuando la capa objetivo es de tipo punto o polígono y la capa a unir es de tipo polígono.</li>
+<li>
+<strong>Igual</strong>: Une los atributos de la capa a unir a los de la capa objetivo cuando sus geometrías son idénticas. Este tipo de unión se puede usar con cualquier tipo de geometría, pero solo funciona si las capas tienen exactamente las mismas coordenadas.</li>
+<li>
+<strong>Cruza</strong>: Une los atributos de la capa a unir a los de la capa objetivo cuando sus geometrías se cruzan, es decir, comparten una parte pero no toda. Este tipo de unión se puede usar cuando las capas son de tipo línea o polígono.</li>
+<li>
+<strong>Toca</strong>: Une los atributos de la capa a unir a los de la capa objetivo cuando sus geometrías se tocan, es decir, comparten un borde o un vértice, pero no una superficie. Este tipo de unión se puede usar cuando las capas son de tipo línea o polígono.</li>
+<li>
+<strong>Sobrelapa</strong>: Une los atributos de la capa a unir a los de la capa objetivo cuando sus geometrías se solapan, es decir, comparten una superficie pero no toda. Este tipo de unión solo se puede usar cuando las capas son de tipo polígono.</li>
+<li>
+<strong>Dentro</strong>: Une los atributos de la capa a unir a los de la capa objetivo cuando el centroide o punto central de la geometría de la capa a unir está dentro de la geometría de la capa objetivo. Este tipo de unión se puede usar cuando la capa objetivo es de tipo polígono y la capa a unir es de tipo punto, línea o polígono.</li>
+</ul>
+<p>La diferencia entre los <strong>tipos de unión</strong> ‘uno a muchos’, ‘uno a uno’ y ‘uno-a-uno’ es la siguiente:</p>
+<ul>
+<li>Unión ‘uno a muchos’: Es cuando una entidad de la capa objetivo se relaciona con varias entidades de la capa a unir. Por ejemplo, si queremos unir los atributos de una capa de calles a una capa de distritos, una entidad de distrito puede contener varias entidades de calles. En este caso, el resultado será una capa con tantas entidades como calles, cada una con los atributos del distrito al que pertenecen.</li>
+<li>Unión ‘uno a uno’: Es cuando una entidad de la capa objetivo se relaciona con una sola entidad de la capa a unir. Se tomarán solo los atributos del primer objeto de la segunda capa que coincida con la primera (e.d., en nuestro ejemplo se tomarían solamente los datos del primero de los dos puntos que caen en una misma cuadrícula).</li>
+<li>Unión ‘uno-a-uno’: En esta unión también se toman solamente los atributos de un objeto de la segunda capa para unirse a los de la primera, pero en contraste con la unión ‘uno a uno’, el objeto de la segunda capa que se unirá será, no el primero que se encuentre en la base de datos, sino el objeto que tenga una superposición mayor.</li>
+</ul>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-30" class="exercise"><strong>Exercise 7.7  </strong></span>Unir atributos por localización, uniendo la información de los puntos de observación a la malla de 250m (n = 247 objetos). Usa la unión ‘uno a muchos’ y después la ‘uno a uno’. Verás que el número de objetos resultantes es 252 vs 247 respectivamente. Comprueba que en la tabla de atributos de la primera unión (n = 252) hay dos registros para IDMalla = 234, correspondientes a las dos observaciones que se hacen dentro de esa cuadrícula, mientras que en la tabla de atributos de la segunda unión (n = 247, tantos como cuadrículas), solamente hay un registro para IDMalla = 234, correspondiente a la primera de las dos observaciones que se encuentran en ella.</p>
+</div>
+<p>No obstante, la mayor parte de elementos de la tabla de atributos de <span style="color: red;">Malla_250_obs_y_alea.shp</span> no presentan información válida, por lo que es conveniente crear un nuevo campo que aglutine presencias y ausencias de sisón, según las celdas. Lo llamaremos “PRESENCIA”. Los pasos a seguir son los siguientes:</p>
+<ol style="list-style-type: decimal">
+<li>Seleccionar las cuadrículas con ‘SoyAleatorio’ = ‘sí’ y actualizar el campo ‘PRESENCIA’ al valor 0.</li>
+<li>Seleccionar las cuadrículas con ‘SoyObservacion’ = ‘sí’ y actualizar el campo ‘PRESENCIA’ al valor 1.</li>
+</ol>
+<p>Esto hace que el campo “PRESENCIA” identifique las cuadrículas donde se detectó un sison (PRESENCIA = 1) y las que consideramos (pseudo)ausencias (PRESENCIA = 0). Nótese que en alguna cuadrícula podría haber, simultáneamente, un punto de observación y uno aleatorio. Con este procedimiento damos prioridad a las observaciones (e.d., si en una cuadrícula se observó sisón, consideraremos que esa cuadrícula es ‘de presencia’). Nótese que podríamos entonces acabar con un número de (pseudo)ausencias inferior al de presencias. Si queremos mantener el equilibrio entre ambos tipos de observaciones, una posible solución es generar antes una cantidad de puntos aleatorios mayor (de ‘sobra’) que nos asegure que el número de cuadrículas seleccionadas como (pseudo)ausencias sea igual o mayor al de presencias y después seleccionar las primeras n = 22 cuadrículas de entre ellas.</p>
+<div class="rmdnote">
+<p>SUGERENCIAS: (1) renombrar anteriormente los campos de las tablas de atributos de las observaciones y los puntos aleatorios (‘id_obs’, ‘id_aleatorio’, etc).</p>
+</div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-31" class="exercise"><strong>Exercise 7.8  </strong></span>Representar <span style="color: red;">Malla_250_obs_y_ale</span>, coloreando las cuadrículas de acuerdo al campo PRESENCIA y pedir en la vista de capas que se indique el número de objetos (n = 252 registros, de los que n = 22 serán PRESENCIA = 1)</p>
+<p>Si se usa la malla en la que unimos la información de los puntos mediante un tipo de unión ‘uno a uno’ (<span style="color: red;">Malla_250_obs_y_alea_b.shp</span>), entonces n = 247 registros (n = 17 presencias).</p>
+</div>
+
+</div>
+</div>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="geodatabases.html"><span class="header-section-number">6</span> Geodatabases</a></div>
+<div class="next"><a href="geoprocesamiento-r%C3%A1ster.html"><span class="header-section-number">8</span> Geoprocesamiento ráster</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#geoprocesamiento-vectorial"><span class="header-section-number">7</span> Geoprocesamiento vectorial</a></li>
+<li><a class="nav-link" href="#uni%C3%B3n"><span class="header-section-number">7.1</span> Unión</a></li>
+<li><a class="nav-link" href="#cortar"><span class="header-section-number">7.2</span> Cortar</a></li>
+<li><a class="nav-link" href="#%C3%A1rea-de-influencia-o-buffer"><span class="header-section-number">7.3</span> Área de influencia o buffer</a></li>
+<li><a class="nav-link" href="#intersecci%C3%B3n"><span class="header-section-number">7.4</span> Intersección</a></li>
+<li><a class="nav-link" href="#disolver"><span class="header-section-number">7.5</span> Disolver</a></li>
+<li><a class="nav-link" href="#enlace-espacial"><span class="header-section-number">7.6</span> Enlace espacial</a></li>
+<li>
+<a class="nav-link" href="#dise%C3%B1o-del-muestreo"><span class="header-section-number">7.7</span> Diseño del muestreo</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#generar-puntos-aleatorios"><span class="header-section-number">7.7.1</span> Generar puntos aleatorios</a></li>
+<li><a class="nav-link" href="#creaci%C3%B3n-de-ret%C3%ADcula-o-malla"><span class="header-section-number">7.7.2</span> Creación de retícula o malla</a></li>
+<li><a class="nav-link" href="#recorte-de-la-malla"><span class="header-section-number">7.7.3</span> Recorte de la malla</a></li>
+<li><a class="nav-link" href="#asociaci%C3%B3n-de-las-observaciones-de-sis%C3%B3n-y-los-puntos-control-a-la-malla."><span class="header-section-number">7.7.4</span> Asociación de las observaciones de sisón y los puntos control a la malla.</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/04-GeoprocesamientoVectorial.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/04-GeoprocesamientoVectorial.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Aplicaciones de SIG y TD en Ecología</strong>: Manual de prácticas en QGIS" was written by <a href="http://teguam.es/miembros/javier-seoane/">Javier Seoane Pinilla</a>, <a href="https://teguam.es/miembros/pablo-acebes-vives/">Pablo Acebes Vives</a>. It was last built on 20 September, 2024.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

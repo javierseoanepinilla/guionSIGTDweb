@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 12 Captura y preparación de la información | Aplicaciones de SIG y TD en Ecología</title>
+<meta name="author" content="Javier Seoane Pinilla, Pablo Acebes Vives">
+<meta name="description" content="En los capítulos anteriores hemos aprendido y practicado las diferentes herramientas de geoprocesamiento y teledetección básicas y más comunes, con la intención de prepararnos para llevar a cabo...">
+<meta name="generator" content="bookdown 0.40 with bs4_book()">
+<meta property="og:title" content="Capítulo 12 Captura y preparación de la información | Aplicaciones de SIG y TD en Ecología">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/2014-06-07-Aneto.png">
+<meta property="og:description" content="En los capítulos anteriores hemos aprendido y practicado las diferentes herramientas de geoprocesamiento y teledetección básicas y más comunes, con la intención de prepararnos para llevar a cabo...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 12 Captura y preparación de la información | Aplicaciones de SIG y TD en Ecología">
+<meta name="twitter:description" content="En los capítulos anteriores hemos aprendido y practicado las diferentes herramientas de geoprocesamiento y teledetección básicas y más comunes, con la intención de prepararnos para llevar a cabo...">
+<meta name="twitter:image" content="/2014-06-07-Aneto.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-binding-2.2.2/leaflet.js"></script><script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script><script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script><link href="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet">
+<script src="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.js"></script><script src="libs/leaflet-minimap-3.3.1/Minimap-binding.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Manual de prácticas en QGIS">Aplicaciones de SIG y TD en Ecología</a>:
+        <small class="text-muted">Manual de prácticas en QGIS</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Sobre este libro</a></li>
+<li class="book-part">PRELIMINARES</li>
+<li><a class="" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
+<li><a class="" href="organizaci%C3%B3n-del-guion-de-pr%C3%A1cticas.html"><span class="header-section-number">2</span> Organización del guion de prácticas</a></li>
+<li class="book-part">SIG Y CARTOGRAFÍA</li>
+<li><a class="" href="introducci%C3%B3n-a-los-sig.html"><span class="header-section-number">3</span> Introducción a los SIG</a></li>
+<li><a class="" href="fundamentos-cartograf%C3%ADa.html"><span class="header-section-number">4</span> Fundamentos cartografía</a></li>
+<li class="book-part">OPERACIONES SIG</li>
+<li><a class="" href="presentaci%C3%B3n-de-qgis.html"><span class="header-section-number">5</span> Presentación de QGIS</a></li>
+<li><a class="" href="geodatabases.html"><span class="header-section-number">6</span> Geodatabases</a></li>
+<li><a class="" href="geoprocesamiento-vectorial.html"><span class="header-section-number">7</span> Geoprocesamiento vectorial</a></li>
+<li><a class="" href="geoprocesamiento-r%C3%A1ster.html"><span class="header-section-number">8</span> Geoprocesamiento ráster</a></li>
+<li><a class="" href="geoprocesamiento-miscel%C3%A1nea.html"><span class="header-section-number">9</span> Geoprocesamiento (miscelánea)</a></li>
+<li class="book-part">TELEDETECCIÓN</li>
+<li><a class="" href="teledetecci%C3%B3n.html"><span class="header-section-number">10</span> Teledetección</a></li>
+<li class="book-part">PAISAJE</li>
+<li><a class="" href="an%C3%A1lisis-de-la-estructura-del-paisaje.html"><span class="header-section-number">11</span> Análisis de la estructura del paisaje</a></li>
+<li class="book-part">MODELOS DE DISTRIBUCIÓN DE ESPECIES</li>
+<li><a class="active" href="captura-y-preparaci%C3%B3n-de-la-informaci%C3%B3n.html"><span class="header-section-number">12</span> Captura y preparación de la información</a></li>
+<li><a class="" href="elaboraci%C3%B3n-del-modelo-predictivo.html"><span class="header-section-number">13</span> Elaboración del modelo predictivo</a></li>
+<li class="book-part">CIERRE</li>
+<li><a class="" href="referencias-para-aprender-m%C3%A1s.html"><span class="header-section-number">14</span> Referencias para aprender más</a></li>
+<li><a class="" href="informaci%C3%B3n-de-la-sesi%C3%B3n.html"><span class="header-section-number">15</span> Información de la sesión</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="captura-y-preparación-de-la-información" class="section level1" number="12">
+<h1>
+<span class="header-section-number">Capítulo 12</span> Captura y preparación de la información<a class="anchor" aria-label="anchor" href="#captura-y-preparaci%C3%B3n-de-la-informaci%C3%B3n"><i class="fas fa-link"></i></a>
+</h1>
+<p>En los capítulos anteriores hemos aprendido y practicado las diferentes herramientas de geoprocesamiento y teledetección básicas y más comunes, con la intención de prepararnos para llevar a cabo modelos más complejos de distribución de especies, los cuales son fundamentales en Ecología. La preparación y adecuación de los datos es fundamental como paso preliminar en su desarrollo, por lo que vamos a dedicarle este capítulo entero.</p>
+<div class="rmdnote">
+<p>Atención, podemos tener cuadrículas duplicadas si al crear la malla y añadir la información de los puntos usamos un tipo de unión de ‘uno a muchos’.</p>
+<p>En este caso habrá que eliminar, tarde o temprano, los registros redundantes (o agrupar su información).</p>
+<p>Podemos usar la malla <span style="color: red;">Malla_250_obs_y_alea_b.shp</span>, que tiene n = 247 registros (cuadrículas) no duplicados.</p>
+</div>
+<div id="extracción-de-información-y-asociación-a-la-malla" class="section level2" number="12.1">
+<h2>
+<span class="header-section-number">12.1</span> Extracción de información y asociación a la malla<a class="anchor" aria-label="anchor" href="#extracci%C3%B3n-de-informaci%C3%B3n-y-asociaci%C3%B3n-a-la-malla"><i class="fas fa-link"></i></a>
+</h2>
+<p>Aquí extraremos estadísticos de los archivos ráster y los asignaremos a la malla.</p>
+<p>Como punto de partida, utilizaremos la capa <span style="color: red;">Malla_obs_ale.shp</span>. Lo primero será obtener los estadísticos de los valores de los píxeles contenidos en cada una de las celdas, entrando, para ello, en la caja de herramientas &gt; “Análisis ráster” &gt; “Estadísticos de zona”. La capa vectorial de entrada será la malla, y las capas ráster de las que desean extraer los estadísticos, son:</p>
+<ul>
+<li>MDE_VT.tiff</li>
+<li>Pendiente.tiff</li>
+<li>Orient_reclas.tiff</li>
+<li>NDVI_2001prim.tiff</li>
+</ul>
+<p>Por tanto, mediante esta operación, para cada celda de la malla dispondremos de información procedente de las capas ráster creadas previamente, además de la información relacionada con la presencia/ausencia de sisón. Como cada variable constará de varios estadísticos distintos, mantendremos solo el que nos interesa (véase la tabla a continuación), eliminando los demás a través de la edición de la tabla de atributos. Una alternativa más eficiente a eliminar a posteriori los campos que no nos interesan es seleccionar los estadísticos en el algoritmo ‘Estadísticas de zona’. P.e., en la caja ‘Estadísticas a calcular’ indicar la media u otro estadístico de interés.</p>
+<p>Nota que en el cuadro de diálogo de esta herramienta podemos dar un prefijo. Esto es muy importante para evitar solapamientos entre los distintos campos, que pueden alterar el proceso. Además, nos es de utilidad para localizar los nuevos campos creados en la tabla de atributos.</p>
+<p>En cualquier caso, es conveniente:</p>
+<ol style="list-style-type: decimal">
+<li>renombrar las columnas que se van creando en la tabla de atributos (o bien con ‘rehacer campos’ o bien con Procesos &gt; Tabla Vectorial &gt; Cambiar nombre de campo)</li>
+<li>examinar los valores que se han añadido a la tabla de atributos (p.e., ¿hay algún valor nulo?)</li>
+<li>representar la capa final coloreando las cuadrículas según los valores de los nuevos campos (¿la representación espacial de la altitud, pendiente y ndvi medios está acorde con lo que esperaríamos?)
+<ul>
+<li>P.e., propiedades &gt; simbología &gt; graduado –&gt; AltitudMed, rampa de color gris, modo: intervalo fijo, tamaño intervalo 10m.</li>
+</ul>
+</li>
+</ol>
+<p>Se puede ir trabajando con capas temporales y renombrar la última como <span style="color: blue;">Malla_250_obs_ale_vamb.shp</span>, o bien generar y nombrar los archivos intermedios: <span style="color: blue;">Malla_250_obs_ale_vamb-1.shp</span> (con MDE), <span style="color: blue;">Malla_250_obs_ale_vamb-2.shp</span> (con MDE y pendiente), <span style="color: blue;">Malla_250_obs_ale_vamb-3.shp</span> (con MDE, pendiente, orientación) y <span style="color: blue;">Malla_250_obs_ale_vamb-4.shp</span> (con MDE, pendiente, orientación y NDVI).</p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="15%">
+<col width="50%">
+<col width="14%">
+<col width="18%">
+</colgroup>
+<thead><tr class="header">
+<th><strong>Variable</strong></th>
+<th><strong>Definición</strong></th>
+<th><strong>Parámetro</strong></th>
+<th><strong>Tipo de capa</strong></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Altitud</td>
+<td>Altura sobre el nivel del mar (m)</td>
+<td>Media</td>
+<td>Raster</td>
+</tr>
+<tr class="even">
+<td>Pendiente</td>
+<td>Inclinación del terreno (º)</td>
+<td>Media</td>
+<td>Raster</td>
+</tr>
+<tr class="odd">
+<td>Orientación</td>
+<td>Dirección del punto cardinal (N, S, E, O, plano)</td>
+<td>Máximo</td>
+<td>Raster</td>
+</tr>
+<tr class="even">
+<td>NDVI</td>
+<td>Índice de vegetación (productividad vegetal)</td>
+<td>Media</td>
+<td>Raster</td>
+</tr>
+<tr class="odd">
+<td>Distancia</td>
+<td>Distancia a carreteras o caminos (m)</td>
+<td>Media</td>
+<td>Vector</td>
+</tr>
+</tbody>
+</table></div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-33" class="exercise"><strong>Exercise 12.1  </strong></span>Reflexiona y discute en cada caso cuál es el estadístico que nos interesa, pensando ya en términos biológicos (más que en términos de SIG).</p>
+<p>Para la <strong>pendiente</strong> podríamos emplear el valor máximo, considerándolo limitante para una especie cursora como el sisón, o el rango (u otra medida de variabilidad), que se suele emplear como descripción de la irregularidad topográfica.</p>
+<p><strong>Orientación</strong> El valor más frecuente (modal) de una variable categórica es razonable como descriptor de las condiciones más habituales.</p>
+<p><strong>Distancia a caminos</strong>. El valor mínimo (e.d., máxima cercanía a caminos) ilustraría sobre condiciones limitantes y sería probablemente adecuado para especies muy sensibles a perturbaciones (p.e., cigüeña negra, urogallo); el valor promedio o la suma de distancias serán descriptores razonables de las condiciones en nuestro caso.</p>
+<p><strong>NDVI</strong> (como descriptor de productividad primaria). El valor mínimo describiría condiciones limitantes por debajo de las cuales tal vez no pueda sobrevivir un organismo. El valor medio describiría las condiciones más comunes.</p>
+<p><strong>Altitud</strong>. La media parece el estadístico más razonable.</p>
+</div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-34" class="exercise"><strong>Exercise 12.2  </strong></span>Reflexiona y discute si se podría incluir las áreas núcleo (‘kernel’) calculada para las observaciones del año anterior dentro de la lista de variables descriptoras a usar en el modelo y la cartografía de la distribución del sisón.</p>
+</div>
+<div class="inline-figure"><img src="imagenes/Pantallazo_estadisticos_zona.png" width="252"></div>
+<div class="rmdnote">
+<p>si los estadísticos de zona de QGIS no funcionan, es muy recomendable instalar el complemento LecoS (<em>Land cover statistics</em>). Todas las opciones aparecerán en la caja de herramientas aunque, en este caso, solamente usamos “Zonal statistics”.</p>
+</div>
+</div>
+<div id="obtención-de-áreas-de-usos-del-suelo-en-la-malla" class="section level2" number="12.2">
+<h2>
+<span class="header-section-number">12.2</span> Obtención de áreas de usos del suelo en la malla<a class="anchor" aria-label="anchor" href="#obtenci%C3%B3n-de-%C3%A1reas-de-usos-del-suelo-en-la-malla"><i class="fas fa-link"></i></a>
+</h2>
+<p>Tras la obtención de los estadísticos anteriores, resulta de gran interés determinar la proporción de cada uso del suelo presente en cada celda de la malla. No obstante, este proceso requiere que nos salgamos de QGIS para realizar varias acciones, por lo que es recomendable que tengas instalado de antemano algún programa de hojas de cálculo como Excel u Open Office.</p>
+<p>El primer paso radica en intersectar la capa generada en el apartado anterior (<span style="color: red;">malla_obs_ale_vamb.shp</span>), con la capa <span style="color: red;">parcelario_2001_ETRS89_ext.shp</span>. La primera se corresponderá a la capa de entrada, mientras que la segunda funcionará como capa de superposición. Seleccionar los campos a añadir desde la capa de superposición (el parcelario). Incluiremos solamente SUST_DEF2 y el identificador de la parcela (que sería conveniente que se denominara IDParcela). En la tabla de atributos de la capa resultante deberá haber tantas entradas para una determinada celda como tipos de suelos distintos identificados en ella.</p>
+<div class="rmdnote">
+<p>SUGERENCIA: mostrar el número de registros de cada capa para comprobar que el número de polígonos de la capa de intersección es mayor que de la malla (1160 vs 247).</p>
+</div>
+<div class="inline-figure"><img src="imagenes/Pantallazo_intersecar_parcelario.png" width="112"></div>
+<p>Una vez realizada la intersección, no debemos olvidarnos de recalcular área y perímetro de los polígonos, ya que los campos remanentes de la capa anterior contienen las mediciones de la capa previa, y por tanto no son correctas (los campos no útiles los eliminaremos tras obtener los nuevos polígonos).</p>
+<p>Para tabular los datos de la tabla de atributos, es necesario exportarla a un formato Excel o similar (.xlsx). Podemos entonces grabar un fichero shapefile para conservarlo (span style=“color: blue;”&gt;Malla_250_intersec_parcelario.shp) y después exportar la tabla de atributos como fichero .xlsx.</p>
+<div class="infobox caution">
+<p>El identificador (ID) de las celdas de la malla será el que se encuentre en primer lugar. Si las capas hubieran sido seleccionadas en orden inverso, tan solo cambiaría el orden de los campos, por lo que el ID sería el segundo.</p>
+</div>
+</div>
+<div id="operaciones-en-hojas-de-cálculo" class="section level2" number="12.3">
+<h2>
+<span class="header-section-number">12.3</span> Operaciones en hojas de cálculo<a class="anchor" aria-label="anchor" href="#operaciones-en-hojas-de-c%C3%A1lculo"><i class="fas fa-link"></i></a>
+</h2>
+<p>1.Abrimos la tabla de atributos en Excel e insertamos una tabla dinámica, en una nueva hoja del libro. A sus columnas transportaremos el campo que define el tipo de sustrato del terreno (SUST_DEF2), mientras que en las filas colocaremos el identificador de la cuadrícula Dado que el valor que nos interesa obtener en la tabla de atributos es el área de cada uso del suelo, debemos configurar el campo de valor para que se indique la suma de todos los valores relativos a ese uso.
+2. Una vez conseguido, copiamos la tabla a una nueva hoja de este libro de Excel, empleando la opción “Valores”, y rellenamos con 0 todas aquellas casillas que hayan quedado vacías Las últimas columna y fila, respectivamente, no son de ningún interés, puesto que reflejan el total, por lo que las podemos eliminar.
+3. Importar a QGIS ese archivo como si fuera un archivo vectorial (añadir capa vectorial) y seleccionar la hoja de cálculo correspondiente dentro de las varias que puede tener el libro de Excel.
+4. Crear una <strong>unión de tablas</strong>, en la capa de <span style="color: red;">Malla_250_obs_ale_vamb</span> con la tabla de atributos sin geometrías que acabamos de importar (las áreas que ocupan los diferentes usos del suelo en cada cuadrícula).
++ En ‘unir capa’ indicar la tabla <span style="color: red;">‘parcelario_2001_tabulado’</span>.
++ En ‘unir campo’ indicar ‘IDMalla’, que es el nombre del identificador de la cuadrícula en la tabla procedente de Excel (la tabla sin geometrías) y en la tabla de atributos de la capa con las variables ambientales.<br>
++ En ‘campo objetivo’ indicar el nombre del identificador de la cuadrícula en la tabla de atributos de la malla (que también se llama ‘IDMalla’)
++ Indicar como prefijo de los nombres de los campos que se unirán “p-” (así aparecerá después “p-L” para el área de de labrado, etc)
+5. Exportar la capa como <span style="color: blue;">Malla_250_obs_ale_vamb_ext.shp</span></p>
+</div>
+<div id="cálculo-de-áreas-en-qgis" class="section level2" number="12.4">
+<h2>
+<span class="header-section-number">12.4</span> Cálculo de áreas en QGIS<a class="anchor" aria-label="anchor" href="#c%C3%A1lculo-de-%C3%A1reas-en-qgis"><i class="fas fa-link"></i></a>
+</h2>
+<p>Podemos realizar los mismos cálculos sin salir de QGIS, pero necesitamos tener claro los pasos a seguir y ser muy <a href="mailto:ordenad@s" class="email">ordenad@s</a>:</p>
+<ol style="list-style-type: decimal">
+<li>Como tenemos distintos usos de suelo en el parcelario, lo primero es crear shapefiles independientes para cada uno de ellos.</li>
+<li>Creado el shapefile para cada uso, disolvemos los polígonos con la función “Dissolve” en función del sustrato</li>
+<li>Realizamos una intersección de la malla estudio (capa entrada) y el shapefile disuelto (capa superposición. Esto nos creará una capa temporal (“intersección”) en la que nos aparecerá el tamaño del polígono dentro de cada celda. Ahora recalculamos el área de dicho polígono, por ejemplo empleando la calculadora de campos -&gt; Geometría -&gt; $area</li>
+<li>Calculada el área, es momento de juntar la capa de intersección a la malla original. Para esto empleamos la herramienta Vector general -&gt; Unir atributos por valor de campo. En este caso, el valor que ambos shapefiles deben compartir es el valor del “ID_celda”. En la opción de “campos a copiar” le especificamos aquellos valores de la capa “Intersección” que queremos añadir a nuestra malla (en este caso por ejemplo el área del sustrato correspondiente).</li>
+<li>Tras ejecutar el proceso obtendremos una nuevo shape de malla con los nuevos campos incorporados. Podemos trabajar con capas temporales, o cada vez que nos genere una nueva malla (tras la adición de las distintas áreas) podemos guardarla con el nombre correspondiente ( por ejemplo “malla_BJ”, “malla_BJ_BV”, etc)</li>
+<li>Tras la incorporación de todas las áreas podríamos también calcular las coberturas correspondientes de cada uso dentro de cada celda. Para ello tendríamos que emplear la calculadora de campos, crear nuevo campo (“cov_BJ”) con valor decimal (tamaño=10, precisión=3) y resultante de la división (área superficie suelo/área celda)*100</li>
+</ol>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="an%C3%A1lisis-de-la-estructura-del-paisaje.html"><span class="header-section-number">11</span> Análisis de la estructura del paisaje</a></div>
+<div class="next"><a href="elaboraci%C3%B3n-del-modelo-predictivo.html"><span class="header-section-number">13</span> Elaboración del modelo predictivo</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#captura-y-preparaci%C3%B3n-de-la-informaci%C3%B3n"><span class="header-section-number">12</span> Captura y preparación de la información</a></li>
+<li><a class="nav-link" href="#extracci%C3%B3n-de-informaci%C3%B3n-y-asociaci%C3%B3n-a-la-malla"><span class="header-section-number">12.1</span> Extracción de información y asociación a la malla</a></li>
+<li><a class="nav-link" href="#obtenci%C3%B3n-de-%C3%A1reas-de-usos-del-suelo-en-la-malla"><span class="header-section-number">12.2</span> Obtención de áreas de usos del suelo en la malla</a></li>
+<li><a class="nav-link" href="#operaciones-en-hojas-de-c%C3%A1lculo"><span class="header-section-number">12.3</span> Operaciones en hojas de cálculo</a></li>
+<li><a class="nav-link" href="#c%C3%A1lculo-de-%C3%A1reas-en-qgis"><span class="header-section-number">12.4</span> Cálculo de áreas en QGIS</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/09a-ModelosCaptura.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/09a-ModelosCaptura.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Aplicaciones de SIG y TD en Ecología</strong>: Manual de prácticas en QGIS" was written by <a href="http://teguam.es/miembros/javier-seoane/">Javier Seoane Pinilla</a>, <a href="https://teguam.es/miembros/pablo-acebes-vives/">Pablo Acebes Vives</a>. It was last built on 20 September, 2024.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 9 Geoprocesamiento (miscelánea) | Aplicaciones de SIG y TD en Ecología</title>
+<meta name="author" content="Javier Seoane Pinilla, Pablo Acebes Vives">
+<meta name="description" content="Este último capítulo sobre geoprocesamiento va a estar dedicado a la realización de estimaciones de áreas de campeo de una determinada especie (en nuestro caso, proseguimos utilizando el modelo...">
+<meta name="generator" content="bookdown 0.40 with bs4_book()">
+<meta property="og:title" content="Capítulo 9 Geoprocesamiento (miscelánea) | Aplicaciones de SIG y TD en Ecología">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/2014-06-07-Aneto.png">
+<meta property="og:description" content="Este último capítulo sobre geoprocesamiento va a estar dedicado a la realización de estimaciones de áreas de campeo de una determinada especie (en nuestro caso, proseguimos utilizando el modelo...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 9 Geoprocesamiento (miscelánea) | Aplicaciones de SIG y TD en Ecología">
+<meta name="twitter:description" content="Este último capítulo sobre geoprocesamiento va a estar dedicado a la realización de estimaciones de áreas de campeo de una determinada especie (en nuestro caso, proseguimos utilizando el modelo...">
+<meta name="twitter:image" content="/2014-06-07-Aneto.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-binding-2.2.2/leaflet.js"></script><script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script><script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script><link href="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet">
+<script src="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.js"></script><script src="libs/leaflet-minimap-3.3.1/Minimap-binding.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Manual de prácticas en QGIS">Aplicaciones de SIG y TD en Ecología</a>:
+        <small class="text-muted">Manual de prácticas en QGIS</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Sobre este libro</a></li>
+<li class="book-part">PRELIMINARES</li>
+<li><a class="" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
+<li><a class="" href="organizaci%C3%B3n-del-guion-de-pr%C3%A1cticas.html"><span class="header-section-number">2</span> Organización del guion de prácticas</a></li>
+<li class="book-part">SIG Y CARTOGRAFÍA</li>
+<li><a class="" href="introducci%C3%B3n-a-los-sig.html"><span class="header-section-number">3</span> Introducción a los SIG</a></li>
+<li><a class="" href="fundamentos-cartograf%C3%ADa.html"><span class="header-section-number">4</span> Fundamentos cartografía</a></li>
+<li class="book-part">OPERACIONES SIG</li>
+<li><a class="" href="presentaci%C3%B3n-de-qgis.html"><span class="header-section-number">5</span> Presentación de QGIS</a></li>
+<li><a class="" href="geodatabases.html"><span class="header-section-number">6</span> Geodatabases</a></li>
+<li><a class="" href="geoprocesamiento-vectorial.html"><span class="header-section-number">7</span> Geoprocesamiento vectorial</a></li>
+<li><a class="" href="geoprocesamiento-r%C3%A1ster.html"><span class="header-section-number">8</span> Geoprocesamiento ráster</a></li>
+<li><a class="active" href="geoprocesamiento-miscel%C3%A1nea.html"><span class="header-section-number">9</span> Geoprocesamiento (miscelánea)</a></li>
+<li class="book-part">TELEDETECCIÓN</li>
+<li><a class="" href="teledetecci%C3%B3n.html"><span class="header-section-number">10</span> Teledetección</a></li>
+<li class="book-part">PAISAJE</li>
+<li><a class="" href="an%C3%A1lisis-de-la-estructura-del-paisaje.html"><span class="header-section-number">11</span> Análisis de la estructura del paisaje</a></li>
+<li class="book-part">MODELOS DE DISTRIBUCIÓN DE ESPECIES</li>
+<li><a class="" href="captura-y-preparaci%C3%B3n-de-la-informaci%C3%B3n.html"><span class="header-section-number">12</span> Captura y preparación de la información</a></li>
+<li><a class="" href="elaboraci%C3%B3n-del-modelo-predictivo.html"><span class="header-section-number">13</span> Elaboración del modelo predictivo</a></li>
+<li class="book-part">CIERRE</li>
+<li><a class="" href="referencias-para-aprender-m%C3%A1s.html"><span class="header-section-number">14</span> Referencias para aprender más</a></li>
+<li><a class="" href="informaci%C3%B3n-de-la-sesi%C3%B3n.html"><span class="header-section-number">15</span> Información de la sesión</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="geoprocesamiento-miscelánea" class="section level1" number="9">
+<h1>
+<span class="header-section-number">Capítulo 9</span> Geoprocesamiento (miscelánea)<a class="anchor" aria-label="anchor" href="#geoprocesamiento-miscel%C3%A1nea"><i class="fas fa-link"></i></a>
+</h1>
+<p>Este último capítulo sobre geoprocesamiento va a estar dedicado a la realización de estimaciones de áreas de campeo de una determinada especie (en nuestro caso, proseguimos utilizando el modelo del sisón común), y de dominios vitales. Además, calcularemos distancia a elementos lineares como carreteras.</p>
+<div id="polígono-mínimo-convexo-mcp" class="section level2" number="9.1">
+<h2>
+<span class="header-section-number">9.1</span> Polígono mínimo convexo (MCP)<a class="anchor" aria-label="anchor" href="#pol%C3%ADgono-m%C3%ADnimo-convexo-mcp"><i class="fas fa-link"></i></a>
+</h2>
+<p>El MCP es aquel polígono de área mínima que abarca todos los puntos más exteriores o periféricos de un patrón de puntos. En nuestro caso, es una composición geométrica obtenida a partir de avistamientos directos de una especie, por lo que su función consiste en unir las observaciones más periféricas ocupando el mínimo área posible. Es muy útil para generar áreas de campeo o utilización de una especie.</p>
+<p>Para realizar este proceso, volvemos a abrir las capas <span style="color: red;">parcelario_2001_VT_ETRS89_ext.shp</span> y <span style="color: red;">Observac_VT_17042001_Project_ETRS89.shp</span>. A continuación, podemos crear el MCP de dos formas distintas:</p>
+<p>Método rápido: en el menú “Vectorial”, seleccionamos “Geoproceso” &gt; “Envolvente convexa”.</p>
+<div class="rmdnote">
+<p>NOTA: depende de la versión de QGIS que estés utilizando, es probable que esta ruta no funcione o que la capa resultante no se muestre en la pantalla. Si esto es así, prueba con el segundo método; es un poco más lento pero más fiable.</p>
+</div>
+<p>Método no tan rápido: vamos a la caja de herramientas, buscamos el apartado “Geometría vectorial” &gt; “Geometría mínima delimitadora”. En la nueva ventana emergente, perfilamos nuestra selección escogiendo la capa <span style="color: red;">Observac_VT_17042001_Project_ETRS89.shp</span> como capa de entrada, y “Envolvente convexa” como tipo de geometría.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_MCP.png" width="401"></div>
+<p>El resultado conseguido mediante cualquiera de las dos rutas debe ser semejante al arriba representado.</p>
+<p>Gracias a estos MCP, se pueden llevar a cabos estudios detallados, no solamente de la distribución de la especie, sino también del área de campeo particular de un(os) individuo(s) concreto(s) o de una categoría de individuos determinada, si disponemos de los correspondientes datos de avistamiento de cada uno/a. De esta forma, sería posible realizar los distintos MCPs individuales, y luego solaparlos utilizando la función de “Intersección”. En caso de querer refinar un poco más el área mínima podríamos tener en cuenta un buffer alrededor de nuestras observaciones sobre el que establecer el MCP. De esta forma estaríamos teniendo en cuenta el área de campeo o efecto borde mencionado en sesiones anteriores.</p>
+</div>
+<div id="área-kernel" class="section level2" number="9.2">
+<h2>
+<span class="header-section-number">9.2</span> Área ‘kernel’<a class="anchor" aria-label="anchor" href="#%C3%A1rea-kernel"><i class="fas fa-link"></i></a>
+</h2>
+<p>Este concepto se define como la expresión bidimensional de la probabilidad de realizar una observación de una determinada especie, en función de la distancia al punto en el que esta ha sido observada (también denominada “función de densidad Kernel”). Para calcularla, emplearemos como capa de entrada <span style="color: red;">Observac_VT_17042001_Project_ETRS89.shp</span></p>
+<p>El algoritmo a utilizar es “v.kernel.rast”, el cual podemos encontrar en la caja de herramientas <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;También tendríamos la opción de calcularlo a través de un Mapa de calor.&lt;/p&gt;"><sup>6</sup></a>.</p>
+<div class="rmdnote">
+<p>Este es un algoritmo de GRASS y, por tanto, es necesario tener instalado el complemento de GRASS 7.0.</p>
+<p>Además, para que aparezca en la caja de herramientas hay que activar el ‘GRASS GIS provider’ en complementos.</p>
+</div>
+<p>En la ventana emergente, ajustamos los siguientes parámetros:</p>
+<ul>
+<li>Radio: 500-1.000. Se variará la cifra para obtener un mejor resultado.</li>
+<li>Largo máximo: 100.</li>
+<li>Multiplicar el resultado: x 10.000.</li>
+<li>Función de Kernel: gausiana.</li>
+<li>Extensión: usamos la proporcionada por la malla.</li>
+</ul>
+<div class="inline-figure"><img src="imagenes/Pantallazo_kernel.png" width="292"></div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-32" class="exercise"><strong>Exercise 9.1  </strong></span>Probar con radio 500 y radio 1000 para examinar las diferencias en el efecto.</p>
+<p>Representar las capas resultantes con simbología de pseudocolor monobanda y rampa de color rojos</p>
+</div>
+<p>El resultado estima puntos por unidad de área. Imagina el núcleo (el ‘kernel’) como un cubo de arena: volteas el cubo en un punto, dejando que la arena se deslice. El deslizamiento apenas ocurre para radios cortos, pero es extenso para radios grandes (tal vez la arena está más húmeda ;-). De todos modos, siempre queda la misma cantidad de arena, sin importar cómo se produzca el deslizamiento. Ahora ve a vaciar un cubo en la ubicación de cada punto (o, más generalmente, si hay un valor positivo x asociado con cada punto de datos, primero pon una cantidad de arena en el cubo proporcional a x y luego vacíalo). La arena se desliza. Se acumula en áreas donde hay muchos cubos. La cuadrícula de densidad te da la altura de la arena apilada en el centro de cada celda de la cuadrícula. Multiplicar esto por el área de una celda estima el volumen de arena que ocupa cada celda<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;esta analogía la tomo de Whuber en StackExchange [GIS] 31/08/2010.&lt;/p&gt;"><sup>7</sup></a>.</p>
+<p>Por eso nosotros multiplicamos el resultado por 10.000, que es el área de las celdas que manejamos (largo máximo = 100), de forma que el resultado estima ‘presencias’ por píxel (de <span class="math inline">\(100m^2\)</span>).</p>
+</div>
+<div id="distancia-a-carreteras" class="section level2" number="9.3">
+<h2>
+<span class="header-section-number">9.3</span> Distancia a carreteras<a class="anchor" aria-label="anchor" href="#distancia-a-carreteras"><i class="fas fa-link"></i></a>
+</h2>
+<p>La distancia a vías de acceso, como carreteras y caminos, se considera a menudo un indicador útil de la frecuencia de perturbaciones por molestias a la vida silvestre. Las áreas más lejanas a vías de acceso suelen tener condiciones de mayor tranquilidad, que prefieren las especies más sensibles.</p>
+<p>Elaboremos entonces una capa de distancia a vías de acceso. Como esta capa describe una variable continua, será conveniente crearla en formato ráster. Pero la información sobre caminos está en formato shapefile (<span style="color: red;">caminos_VT_ETRS89</span>). ¿Cómo podemos proceder?:</p>
+<ol style="list-style-type: decimal">
+<li>Prepara el archivo de <span style="color: red;">caminos_VT_ETRS89</span> No tiene un identificador único para cada camino y vendrá bien crearlo. Para ello vamos a la calculadora de campos, creamos campo nuevo (‘IDcamino’) y actualizamos su valor con la expresión <span style="color: blue;">‘<span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;&lt;strong&gt;Row_number?&lt;/strong&gt;&lt;/p&gt;"><sup>8</sup></a></span>’</span>. Puedes llamar a esta nueva capa <span style="color: red;">caminos_VT_ETRS89ext</span>. Puedes recortar ese fichero vectorial con el área de estudio.</li>
+<li>Convierte en ráster el fichero vectorial <span style="color: red;">caminos_VT_ETRS89ext</span> (e.d., rasterízalo): Raster &gt; Conversión &gt; Rasterizar (vectorial a ráster). Indica como capa de entrada <span style="color: red;">caminos_VT_ETRS89ext</span>, como campo de marcado ‘IDcamino’ y usa un valor fijo para marcar (un ‘1’; se trata de un valor bandera que indica que el píxel está ocupado por un camino). Emplearemos una resolución de 50x50 metros (las unidades georreferenciadas) y como extensión de salida la que proporciona la capa <span style="color: red;">area_estudioVT_ETRS89</span>.</li>
+<li>Ahora ve a procesos &gt; GDAL &gt; Análisis ráster &gt; Proximidad (distancia ráster) e indica como capa de entrada la capa temporal que acabas de crear (‘Rasterizado’), en unidades de distancia las unidades georreferenciadas. Exporta la capa resultante como un geoTIFF (<span style="color: blue;">‘DistanciaCaminos’</span>). Este representa la distancia de cada píxel de 50x50m al camino más cercano, en metros.</li>
+<li>Superpón <span style="color: red;">Malla_250.shp</span> y haz zoom sobre cualquier cuadrícula. Podemos calcular el valor medio de distancia para los píxeles que ves en cada cuadrícula. Ya sabes: Procesos &gt; Estadísticas de zona. En la capa resultante, usa un estilo de representación graduado según el valor de la media de las distancias (e.d., según el valor del nuevo campo que has creado). ¿Coincide con lo que esperarías de acuerdo a la red de caminos?</li>
+</ol>
+</div>
+</div>
+
+
+
+
+  <div class="chapter-nav">
+<div class="prev"><a href="geoprocesamiento-r%C3%A1ster.html"><span class="header-section-number">8</span> Geoprocesamiento ráster</a></div>
+<div class="next"><a href="teledetecci%C3%B3n.html"><span class="header-section-number">10</span> Teledetección</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#geoprocesamiento-miscel%C3%A1nea"><span class="header-section-number">9</span> Geoprocesamiento (miscelánea)</a></li>
+<li><a class="nav-link" href="#pol%C3%ADgono-m%C3%ADnimo-convexo-mcp"><span class="header-section-number">9.1</span> Polígono mínimo convexo (MCP)</a></li>
+<li><a class="nav-link" href="#%C3%A1rea-kernel"><span class="header-section-number">9.2</span> Área ‘kernel’</a></li>
+<li><a class="nav-link" href="#distancia-a-carreteras"><span class="header-section-number">9.3</span> Distancia a carreteras</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/06-GeoprocesamientoIII.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/06-GeoprocesamientoIII.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Aplicaciones de SIG y TD en Ecología</strong>: Manual de prácticas en QGIS" was written by <a href="http://teguam.es/miembros/javier-seoane/">Javier Seoane Pinilla</a>, <a href="https://teguam.es/miembros/pablo-acebes-vives/">Pablo Acebes Vives</a>. It was last built on 20 September, 2024.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

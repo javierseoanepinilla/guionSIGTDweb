@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 10 Teledetección | Aplicaciones de SIG y TD en Ecología</title>
+<meta name="author" content="Javier Seoane Pinilla, Pablo Acebes Vives">
+<meta name="description" content="Los SIG no solo nos ayudan a componer mapas y figuras ilustrativas; gracias a ellos, también tenemos la capacidad de obtener información de un determinado territorio a distancia, empleando un...">
+<meta name="generator" content="bookdown 0.40 with bs4_book()">
+<meta property="og:title" content="Capítulo 10 Teledetección | Aplicaciones de SIG y TD en Ecología">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/2014-06-07-Aneto.png">
+<meta property="og:description" content="Los SIG no solo nos ayudan a componer mapas y figuras ilustrativas; gracias a ellos, también tenemos la capacidad de obtener información de un determinado territorio a distancia, empleando un...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 10 Teledetección | Aplicaciones de SIG y TD en Ecología">
+<meta name="twitter:description" content="Los SIG no solo nos ayudan a componer mapas y figuras ilustrativas; gracias a ellos, también tenemos la capacidad de obtener información de un determinado territorio a distancia, empleando un...">
+<meta name="twitter:image" content="/2014-06-07-Aneto.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-binding-2.2.2/leaflet.js"></script><script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script><script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script><link href="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet">
+<script src="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.js"></script><script src="libs/leaflet-minimap-3.3.1/Minimap-binding.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Manual de prácticas en QGIS">Aplicaciones de SIG y TD en Ecología</a>:
+        <small class="text-muted">Manual de prácticas en QGIS</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Sobre este libro</a></li>
+<li class="book-part">PRELIMINARES</li>
+<li><a class="" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
+<li><a class="" href="organizaci%C3%B3n-del-guion-de-pr%C3%A1cticas.html"><span class="header-section-number">2</span> Organización del guion de prácticas</a></li>
+<li class="book-part">SIG Y CARTOGRAFÍA</li>
+<li><a class="" href="introducci%C3%B3n-a-los-sig.html"><span class="header-section-number">3</span> Introducción a los SIG</a></li>
+<li><a class="" href="fundamentos-cartograf%C3%ADa.html"><span class="header-section-number">4</span> Fundamentos cartografía</a></li>
+<li class="book-part">OPERACIONES SIG</li>
+<li><a class="" href="presentaci%C3%B3n-de-qgis.html"><span class="header-section-number">5</span> Presentación de QGIS</a></li>
+<li><a class="" href="geodatabases.html"><span class="header-section-number">6</span> Geodatabases</a></li>
+<li><a class="" href="geoprocesamiento-vectorial.html"><span class="header-section-number">7</span> Geoprocesamiento vectorial</a></li>
+<li><a class="" href="geoprocesamiento-r%C3%A1ster.html"><span class="header-section-number">8</span> Geoprocesamiento ráster</a></li>
+<li><a class="" href="geoprocesamiento-miscel%C3%A1nea.html"><span class="header-section-number">9</span> Geoprocesamiento (miscelánea)</a></li>
+<li class="book-part">TELEDETECCIÓN</li>
+<li><a class="active" href="teledetecci%C3%B3n.html"><span class="header-section-number">10</span> Teledetección</a></li>
+<li class="book-part">PAISAJE</li>
+<li><a class="" href="an%C3%A1lisis-de-la-estructura-del-paisaje.html"><span class="header-section-number">11</span> Análisis de la estructura del paisaje</a></li>
+<li class="book-part">MODELOS DE DISTRIBUCIÓN DE ESPECIES</li>
+<li><a class="" href="captura-y-preparaci%C3%B3n-de-la-informaci%C3%B3n.html"><span class="header-section-number">12</span> Captura y preparación de la información</a></li>
+<li><a class="" href="elaboraci%C3%B3n-del-modelo-predictivo.html"><span class="header-section-number">13</span> Elaboración del modelo predictivo</a></li>
+<li class="book-part">CIERRE</li>
+<li><a class="" href="referencias-para-aprender-m%C3%A1s.html"><span class="header-section-number">14</span> Referencias para aprender más</a></li>
+<li><a class="" href="informaci%C3%B3n-de-la-sesi%C3%B3n.html"><span class="header-section-number">15</span> Información de la sesión</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="teledetección" class="section level1" number="10">
+<h1>
+<span class="header-section-number">Capítulo 10</span> Teledetección<a class="anchor" aria-label="anchor" href="#teledetecci%C3%B3n"><i class="fas fa-link"></i></a>
+</h1>
+<p>Los SIG no solo nos ayudan a componer mapas y figuras ilustrativas; gracias a ellos, también tenemos la capacidad de obtener información de un determinado territorio a distancia, empleando un sensor. Es lo que se conoce como <strong>teledetección</strong>. Los sensores empleados suelen estar instalados en satélites o aviones, y más recientemente en drones, y captan la luz solar reflejada por los distintos tipos de superficie del suelo. Esta información es la huella o impronta que deja el paisaje en la radiación solar reflejada, y se denomina <strong>firma espectral</strong>.</p>
+<p>Los sensores captan la información espectral y la almacenan en una serie de <strong>bandas</strong>, que corresponden con distintas longitudes de onda reflejadas. Esta información se asocia a cada pixel del territorio, y el conjunto de pixeles componen una imagen o <strong>capa ráster</strong>. Un mayor número de bandas diferenciadas por un sensor supone una mayor <strong>resolución espectral</strong>. El tamaño del pixel determina la <strong>resolución espacial</strong>. La frecuencia de paso o de toma de imágenes de una misma zona del planeta indica la <strong>resolución temporal</strong>. Existen numerosas misiones satelitales sobrevolando el planeta, con distintos objetivos, y por tanto con diferentes resoluciones espectrales, espaciales y temporales. Las imágenes y fotografías extraídas para la elaboración y seguimiento de este manual corresponden a la misión satelital LANDSAT 7, lanzada en 1999 aunque también emplearemos otras imágenes en algunos ejercicios (p.e. ASTER). Este satélite es capaz de diferenciar 8 bandas, de las cuales, vamos a trabajar con las 6 más importantes:</p>
+<ul>
+<li>B1: azul.</li>
+<li>B2: verde.</li>
+<li>B3: rojo.</li>
+<li>B4: infrarrojo cercano.</li>
+<li>B5: infrarrojo medio.</li>
+<li>B6: infrarrojo lejano.</li>
+</ul>
+<p>En este capítulo aprenderemos a manejarnos con imágenes ráster, empleando para ello el menú <strong>“Ráster”</strong> para ello.</p>
+<p>Lo primero que vamos a hacer es familiarizarnos con las imágenes ráster. Para ello, vamos a cargar diferentes imágenes: por una parte, cargaremos el set de imágenes <span style="color: red;">ortoimagen1.rst</span>, <span style="color: red;">ortoimagen2.rst</span> y <span style="color: red;">ortoimagen3.rst</span>. Por otra, cargaremos <span style="color: red;">25_03_891.img</span>, <span style="color: red;">25_03_892.img</span>, <span style="color: red;">25_03_893.img</span> y <span style="color: red;">25_03_894.img</span>. Nos fijaremos en el territorio que representa cada set, haremos zoom y nos fijaremos en su resolución espacial, prestando atención al tamaño de pixel. Prestaremos atención al ‘color’ de cada una de las imágenes, así como al gradiente de colores o escala de grises que presenta cada imagen, y que es lo que se conoce como <strong>resolución radiométrica</strong>. Abriremos la ventana de propiedades de la capa y nos fijaremos en el tipo de datos y en los estadísticos relativos a la resolución radiométrica, así como al tamaño de pixel (todo ello en ‘Información’). Comprobaremos el Sistema de Referencia de Coordenadas asignado (SCR) para ver si coincide con el del proyecto (en ‘Fuente’).</p>
+<p>A continuación, vamos a crear una imagen multiespectral, esto es, un capa que contenga un
+conjunto de imágenes o bandas, de tal forma que podamos crear composiciones de color (color verdadero, falso color) y calcular índices a partir de operaciones estadísticas entre bandas.</p>
+<p>Una vez cargadas las bandas, necesitamos construir un ráster virtual, para lo cual abrimos el desplegable “Ráster” &gt; “Miscelánea”, y pinchamos sobre la opción correspondiente. A continuación, seleccionamos las bandas cargadas en el documento (tanto el set ‘ortoimagen’ como ‘25_03_891’), pinchamos en la opción “Colocar cada archivo en una banda separada” y generamos la nueva capa. Podremos generarla como archivo temporal, o darle un nombre y guardarlo como archivo permanente.</p>
+<div class="infobox caution">
+<p>¡IMPORTANTE!
+No sólo importan las bandas que cargas a la hora de generar una imagen multiespectral. El orden también va a condicionar el color con que visualizas la imagen resultante.</p>
+</div>
+<div id="mejoras-radiométricas" class="section level2" number="10.1">
+<h2>
+<span class="header-section-number">10.1</span> Mejoras radiométricas<a class="anchor" aria-label="anchor" href="#mejoras-radiom%C3%A9tricas"><i class="fas fa-link"></i></a>
+</h2>
+<p>El primer paso antes de trabajar con una capa ráster es proporcionar una adecuada visualización de la imagen, para facilitar un correcto manejo posterior.</p>
+<div id="composiciones-de-color" class="section level3" number="10.1.1">
+<h3>
+<span class="header-section-number">10.1.1</span> Composiciones de color<a class="anchor" aria-label="anchor" href="#composiciones-de-color"><i class="fas fa-link"></i></a>
+</h3>
+<p>Aunque las composiciones de color no son mejoras radiométricas, son esenciales para identificar objetos o regiones de interés a partir de la combinación de las bandas.</p>
+<p>El ojo humano divide el espectro de luz visible en tres componentes, los colores primarios rojo, verde y azul, con los que se pueden formar el resto de colores del arco iris ya sea por adición (el método empleado en, por ejemplo, los monitores de ordenador) o por sustracción (el método empleado en impresión).</p>
+<p>La información de las bandas de las imágenes de satélite se puede distribuir en los tres canales correspondientes a los colores primarios, rojo, verde y azul, de forma que los elementos del territorio adquirirán esas tonalidades dependiendo de su respuesta a las diferentes longitudes de onda. Esta imagen de color compuesto se denomina ‘combinación RGB’ (de red-green-blue). Las combinaciones de color permiten mejorar la interpretabilidad de las imágenes pues el ojo humano percibe mejor las diferencias de tonalidad que de intensidad de grises. El objetivo es destacar los atributos del territorio que más nos interesen.</p>
+<p>En Landsat 7 la combinación que más se acerca al aspecto real del paisaje es la conocida como <strong>321</strong> o <strong>RGB</strong> (Red Green Blue), que combina las bandas del espectro de luz visible y los ordena de la siguiente manera, que es el ejercicio que proponeos: sitúa la banda 1 (azul: 0,45-0,51 mm de longitud de onda) en el canal azul, la banda 2 (verde: 0,53-0,59 mm) en el canal verde y la banda 3 (rojo: 0,45-0,51 mm). Ello da lugar a imágenes en <strong>color verdadero</strong>. Cuando alteramos ese orden, conseguimos imágenes en <strong>falso color</strong>. Ojo, si la imagen que empleamos no tiene alguna de las bandas del visible, como es el caso de ASTER, que carece de azul, no podremos generar imágenes en color verdadero. La combinación de falso color más habitual es aquella que asigna los colores rojo, verde y azul a las bandas del infrarrojo cercano, el rojo y el azul (432). De esta forma, destacamos en color rojo la vegetación.</p>
+<p>Para cambiar la composición de bandas, entramos en el menú “Propiedades de la capa” &gt; “Simbología”, y seleccionamos en “Tipo de renderizador” “Color de multicapa”.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_2_renderizador.png" width="75%" style="display: block; margin: auto;"></div>
+<p>No obstante, existen infinidad de combinaciones en falso color que facilitan la visualización de ciertos elementos del territorio. Aquí tienes algunos ejemplos a los que merece la pena que eches un vistazo:</p>
+<ul>
+<li>
+<strong>762</strong>: especial para detectar entornos urbanos.</li>
+<li>
+<strong>543</strong>: infrarrojo color convencional. Ideal para detectar cultivos, puesto que las plantas húmedas reflejan, en menor medida, el infrarrojo cercano.</li>
+</ul>
+</div>
+<div id="aumento-del-contraste" class="section level3" number="10.1.2">
+<h3>
+<span class="header-section-number">10.1.2</span> Aumento del contraste<a class="anchor" aria-label="anchor" href="#aumento-del-contraste"><i class="fas fa-link"></i></a>
+</h3>
+<p>Esta función tiene como objetivo la modificación del contraste de la imagen, por lo que será necesario expandir el rango de píxeles a lo largo del rango de variación permitido por la resolución radiométrica con la que estemos operando. Como ya hemos señalado en el apartado anterior, para ejecutar esta acción, abrimos el menú “Propiedades de la capa” &gt; “Simbología”, y nos fijamos, ahora sí, en la opción <strong>“Mejora de contraste”</strong>.</p>
+<p>Antes de jugar con esa opción, será mejor que nos fijemos en la siguiente pestaña que, por lo general, aparecerá recogida, y que se denomina “Configuración de valores mín/máx”. De todas las opciones que se nos presentan, elegimos “Mín/máx” para cargar los valores extremos de cada una de las bandas de color. Aunque podemos modificarlos manualmente, los mantendremos por el momento. Acto seguido, en “Mejora del contraste”, seleccionamos “Estirar a MínMax”. Al finalizar el proceso, notaremos cómo los colores de la imagen se han vuelto más intensos.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_3_contraste.png" width="75%" style="display: block; margin: auto;"></div>
+<div class="rmdnote">
+<p>Al tratarse de un “estiramiento” de píxeles, la imagen pierde su fidelidad, por lo que, si bien puede ser útil para una interpretación visual, NUNCA debe emplearse en análisis digitales, ya que los valores de los píxeles no se corresponden con la realidad.</p>
+</div>
+</div>
+</div>
+<div id="filtros" class="section level2" number="10.2">
+<h2>
+<span class="header-section-number">10.2</span> Filtros<a class="anchor" aria-label="anchor" href="#filtros"><i class="fas fa-link"></i></a>
+</h2>
+<p>Además de la modificación del contraste, existen otros métodos para realzar imágenes, destacando determinadas características de la imagen original. Uno de ellos es el <strong>filtrado</strong>. La principal ventaja frente a la técnica anterior radica en que, en este caso, el valor de los píxeles no se modifica, sino que se tienen en cuenta el valor digital de propio píxel a filtrar, y el de los píxeles vecinos. Así, los píxeles de la nueva imagen se calculan mediante una ventana móvil o <strong>filtro</strong> que se va desplazando por toda la composición, asignando un nuevo valor derivado de la combinación lineal de los valores digitales de todos los píxeles que caben en la ventana móvil.</p>
+<div id="rellenar-píxeles-vacíos" class="section level3" number="10.2.1">
+<h3>
+<span class="header-section-number">10.2.1</span> Rellenar píxeles vacíos<a class="anchor" aria-label="anchor" href="#rellenar-p%C3%ADxeles-vac%C3%ADos"><i class="fas fa-link"></i></a>
+</h3>
+<p>En algunos casos, tras el muestreo, es posible que ciertos píxeles aparezcan sin datos, por lo que podemos rellenarlos para evitar futuros errores y problemas en QGIS. Para ello, dentro del menú “Ráster”, seleccionamos “Análisis” &gt; “Rellenar sin datos”. De esta manera, el filtro, de 10x10 en este caso, rellenará los píxeles vacíos que encuentre realizando la mencionada combinación lineal.</p>
+<p><img src="imagenes/Pantallazo_4_rellenar4_1png.png" width="50%"><img src="imagenes/Pantallazo_4_rellenar_4_2png.png" width="50%"></p>
+</div>
+<div id="filtro-definido-por-el-usuario" class="section level3" number="10.2.2">
+<h3>
+<span class="header-section-number">10.2.2</span> Filtro definido por el usuario<a class="anchor" aria-label="anchor" href="#filtro-definido-por-el-usuario"><i class="fas fa-link"></i></a>
+</h3>
+<p>Si pretendemos personalizar el filtro según el cual vayamos a resaltar la imagen, debemos acudir nuevamente al menú “Ráster” &gt; “Análisis”, aunque, en este caso, pinchamos sobre “Filtrado”. En la ventana emergente podemos seleccionar la capa de entrada, el umbral para el filtro o incluso emplear una capa de validación opcional.</p>
+</div>
+</div>
+<div id="correcciones-radiométricas" class="section level2" number="10.3">
+<h2>
+<span class="header-section-number">10.3</span> Correcciones radiométricas<a class="anchor" aria-label="anchor" href="#correcciones-radiom%C3%A9tricas"><i class="fas fa-link"></i></a>
+</h2>
+<p>Otro factor que puede influir en el momento de comparar imágenes es el relativo a las condiciones atmosféricas con las que se tomó cada fotografía. Por lo tanto, antes de evaluar dos archivos obtenidos en épocas del año diferentes, es conveniente homogeneizarlas para reducir la variación radiométrica (o ruido espectral) generada por la dispersión atmosférica.</p>
+<p>Lo primero que debemos hacer para ello es localizar elementos de reflectancia conocida y constante a una escala temporal (ej.: masas de agua profunda), denominados <strong>invariables</strong>. Como vimos en el apartado 4.1.2., el agua apenas refleja energía, sobre todo en una situación de atmósfera despejada, por lo que, si para estas zonas se obtienen valores digitales anormalmente altos, se debe al efecto de la dispersión atmosférica.</p>
+<p>Para practicar esta función, seguiremos los siguientes pasos:</p>
+<ol style="list-style-type: decimal">
+<li>Cargamos las cuatro bandas de la imagen 25_03_89.rst.</li>
+<li>Identificamos una zona de agua.</li>
+<li>Seleccionamos la herramienta “Identificar objetos espaciales”, situada en la barra de herramientas y pinchamos sobre varios píxeles contenidos en la masa de agua. En la parte izquierda de la pantalla, aparecerá automáticamente la ventana
+“Resultados de la identificación”, donde, entre otra información, aparecen los valores de cada banda. El objetivo es hallar los valores mínimos para cada banda en toda la masa de agua.</li>
+<li>Abrimos la “Calculadora ráster” (nuevamente en el menú “Ráster”), la cual nos permite realizar operaciones algebraicas con los datos de este tipo de capas. Para no restar una cantidad demasiado elevada, vamos a probar con n-5 (siendo “n” el valor mínimo determinado para cada una de las bandas).</li>
+</ol>
+<div class="inline-figure"><img src="imagenes/Pantallazo_5_calculadora_raster.png" width="75%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="imagenes/Pantallazo_5b_calculadora_raster.png" width="75%" style="display: block; margin: auto;"></div>
+<p>Una vez conocidas, las insertamos en la barra extensión de corte siguiendo el orden que nos marca arriba (<span class="math inline">\(x_{mín}\)</span>, <span class="math inline">\(x_{máx}\)</span>, <span class="math inline">\(y_{mín}\)</span>, <span class="math inline">\(y_{máx}\)</span>) y sustituyendo las comas por puntos (se trata de un sistema anglosajón). Una vez detallado, pinchamos sobre “Ejecutar”, y obtendremos, como resultado, una capa que solo abarca Valdetorres de Jarama, que llamaremos <span style="color: blue;">25_03_894_recortada.rst</span>. Otra opción para el recorte del ráster puede ser el uso de la capa de “zona_estudio” como máscara para directamente cortar esa superficie.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_6_cortar_extension.png" width="1015"></div>
+<div class="rmdnote">
+<p>¡IMPORTANTE!
+Esta opción te permite recortar una zona de la capa “a ojo”, lo cual te puede ser muy útil si no tienes las coordenadas y puedes localizar el área a vista de mapa.</p>
+</div>
+</div>
+<div id="georreferenciación" class="section level2" number="10.4">
+<h2>
+<span class="header-section-number">10.4</span> Georreferenciación<a class="anchor" aria-label="anchor" href="#georreferenciaci%C3%B3n"><i class="fas fa-link"></i></a>
+</h2>
+<p>En ocasiones, no todas las imágenes con las que trabajamos tienen por qué coincidir geográficamente. Para evitar la pérdida de datos o su incorrecta interpretación, utilizamos la georreferenciación. Esta consiste en emplear referencias de una imagen/capa, sobre otra, para señalar los mismos puntos geográficos.</p>
+<p>Para esta acción, además de utilizar la capa previamente recortada (<span style="color: red;">25_03_894_recortada.rst</span>), vamos a abrir también <span style="color: red;">08122002_pan.img</span>. Comprobamos que los puntos señalados en ambas capas (elipses rojas en la primera, y amarillas en la segunda), no coinciden, superponiendo las imágenes. Esto se consigue modificando la opacidad global de la capa superior, en el menú “Propiedades de la capa” &gt; “Transparencia”.</p>
+<p>En estos casos es cuando debemos georreferenciar una de las imágenes. Lo primero es cerciorarse de que los SRC de ambas capas son idénticos, y que las unidades de medida de distancia y superficie son metros y metros cuadrados, respectivamente. Una vez comprobado, los pasos a seguir son los siguientes:</p>
+<ol style="list-style-type: decimal">
+<li>Abrimos el desplegable “Complementos” &gt; “Administrar e instalar complementos…”.</li>
+<li>En la nueva ventana emergente, pinchamos en “Georreferenciador GDAL”, asegurándonos de que queda activado (al tratarse de un complemento del programa, tenemos que activarlo manualmente; de lo contrario, no funcionará).</li>
+<li>Abrimos el menú “Ráster”, y comprobamos que aparece una nueva opción: “Georreferenciador”. Pinchamos sobre ella. La nueva ventana que aparece a continuación va a ser nuestro espacio de trabajo a partir de ahora.</li>
+<li>Cargamos la capa que queremos referenciar (<span style="color: red;">08122002_pan.img</span>) con “Abrir ráster” seleccionando el mismo SRC que el para el resto del proyecto (EPSG: 25830).</li>
+<li>En la parte superior se carga la imagen, mientras que la parte inferior es la destinada a determinar los <strong>puntos de control</strong> (GCP o Ground Control Points) del territorio (es decir, las coordenadas elegidas para corregir la desviación de la imagen). Podemos incorporarlos de dos formas (aunque aquí emplearemos la primera):
+<ul>
+<li>“Añadir punto”:
+<img src="imagenes/Icono_anadir_punto.png" width="12">
+pinchamos directamente sobre el punto de la capa ráster que queremos localizar. A continuación, se abre una nueva ventana, en la que podremos especificar las coordenadas de ese lugar (si las conocemos), o definirlas desde el lienzo (si las desconocemos). Muy útil si las imágenes presentan elementos comunes fácilmente reconocibles.</li>
+<li>“Cargar puntos PCG”:
+<img src="imagenes/Icono_cargar_punto.png" width="11">
+si tenemos otra capa/archivo en la que ya se han marcado y guardado previamente esos puntos, solo tenemos que cargarla en el georreferenciador a través de esta herramienta.</li>
+</ul>
+</li>
+</ol>
+<div class="inline-figure"><img src="imagenes/Pantallazo_7_coordenadas_mapa.png" width="238"></div>
+<ol start="6" style="list-style-type: decimal">
+<li>Finalmente, para georreferenciar la imagen, vamos a tomar como puntos de referencia las elipses. Primero, seleccionamos una de ellas en la capa abierta en el georreferenciador. A continuación, seleccionamos la opción “Desde el lienzo del mapa”, y pulsamos en el mismo punto de la elipse en la capa que tengamos abierta en ese momento en nuestro proyecto de QGIS, que debe ser <span style="color: red;">25_03_894_recortada</span>. Como resultado, aparecerá, en la porción inferior de la ventana del georreferenciador, la información de ese punto.</li>
+<li>Repetimos el paso con la otra elipse, viendo cómo se añade el punto a la lista del georreferenciador.</li>
+</ol>
+<p>Para que el modelo sea lo más robusto posible, se recomienda que se tomen al menos 3 puntos, y que estén repartidos por toda la imagen, por lo que sería recomendable buscar algún punto más para afianzar la georreferenciación de la capa.</p>
+<div class="rmdtip">
+<p>¡IRECUERDA!
+Cuando vayas a elegir los GCP, procura que sean puntos concretos y que no abarquen una gran cantidad de la imagen, para minimizar el error de medición y tratar de pinchar siempre en el mismo píxel. De lo contrario, la georreferenciación no funcionará.</p>
+</div>
+</div>
+<div id="índices-radiométricos" class="section level2" number="10.5">
+<h2>
+<span class="header-section-number">10.5</span> Índices radiométricos<a class="anchor" aria-label="anchor" href="#%C3%ADndices-radiom%C3%A9tricos"><i class="fas fa-link"></i></a>
+</h2>
+<p>La teledetección presenta otras aplicaciones más allá de la modificación y corrección de imágenes ráster. Gracias a ella, se pueden poner de relieve otras características concretas de las imágenes, como la vegetación o la litología, calculando para ello índices radiométricos. Estos índices representan la relación aritmética existente entre distintas bandas de del sensor aplicada píxel a píxel (véase el capítulo 4 para comprender la composición de estos archivos).</p>
+<p>Las imágenes que vamos a emplear en este capítulo proceden del satélite ASTER (diferente al satélite LANDSAT, ya que no presenta por ejemplo la banda de color azul), y se corresponden con la zona de estudio de Valdetorres de Jarama, en la primavera de 2001. Las capas en cuestión son <span style="color: red;">P1-9.rst</span>. Como ocurre cada vez que cargamos una imagen ráster, debemos componer una <strong>imagen multiespectral</strong>, cargando todas las bandas en riguroso orden (véase capítulo 4 para más detalles).</p>
+<div class="rmdnote">
+<p>NOTA: ASTER solo consta de 2 bandas para el espectro de onda visible (rojo y verde), por lo que la imagen cargada no estará en color verdadero. Por lo tanto, es aconsejable generar una representación en falso color, asignando las bandas 1 (verde), 2 (rojo) y 3 (infrarrojo cercano), a las correspondientes a azul, verde y rojo en QGIS.</p>
+</div>
+<div id="definición-de-índices" class="section level3" number="10.5.1">
+<h3>
+<span class="header-section-number">10.5.1</span> Definición de índices<a class="anchor" aria-label="anchor" href="#definici%C3%B3n-de-%C3%ADndices"><i class="fas fa-link"></i></a>
+</h3>
+<p>Para calcular estos parámetros, vamos a volver a utilizar la calculadora ráster, una herramienta que nos permite realizar operaciones matemáticas con las capas (véase capítulo 4 para más detalles sobre su funcionamiento).</p>
+<p>A continuación, se detallan tres de los índices más útiles a la hora de resaltar propiedades relacionadas con la vegetación o las masas de agua de la imagen:</p>
+<p><strong>Normalized Difference Vegetation Index (NDVI)</strong>: se trata de uno de los índices más ampliamente utilizados en GIS, cuya función radica en ofrecer información sobre la productividad vegetal (calculada para cada píxel). Esto se consigue mediante una ratio entre las bandas del rojo y el infrarrojo cercano de la imagen, gracias a la reflectancia contrastada de ambas. El rango de valores que puede tomar cada píxel oscila entre -1 y 1, dependiendo del vigor de la vegetación contenida en cada uno.
+<span class="math display">\[NDVI = \frac{IRC - R}{IRC + R} = \frac{B3 - B2}{B3 + B2}\]</span></p>
+<p>Al realizar la operación en la calculadora, nombramos a la capa de salida <span style="color: blue;">NDVI_2001prim.tiff</span>, y comprobamos que el resultado, es una imagen en la que cada parcela del terreno aparece en una tonalidad de gris distinta. Aquellas zonas más claras, serán las que mayor presencia de vegetación fotosintéticamente activa tengan.</p>
+<div class="rmdnote">
+<p>NOTA: Este archivo es el único que vamos a generar como PERMANENTE, ya que lo vamos a necesitar posteriormente para elaborar el modelo de distribución potencial del sisón. A partir de aquí, los siguientes ficheros serán TEMPORALES.</p>
+</div>
+<p>Con el objetivo de comparar la productividad del campo entre la primavera y el verano, repetimos el proceso anterior para calcular el NDVI con las capas correspondientes (<span style="color: red;">S1-9.rst</span>). Así, obtenemos la fenología de la vegetación local en dos estaciones distintas, pudiendo deducir el tipo de formación presente en el terreno (ej.: un cultivo estacional puede diferenciarse de una zona de bosque esclerófilo, ya que el primero solo presenta valores altos para el NDVI en primavera, cuando el campo se ha sembrado y las plantas se encuentran en pleno desarrollo; en cambio, el segundo muestra valores altos tanto en primavera como en verano).</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_8_compara_NDVI.png" width="808"></div>
+<p>Globalmente, se aprecia con claridad la diferencia entre la primavera (izquierda) y el verano (derecha).</p>
+<p><strong>Índice de vegetación seca (CLAI)</strong>: especialmente indicado para detectar la cantidad de rastrojos o restos que han quedado en un terreno tras la cosecha del mismo, ya que este índice detecta la celulosa y la lignina, sustancias de las que se compone, principalmente, la vegetación muerta. Para el cálculo de este parámetro, empleamos las bandas de infrarrojo 4 y 5:
+<span class="math display">\[CLAI = \frac{AST4 - AST5}{AST4 + AST5} \ (en \ ASTER)\]</span></p>
+<p><strong>Land Surface Water Index (LSWI)</strong>: este parámetro ha sido diseñado para detectar las masas de agua, empleando el infrarrojo cercano y el infrarrojo de onda corta. La expresión aritmética a usar sería la que sigue:
+<span class="math display">\[LSEI = \frac{IRC - SWIR}{IRC + SWIR} = \frac{B3 - B4}{B3 + B4}\ (en \ ASTER)\]</span>
+Las tonalidades más oscuras coinciden con los valores más bajos del LSWI, y denotan una menor presencia de agua en la vegetación. Por lo tanto, la imagen resultante de las capas de primavera tendrá valores más altos que la originada para el verano.</p>
+<div class="rmdnote">
+<p>¡RECUERDA!
+Para facilitar la comprensión y la visualización de las imágenes, puedes modificar su escala de colores en “Propiedades de la capa”, y elegir una que se ajuste (ej.: en tonalidades verdes), o crear la tuya propia.</p>
+</div>
+</div>
+<div id="detección-de-cambios" class="section level3" number="10.5.2">
+<h3>
+<span class="header-section-number">10.5.2</span> Detección de cambios<a class="anchor" aria-label="anchor" href="#detecci%C3%B3n-de-cambios"><i class="fas fa-link"></i></a>
+</h3>
+<p>Si la variación estacional entre las distintas imágenes no se distingue fácilmente a simple vista, o no es posible, se pueden restar los valores de los píxeles para obtener un dato numérico que la escenifique.</p>
+<p>Para ello, en la calculadora ráster restamos las capas del índice NDVI para primavera y verano. Se genera, como resultado, una capa con valores bajos (colores oscuros) para aquellos píxeles que hayan experimentado poca variación, mientras que los valores más elevados (colores claros) indican las zonas en las que se han obrado cambios más importantes.</p>
+</div>
+</div>
+<div id="clasificación" class="section level2" number="10.6">
+<h2>
+<span class="header-section-number">10.6</span> Clasificación<a class="anchor" aria-label="anchor" href="#clasificaci%C3%B3n"><i class="fas fa-link"></i></a>
+</h2>
+<p>Puede sernos muy útil clasificar las imágenes en base a la información multiespectral que nos proporcionan. Este proceso consiste en la asignación a cada píxel de un valor cualitativo asociado al tipo de cobertura del terreno, y se puede llevar a cabo mediante dos métodos: supervisado y no supervisado.</p>
+<div id="método-no-supervisado" class="section level3" number="10.6.1">
+<h3>
+<span class="header-section-number">10.6.1</span> Método no supervisado<a class="anchor" aria-label="anchor" href="#m%C3%A9todo-no-supervisado"><i class="fas fa-link"></i></a>
+</h3>
+<p>Para este procedimiento no es necesario tener un conocimiento previo del área que vamos a analizar, ya que se basa en la suposición de que los píxeles forman grupos homogéneos respecto a la información de sus bandas. Estos conjuntos se denominan <strong>clusters</strong>, y cada uno está compuesto por todos los píxeles que presenten el mismo valor para una banda.</p>
+<p>Es imprescindible instalar el complemento “Semi-Automatic Classification Plugin”. A continuación, automáticamente, veremos que la interfaz de QGIS cambia ligeramente, añadiéndose una tercera barra de herramientas en la parte superior, y una nueva ventana de comandos en la esquina inferior izquierda, bajo el panel de capas.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_9_aster.png" width="100%" style="display: block; margin: auto;"></div>
+<p>Para seleccionar las bandas empleadas en la reclasificación, debemos pulsar tras lo cual emergerá un nuevo menú, en el que detallaremos todo esto. Dado que, como primera tarea, vamos a analizar la clasificación de los tipos de suelo tanto en primavera como en verano, es importante seleccionar todas las bandas ASTER de cada período en dos sets (P1-9.rst) y (S1-9.rst). Si hacemos el proceso con todas las capas, estamos incluyendo más información a los pixeles, lo que puede ser beneficioso. Las abriremos desde la carpeta de documentos donde se encuentren. Se añadirán a la zona <em>active band set</em>. Posteriormente, realizaremos el mismo procedimiento analizando conjuntamente los índices NDVI calculados (<span style="color: red;">NDVI_2001prim</span> y <span style="color: red;">NDVI_2001ver</span>). Revisar que en el recuadro de “Band set” no se repiten algunas de las capas. En cualquiera de estas situaciones, se tendrán en cuenta 4 categorías distintas, que han de identificarse con los usos del suelo, a saber:</p>
+<ul>
+<li>Campo cultivado.</li>
+<li>Barbecho.</li>
+<li>Vegetación natural.</li>
+<li>Zona urbana.</li>
+</ul>
+<div class="inline-figure"><img src="imagenes/Pantallazo_10_semiautomatic_pluging.png" width="75%" style="display: block; margin: auto;"></div>
+<p>Una vez seleccionadas dichas opciones, ejecutamos el SCP. Antes de generar el nuevo ráster virtual, QGIS nos preguntará por la carpeta de destino y directamente generará un nuevo ráster en el proyecto. Usaremos los siguientes nombres, dependiendo del proceso que estemos llevando a cabo:</p>
+<ul>
+<li><span style="color: blue;">Clas_nosuperv_prim.tiff</span></li>
+<li><span style="color: blue;">Clas_nosuperv_ver.tiff</span></li>
+<li><span style="color: blue;">Clas_nosuperv_NDVI.tiff</span></li>
+</ul>
+<p>Por último, para visualizar mejor los resultados, es conveniente cambiar la leyenda de colores a un estilo solo con 4 categorías.</p>
+<p>Estos serán los resultados tras realizar las clasificaciones de los usos del suelo en primavera (arriba), verano (centro), y según el NDVI de ambas estaciones (abajo):</p>
+<p><img src="imagenes/Pantallazo_11_2-ndvi-izda.png" width="50%" style="display: block; margin: auto;"><img src="imagenes/Pantallazo_11_1-ndvi-centro.png" width="50%" style="display: block; margin: auto;"><img src="imagenes/Pantallazo_11_3-ndvi-dcha.png" width="50%" style="display: block; margin: auto;"></p>
+<p>Si queremos hacer una combinación de bandas de colores de forma algo más automática podemos emplear la misma herramienta, y especificar las bandas de colores. Si queremos que nos genere todas las bandas posibles podemos indicárselo con la opción que aparece en la zona inferior (“Combinaciones de bandas) y luego seleccionamos la que queremos.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_12_semiautomatic_pluging_rgb.png" width="110%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="imagenes/Pantallazo_13_semiautomatic_pluging_rgb.png" width="110%" style="display: block; margin: auto;"></div>
+<p>Hacemos un clustering usando la banda con todos los valores de primavera y verano. Cuantas mas interacciones, mejor resultados.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_14_semiautomatic_pluging_cluster.png" width="110%" style="display: block; margin: auto;"></div>
+</div>
+<div id="método-supervisado" class="section level3" number="10.6.2">
+<h3>
+<span class="header-section-number">10.6.2</span> Método supervisado<a class="anchor" aria-label="anchor" href="#m%C3%A9todo-supervisado"><i class="fas fa-link"></i></a>
+</h3>
+<p>En este caso, sí que es preciso tener conocimiento previo sobre la zona de estudio, ya que necesitamos determinar un compendio de áreas piloto para la clasificación, denominadas <strong>campos de entrenamiento</strong>. Estas muestras representarán una categoría conocida de antemano. Para este procedimiento, solamente utilizaremos las bandas correspondientes a primavera y verano (<span style="color: red;">P1-9.rst</span>, <span style="color: red;">S1-9.rst</span>).</p>
+<ol style="list-style-type: decimal">
+<li>El primer paso radica en la creación de una nueva capa vectorial llamada <span style="color: blue;">entrenamiento.shp</span>, cuyos polígonos serán los campos de entrenamiento seleccionados (véase apartado 1.3.2., “Crear un shapefile”). En la ventana emergente, incorporamos un nuevo campo llamado “Categoría”, de tipo “datos de texto”/”string”. Una vez se haya creado la capa, establecemos los polígonos en las zonas en las que se conoce el tipo de cobertura del suelo presente, y la indicamos en la tabla de atributos. En este caso, solo distinguimos 3 categorías: Cultivos de cereal, Barbecho y Vegetación natural.</li>
+</ol>
+<div class="rmdnote">
+<p>IMPORTANTE
+Se debe crear al menos un polígono por campo de entrenamiento, aunque, cuantos más se generen, más preciso será el resultado.</p>
+</div>
+<ol start="2" style="list-style-type: decimal">
+<li>A continuación, en el buscador de la caja de herramientas, escribimos “Supervised classification” y pinchamos sobre el primer resultado (no confundir con “Supervised classification for grids/shapes”). En la ventana emergente, seleccionamos los siguientes parámetros de análisis:</li>
+</ol>
+<div class="inline-figure"><img src="imagenes/Pantallazo_15_supervised.png" width="110%" style="display: block; margin: auto;"></div>
+<p>Al igual que con el método anterior, para visualizar mejor el resultado, podemos cambiar la paleta de color en el menú “Propiedades de la capa”, y seleccionar/crear un estilo con 3 categorías. Es posible que el resultado varíe en función de la ubicación y naturaleza de los polígonos creados.</p>
+<div class="infobox caution">
+<p>Asegúrate de que ningún polígono está seleccionado previamente; si no, esta solo atenderá a dichos elementos, en lugar de a todos los de la capa de entrenamiento.</p>
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+  <div class="chapter-nav">
+<div class="prev"><a href="geoprocesamiento-miscel%C3%A1nea.html"><span class="header-section-number">9</span> Geoprocesamiento (miscelánea)</a></div>
+<div class="next"><a href="an%C3%A1lisis-de-la-estructura-del-paisaje.html"><span class="header-section-number">11</span> Análisis de la estructura del paisaje</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#teledetecci%C3%B3n"><span class="header-section-number">10</span> Teledetección</a></li>
+<li>
+<a class="nav-link" href="#mejoras-radiom%C3%A9tricas"><span class="header-section-number">10.1</span> Mejoras radiométricas</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#composiciones-de-color"><span class="header-section-number">10.1.1</span> Composiciones de color</a></li>
+<li><a class="nav-link" href="#aumento-del-contraste"><span class="header-section-number">10.1.2</span> Aumento del contraste</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#filtros"><span class="header-section-number">10.2</span> Filtros</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#rellenar-p%C3%ADxeles-vac%C3%ADos"><span class="header-section-number">10.2.1</span> Rellenar píxeles vacíos</a></li>
+<li><a class="nav-link" href="#filtro-definido-por-el-usuario"><span class="header-section-number">10.2.2</span> Filtro definido por el usuario</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#correcciones-radiom%C3%A9tricas"><span class="header-section-number">10.3</span> Correcciones radiométricas</a></li>
+<li><a class="nav-link" href="#georreferenciaci%C3%B3n"><span class="header-section-number">10.4</span> Georreferenciación</a></li>
+<li>
+<a class="nav-link" href="#%C3%ADndices-radiom%C3%A9tricos"><span class="header-section-number">10.5</span> Índices radiométricos</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#definici%C3%B3n-de-%C3%ADndices"><span class="header-section-number">10.5.1</span> Definición de índices</a></li>
+<li><a class="nav-link" href="#detecci%C3%B3n-de-cambios"><span class="header-section-number">10.5.2</span> Detección de cambios</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#clasificaci%C3%B3n"><span class="header-section-number">10.6</span> Clasificación</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#m%C3%A9todo-no-supervisado"><span class="header-section-number">10.6.1</span> Método no supervisado</a></li>
+<li><a class="nav-link" href="#m%C3%A9todo-supervisado"><span class="header-section-number">10.6.2</span> Método supervisado</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/07-Teledeteccion.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/07-Teledeteccion.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Aplicaciones de SIG y TD en Ecología</strong>: Manual de prácticas en QGIS" was written by <a href="http://teguam.es/miembros/javier-seoane/">Javier Seoane Pinilla</a>, <a href="https://teguam.es/miembros/pablo-acebes-vives/">Pablo Acebes Vives</a>. It was last built on 20 September, 2024.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 5 Presentación de QGIS | Aplicaciones de SIG y TD en Ecología</title>
+<meta name="author" content="Javier Seoane Pinilla, Pablo Acebes Vives">
+<meta name="description" content="5.1 Pestaña de proyectos y propiedades Para comenzar a trabajar en QGIS, es necesario seleccionar un nuevo proyecto, o abrir uno sobre el que ya hayamos empezado a trabajar. Por tanto, debemos...">
+<meta name="generator" content="bookdown 0.40 with bs4_book()">
+<meta property="og:title" content="Capítulo 5 Presentación de QGIS | Aplicaciones de SIG y TD en Ecología">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/2014-06-07-Aneto.png">
+<meta property="og:description" content="5.1 Pestaña de proyectos y propiedades Para comenzar a trabajar en QGIS, es necesario seleccionar un nuevo proyecto, o abrir uno sobre el que ya hayamos empezado a trabajar. Por tanto, debemos...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 5 Presentación de QGIS | Aplicaciones de SIG y TD en Ecología">
+<meta name="twitter:description" content="5.1 Pestaña de proyectos y propiedades Para comenzar a trabajar en QGIS, es necesario seleccionar un nuevo proyecto, o abrir uno sobre el que ya hayamos empezado a trabajar. Por tanto, debemos...">
+<meta name="twitter:image" content="/2014-06-07-Aneto.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-binding-2.2.2/leaflet.js"></script><script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script><script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script><link href="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet">
+<script src="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.js"></script><script src="libs/leaflet-minimap-3.3.1/Minimap-binding.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Manual de prácticas en QGIS">Aplicaciones de SIG y TD en Ecología</a>:
+        <small class="text-muted">Manual de prácticas en QGIS</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Sobre este libro</a></li>
+<li class="book-part">PRELIMINARES</li>
+<li><a class="" href="introducci%C3%B3n.html"><span class="header-section-number">1</span> Introducción</a></li>
+<li><a class="" href="organizaci%C3%B3n-del-guion-de-pr%C3%A1cticas.html"><span class="header-section-number">2</span> Organización del guion de prácticas</a></li>
+<li class="book-part">SIG Y CARTOGRAFÍA</li>
+<li><a class="" href="introducci%C3%B3n-a-los-sig.html"><span class="header-section-number">3</span> Introducción a los SIG</a></li>
+<li><a class="" href="fundamentos-cartograf%C3%ADa.html"><span class="header-section-number">4</span> Fundamentos cartografía</a></li>
+<li class="book-part">OPERACIONES SIG</li>
+<li><a class="active" href="presentaci%C3%B3n-de-qgis.html"><span class="header-section-number">5</span> Presentación de QGIS</a></li>
+<li><a class="" href="geodatabases.html"><span class="header-section-number">6</span> Geodatabases</a></li>
+<li><a class="" href="geoprocesamiento-vectorial.html"><span class="header-section-number">7</span> Geoprocesamiento vectorial</a></li>
+<li><a class="" href="geoprocesamiento-r%C3%A1ster.html"><span class="header-section-number">8</span> Geoprocesamiento ráster</a></li>
+<li><a class="" href="geoprocesamiento-miscel%C3%A1nea.html"><span class="header-section-number">9</span> Geoprocesamiento (miscelánea)</a></li>
+<li class="book-part">TELEDETECCIÓN</li>
+<li><a class="" href="teledetecci%C3%B3n.html"><span class="header-section-number">10</span> Teledetección</a></li>
+<li class="book-part">PAISAJE</li>
+<li><a class="" href="an%C3%A1lisis-de-la-estructura-del-paisaje.html"><span class="header-section-number">11</span> Análisis de la estructura del paisaje</a></li>
+<li class="book-part">MODELOS DE DISTRIBUCIÓN DE ESPECIES</li>
+<li><a class="" href="captura-y-preparaci%C3%B3n-de-la-informaci%C3%B3n.html"><span class="header-section-number">12</span> Captura y preparación de la información</a></li>
+<li><a class="" href="elaboraci%C3%B3n-del-modelo-predictivo.html"><span class="header-section-number">13</span> Elaboración del modelo predictivo</a></li>
+<li class="book-part">CIERRE</li>
+<li><a class="" href="referencias-para-aprender-m%C3%A1s.html"><span class="header-section-number">14</span> Referencias para aprender más</a></li>
+<li><a class="" href="informaci%C3%B3n-de-la-sesi%C3%B3n.html"><span class="header-section-number">15</span> Información de la sesión</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="presentación-de-qgis" class="section level1" number="5">
+<h1>
+<span class="header-section-number">Capítulo 5</span> Presentación de QGIS<a class="anchor" aria-label="anchor" href="#presentaci%C3%B3n-de-qgis"><i class="fas fa-link"></i></a>
+</h1>
+<div id="pestaña-de-proyectos-y-propiedades" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Pestaña de proyectos y propiedades<a class="anchor" aria-label="anchor" href="#pesta%C3%B1a-de-proyectos-y-propiedades"><i class="fas fa-link"></i></a>
+</h2>
+<p>Para comenzar a trabajar en QGIS, es necesario seleccionar un nuevo proyecto, o abrir uno sobre el que ya hayamos empezado a trabajar. Por tanto, debemos dirigirnos a la pestaña “Proyectos”, situada en la esquina superior izquierda del visor. Desde el menú desplegable, podremos crear, abrir, importar/exportar y cambiar la configuración de nuestro documento.</p>
+<p>Con el objetivo de localizar todos estos comandos, vamos a crear un proyecto “Nuevo” sobre el que poder trabajar, el cual aparecerá, por definición con el nombre de Proyecto sin título. Podemos seleccionar esta opción desde la pestaña “Proyectos” o desde la barra de herramientas, con el botón</p>
+<div class="inline-figure"><img src="imagenes/Boton_nuevo_proyecto.png" width="30"></div>
+<div class="inline-figure"><img src="imagenes/Pantallazo_nuevo_proyecto.png" width="448"></div>
+<p>Una vez hemos abierto un nuevo proyecto, vamos a proceder a renombrarlo, y ajustar las propiedades.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_guardar_proyecto.png" width="532"></div>
+<p>Antes de empezar con el proyecto en sí, conviene echar un vistazo a la pestaña “Propiedades”, donde podemos realizar diversas acciones, como renombrar el documento, o elegir las unidades en las que se mostrará el mapa. Nada más pinchar en “Propiedades”, se despliega una nueva ventana.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_propiedades_proyecto.png" width="125%" style="display: block; margin: auto;"></div>
+<div class="rmdnote">
+<p>Observa que, por defecto, las unidades seleccionadas para la medición de distancia y superficie, ya aparecen en metros y metros cuadrados respectivamente, por lo que no sería necesaria modificar esta parte.</p>
+</div>
+<p>A la izquierda, encontramos el menú por el que nos podremos desplazar en esta categoría. Por defecto, saldrá ubicado en la pestaña “General”. En ella, podremos modificar el título del proyecto, su ruta de archivo, o las unidades para mediciones de distancia y superficie. El siguiente paso consiste en establecer el Sistema de Proyección y Referencias de Coordenadas (SRC). Para ello, lo primero es pinchar en la pestaña “SRC” en el menú de la izquierda, con lo que las opciones de la pantalla central, cambian. En la parte superior, aparece una barra de búsqueda muy cómoda para filtrar la lista de proyecciones y encontrar rápidamente la que necesitamos. Si no sabemos cuál es su código, o simplemente queremos curiosear, más abajo encontramos una lista con las proyecciones incorporadas en esta versión de QGIS (Predefined Coordinate Reference Systems).</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_CRS.png" width="511"></div>
+<div class="rmdnote">
+<p>¡IMPORTANTE!
+Los Sistemas de Referencia de Coordenadas (SCR) son uno de los aspectos frecuentemente problemáticos a resolver en un proyecto de SIG. En la siguiente web se dan consejos y soluciones comunes: <a href="https://ihatecoordinatesystems.com/" class="uri">https://ihatecoordinatesystems.com/</a>
+La denominación de los distintos SCR y sus especificaciones técnicas se pueden encontrar en la web epsg.io (p.e., en <a href="https://epsg.io/25830" class="uri">https://epsg.io/25830</a> se describe el CRS 25830 y dónde es aplicable).
+A la hora de seleccionar los SRC, vamos a utilizar las referencias más comunes:
+<strong>ETRS89 UTM 30N</strong> para España: código 25830.
+<strong>WGS84</strong> para el globo terráqueo entero: código 4326.</p>
+</div>
+</div>
+<div id="añadir-capas-y-navegar-por-la-vista" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> Añadir capas y navegar por la vista<a class="anchor" aria-label="anchor" href="#a%C3%B1adir-capas-y-navegar-por-la-vista"><i class="fas fa-link"></i></a>
+</h2>
+<p>Una vez manejados los controles del archivo, procedemos a abrir una de las capas que tenemos a nuestra disposición, con la que nos familiarizaremos con la interfaz, además de aprender a movernos por la vista. Para ello, vamos a trabajar con la capa de los usos del suelo (shapefile “.shp”) en Valdetorres de Jarama en 2001 (<span style="color: red;">parcelario_2001_VT_ETRS89.shp</span>), la cual puede abrirse desde la pestaña “Capa”, o desde el botón “Abrir administrador de fuentes de datos”, en la barra de herramientas.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_anadir_capa_vectorial.png" width="125%" style="display: block; margin: auto;"></div>
+<p>La capa no tiene definido un SRC, e.d., la máquina no sabe con qué SRC se creó. Definámoslo como EPSG 25830 (el del proyecto) porque fue con ese con el que se creó (bueno, y si no fue con ese, fue con uno muy próximo)</p>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-1" class="exercise"><strong>Exercise 5.1  </strong></span>EJERCICIO:
+Examinar la representación espacial: se trata de una capa vectorial <em>de polígonos</em>. Zoom a la capa y ver que no hay discontinuidades o píxeles, sino líneas que se cierran (o se deberían cerrar)</p>
+</div>
+<p>En ambos casos, llegaremos a un menú similar al que nos encontrábamos en la pestaña “Propiedades”, aunque, ahora, en la barra lateral izquierda, debemos seleccionar el apartado “Navegador”. Desde él podremos explorar las carpetas de archivos de nuestro equipo, y seleccionar la capa que necesitamos. Cuando la encontremos, pulsamos sobre ella y nos aparecerá, directamente, en la pantalla principal, sobre nuestro proyecto.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_navegador.png" width="125%" style="display: block; margin: auto;"></div>
+<p>En el margen izquierdo, se enumeran todas las capas cargadas para este proyecto, y quedan marcadas con un tic las que se muestran en este momento en pantalla. Si se modifica el orden en que aparecen, se altera también el orden de las mismas.</p>
+<div class="rmdtip">
+<p>¡RECUERDA!:
+En la pestaña ‘propiedades’ puedes ‘redefinir’ el SRC, e.d., seleccionar otro sobre el que ubicaremos nuestras capas. Para cambiar el SRC (e.d., la información de la capa) se requiere reproyectar la capa (e.d., cambiar tanto el SRC como las coordenadas)</p>
+</div>
+<p>Asimismo, encima encontramos una vista reducida del navegador, desde la cual también podemos buscar otros proyectos y/o capas que queramos cargar en el futuro. Vamos a probar a abrir otras dos capas: <span style="color: red;">Observac_VT_17042001_Project_ETRS89.shp</span> y <span style="color: red;">carreteras04_ETRS89.shp</span>. Una vez cargadas, se puede comprobar que, al lado del nombre, en el menú “Capas”, se indica la simbología con la que se representa cada una. Si necesitamos modificar las características de una capa en concreto, podemos hacer doble clic sobre ella, y aparecerá el menú “Propiedades de la capa”, en el que podremos cambiar la simbología, el SRC o el nombre, además de añadirle etiquetas o gráficos en 3D.</p>
+<p>Para navegar por la vista, podemos arrastrar la imagen para centrar el rincón que necesitamos observar, o utilizar los iconos de la barra de herramientas (desplazar mapa, acercar/alejar zoom, zoom general, etc.).</p>
+<p>Una vez que hemos realizado una determinada combinación y configuración de capas, que deseamos conservar, podemos guardarla como proyecto, en cuyo caso, el archivo se guardará con la extensión *.qgz.</p>
+<div class="rmdtip">
+<p>Recuerda que para guardar el proyecto y/o cualquier avance tienes un acceso directo en la barra de herramientas. Además, los proyectos funcionan con las rutas y nombres de acceso de las capas, en el momento de su creación, por lo que, cualquier modificación a este respecto puede inhabilitar total o parcialmente nuestro proyecto.</p>
+</div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-2" class="exercise"><strong>Exercise 5.2  </strong></span>QGIS permite importar archivos desde muchos formatos para datos geográficos como los archivos de tipo *.gpx con que se graban habitualmente los datos en dispositivos GPS y los archivos de tipo *.kml, que genera Google Earth. Prueba a cargar el fichero de puntos Observac_VT_24042002.kml (EPSG 4326 - WGS84) sobre el parcelario y examínalo también en <em>Google Earth</em> para comprobar que las visualizaciones son coincidentes.</p>
+</div>
+</div>
+<div id="capas-vectoriales" class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> Capas vectoriales<a class="anchor" aria-label="anchor" href="#capas-vectoriales"><i class="fas fa-link"></i></a>
+</h2>
+<div id="propiedades-de-la-capa" class="section level3" number="5.3.1">
+<h3>
+<span class="header-section-number">5.3.1</span> Propiedades de la capa<a class="anchor" aria-label="anchor" href="#propiedades-de-la-capa"><i class="fas fa-link"></i></a>
+</h3>
+<p>Las capas seleccionadas hasta ahora son <strong>capas vectoriales</strong>. Como ya hemos visto, haciendo doble clic sobre la capa seleccionada, se puede acceder al menú de “Propiedades de la capa”. Ahora vamos a comentar más detalladamente diversas acciones que puedes realizar desde ahí.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_propiedades_capa.png" width="125%" style="display: block; margin: auto;"></div>
+<ul>
+<li>“Fuente”:
+<ul>
+<li>Modificar el nombre de la capa: solo se cambia la visualización en el proyecto, NO el nombre ni la ruta del archivo. Se puede hacer también directamente desde la leyenda.</li>
+<li>Codificación de la fuente de datos: por defecto, y al estar empleando Windows, la configuración que aparece seleccionada es “windows 1252”, pero podemos seleccionar la que más nos convenga. De momento, no obstante, la dejamos así.</li>
+<li>Establecer SRC: elección del SRC que necesitamos. Por defecto, debido a la configuración de la capa parcelario_2001_VT_ETRS89.shp, el SRC seleccionado es ETRS89/UTM zone 30N; EPSG: 25830 (las capas deben tener la misma proyección que la del proyecto).</li>
+</ul>
+</li>
+<li>“Simbología”: elección de la representación gráfica de la capa. Pueden elegirse distintos renderizadores, dependiendo de la naturaleza del dato a señalar:
+<ul>
+<li>Ningún símbolo: se retiran los marcadores de la capa.</li>
+<li>Símbolo único: los datos de la capa son representados de la misma manera. Podemos seleccionar el color, el grosor, la unidad de medida y la textura del símbolo. Para añadir más símbolos, pulsamos sobre el botón “+”, en la parte superior derecha del menú. Se puede explorar la librería de símbolos de QGIS cambiando el campo ‘tipo de capa del símbolo’ a ‘Marcador SVG’ y seleccionar entre las imágenes SVG que se muestran más abajo. El usuario también puede incluir sus propios gráficos SVG en esta librería de símbolos para usarlos en la representación (para ello grábalos en la ruta a los SVG que se indica en Configuración &gt; Opciones &gt; Sistema).</li>
+<li>Categorizado: para datos categóricos. En este apartado, podemos distinguir valores mediante una escala de colores. En la tabla inferior, se ubica la leyenda con el significado de todos los marcadores categóricos.</li>
+<li>Graduado: para datos clasificados en escalas. De forma semejante al apartado anterior, es posible asignar distintos marcadores a datos cualitativos, representados mediante porcentajes.</li>
+<li>Basado en reglas: en este apartado, nos encontramos con una lista de los símbolos que hemos creado, así como su jerarquía y significado.</li>
+<li>Polígonos invertidos: apartado en el que, nuevamente, se nos presenta una leyenda con los polígonos invertidos que hemos establecido para el proyecto.</li>
+<li>2.5 D: efecto mediante el cual, podemos generar estructuras en relieve en nuestro proyecto, configurando la altura sobre la base, el ángulo, los colores y la sombra de la estructura. Es posible convertir el resultado en otro renderizador, siempre que sea sencillo, categorizado o graduado.</li>
+</ul>
+</li>
+</ul>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-3" class="exercise"><strong>Exercise 5.3  </strong></span>EJERCICIO:
+representa el parcelario mediante una escala de colores que se aplique al campo “SUST_DEF”. Emplea una asignación de colores a los usos del suelo que te parezca descriptiva y modifica la escala en consecuencia.</p>
+</div>
+<div class="inline-figure"><img src="imagenes/Pantallazo_simbologia.png" width="516"></div>
+<p>Se pueden crear y guardar leyendas personalizadas desde este menú. Para ello, elegimos la opción “Categorizado” en la barra de simbología, y veremos que la pantalla cambia ligeramente. Debemos seguir los siguientes pasos:</p>
+<ol style="list-style-type: decimal">
+<li>Seleccionar el valor de campo para el que personalizaremos la leyenda.</li>
+<li>Al pinchar sobre “Clasificar”, aparecerá una paleta aleatoria de colores para los distintos valores.</li>
+<li>Elegir una rampa de color (si preferimos no dejar el motivo aleatorio).</li>
+<li>En “Representación de capa”, podemos modificar la opacidad de esta, lo cual puede sernos muy útil a la hora de superponer capas, sin perder la información de la capa inferior.</li>
+<li>Si deseamos conservar la leyenda creada para este campo, de tal forma que se pueda volver a emplear en un futuro, hacemos clic en “Estilo” &gt; “Guardar estilo como…”.</li>
+<li>Pinchamos sobre “Aplicar” &gt; “Aceptar”.</li>
+</ol>
+<p>Otra función bastante interesante, es la posibilidad de añadir <strong>etiquetas</strong> a los símbolos que hemos establecido. Para ello, solo hace falta pinchar en la sección “Etiquetas”, en el menú de “Propiedades de la capa”, o, simplemente, hacer doble clic sobre el símbolo elegido (en la categoría “símbolo único”), y se desplegará un nuevo menú de configuración del símbolo. En él, además, tendremos la capacidad de variar el estilo de la marca, la anchura, el estilo de ángulos, y hasta el estilo de rellenos.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_estilos.png" width="444"></div>
+<div class="rmdtip">
+<p>Puede ser muy útil crear una leyenda de colores asociada a los distintos valores del campo, para una mejor visualización (ej.: trigo = colores amarillos, sustrato sin cultivar = marrones, etc.). Para ahorrar tiempo, también puedes cargar estilos que hayas creado previamente, también desde la pestaña “Estilos”.</p>
+</div>
+</div>
+<div id="crear-un-shapefile" class="section level3" number="5.3.2">
+<h3>
+<span class="header-section-number">5.3.2</span> Crear un <em>shapefile</em><a class="anchor" aria-label="anchor" href="#crear-un-shapefile"><i class="fas fa-link"></i></a>
+</h3>
+<p>El siguiente paso radica en crear una capa vectorial con geometrías (shapefile). Lo primero que debemos hacer es seleccionar “Capa” en la barra de herramientas. A continuación, en el desplegable, pinchamos sobre “Crear capa”, y “Nueva capa de archivo shape”. Se abrirá una ventana en la que ajustaremos los parámetros de la capa:</p>
+<ul>
+<li>
+<strong>Nombre</strong>: vamos a llamarla <span style="color: blue;">Puntos_prueba.shp</span>.</li>
+<li>
+<strong>Tipo de geometría</strong>: en este caso, puntos.</li>
+<li>Especificamos la <strong>ruta</strong> donde queremos guardar nuestra nueva capa. No dejamos a QGIS que se la asocie por defecto.</li>
+<li>
+<strong>SRC</strong>: no vamos a cambiarlo; de momento nos quedamos con ETRS89/30N.</li>
+<li>
+<strong>Campos</strong>: podemos añadir todos los que consideremos necesarios. Para confirmarlos, pinchamos en el botón “Añadir a la lista de campos”.</li>
+<li>
+<strong>Lista de campos</strong>: desglose de todos los campos añadidos a la capa.</li>
+</ul>
+<p>Al pulsar en “Aceptar”, nuestra nueva capa aparecerá representada en el proyecto, y se visualizará junto a las demás en la lista de capas, a la izquierda de la pantalla.</p>
+<p>Para añadir nuevos elementos, debemos primero poder editar la capa, para lo cual hacemos clic con el botón derecho del ratón sobre ella (en el menú de capas), y seleccionamos “Conmutar edición”. Automáticamente, veremos cómo ciertas funciones de la barra de herramientas se desbloquean. Para nuestro estudio, pinchamos sobre “Añadir punto”, y elegimos el lugar de la capa donde instalarlo. En la ventana emergente que surge tras pinchar, introducimos el número de la observación (en el campo “ID”), y el resto de atributos que hayamos decidido añadir a la lista de campos.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_nuevo_shape.png" width="125%" style="display: block; margin: auto;"></div>
+</div>
+<div id="crear-un-shapefile-desde-un-archivo-de-excel" class="section level3" number="5.3.3">
+<h3>
+<span class="header-section-number">5.3.3</span> Crear un <em>shapefile</em> desde un archivo de Excel<a class="anchor" aria-label="anchor" href="#crear-un-shapefile-desde-un-archivo-de-excel"><i class="fas fa-link"></i></a>
+</h3>
+<p>Desde hace varias versiones, QGIS permite cargar datos de Excel en formato .xls. Comprobémoslo con el archivo <span style="color: red;">Observaciones.xls</span> que puedes localizar en la carpeta de datos para esta asignatura. Sigue estos pasos:</p>
+<ol style="list-style-type: decimal">
+<li>añadir capa vectorial</li>
+<li>seleccionar el fichero de excel (.xls o .xlsx; nota que xlsx es el estándar de Microsoft desde 2007)</li>
+<li>si el fichero tiene varias hojas, QGIS pedirá que selecciones una (o varias) de ellas</li>
+<li>se añade entonces una capa a la ventana de capas; se trata de una tabla sin geometría: examinar su tabla de atributos</li>
+<li>añadamos la geometría: caja de herramienta de procesos &gt; creación de vectores (o ‘crear capa de puntos a partir de tabla’); seleccionar campos X e Y y el SRC.</li>
+<li>Guardar el archivo vectorial de salida, que se representará en la vista del proyecto</li>
+</ol>
+<p>Si el fichero de entrada está en formato texto (.txt o .csv), entonces ve a “Capa” &gt; “Añadir capa” &gt; “Añadir capa de texto delimitado” y define la geometría asegurándote de que la X se corresponde con los datos de las abscisas, y los de las Y con las ordenadas. Después selecciona el SRC y añade la capa al proyecto. Cuando hayamos terminado, guardamos la información en formato SHP. Para guardarlo damos con el botón derecho sobre la capa y seleccionamos Exportar -&gt; guardar como -&gt; shapefile (ESRI).</p>
+</div>
+</div>
+<div id="capas-ráster" class="section level2" number="5.4">
+<h2>
+<span class="header-section-number">5.4</span> Capas ráster<a class="anchor" aria-label="anchor" href="#capas-r%C3%A1ster"><i class="fas fa-link"></i></a>
+</h2>
+<div id="propiedades" class="section level3" number="5.4.1">
+<h3>
+<span class="header-section-number">5.4.1</span> Propiedades<a class="anchor" aria-label="anchor" href="#propiedades"><i class="fas fa-link"></i></a>
+</h3>
+<p>En este apartado, vamos a abrir la capa <span style="color: red;">VT2002ABR_pan.img</span>, sobre la que trabajaremos. Una vez abierta, abrimos el menú “Propiedades de la capa”, tal y como hemos hecho hasta ahora. Sin embargo, veremos que la nueva ventana es ligeramente distinta a la que nos hemos venido enfrentando.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_propiedades_raster.png" width="125%" style="display: block; margin: auto;"></div>
+<p>Cabe la posibilidad de configurar la visibilidad de una capa, atendiendo a su escala. Para ello, pinchamos sobre la pestaña “Representación”, dentro del menú “Propiedades”, tras lo cual, deberemos habilitar esta opción. A continuación, podemos actuar de 2 formas:</p>
+<ul>
+<li>Mínimo (exclusivo): si disminuimos la escala por debajo de 1:xxx (siendo “xxx” una escala mínima), se oculta la imagen.</li>
+<li>Máximo (inclusivo): si aumentamos la escala por encima de 1:xxx (siendo “xxx” una escala máxima), se oculta la imagen.</li>
+</ul>
+</div>
+<div id="visualización" class="section level3" number="5.4.2">
+<h3>
+<span class="header-section-number">5.4.2</span> Visualización<a class="anchor" aria-label="anchor" href="#visualizaci%C3%B3n"><i class="fas fa-link"></i></a>
+</h3>
+<p>En algunos casos, nos encontraremos con ráster de una sola banda, a los que no podremos asociar una leyenda como en casos anteriores. No obstante, para facilitar su visualización, es posible asignar un color según rangos de píxeles, de tal manera que se obtiene un degradado. Por definición, QGIS siempre asigna un gradiente “negro a blanco”, pero podemos modificarlo cambiando el tipo de renderizador a “Pseudocolor monobanda”. En esta pantalla, tenemos dos opciones: bien elegir una rampa de color, bien crear nuestro propio estilo personalizado.</p>
+<p>Dependiendo del tipo de representación que nos interese, podemos clasificar los datos como valores continuos, en intervalos iguales o atendiendo a los cuantiles (“Modo”).</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_simbologia_raster.png" width="125%" style="display: block; margin: auto;"></div>
+<div class="rmdtip">
+<p>¡RECUERDA!
+Puedes usar tus personalizados también con las capas ráster monobanda.</p>
+</div>
+</div>
+</div>
+<div id="configuración-y-personalización-de-qgis" class="section level2" number="5.5">
+<h2>
+<span class="header-section-number">5.5</span> Configuración y personalización de QGIS<a class="anchor" aria-label="anchor" href="#configuraci%C3%B3n-y-personalizaci%C3%B3n-de-qgis"><i class="fas fa-link"></i></a>
+</h2>
+<p>Podemos personalizar diversas opciones del programa, tanto si pretendemos configurar una carpeta predeterminada donde buscar archivos compatibles con QGIS, como si necesitamos modificar la representación de las capas o las propuestas de escalas y SRC predeterminados. Para ello, pinchamos en la pestaña “Configuración”, en la parte superior de la barra de herramientas, y, luego, en “Opciones”. A continuación, se despliega un panel con idéntica interfaz al menú “Propiedades de capa”, con algunas diferencias. Vamos a explorar algunas de las pestañas más importantes:</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_opciones_general.png" width="125%" style="display: block; margin: auto;"></div>
+<ul>
+<li>“General”: en ella, se pueden modificar ajustes genéricos, tales como el idioma o el estilo de la aplicación. También se puede modificar la apertura de archivos en coordinación con la apertura del programa, la posibilidad de marcar el proyecto actual como predeterminado, o el directorio en el que se almacenarán los proyectos. Para realizar esta última acción, tan solo debemos pinchar sobre el botón “Seleccionar carpeta” , y navegar por el sistema hasta encontrar la ruta
+deseada. Si queremos revertir esta acción, pulsamos sobre el botón “Restablecer”.</li>
+<li>“Sistema”: esta pestaña es interesante, si deseamos modificar distintas rutas de búsqueda de archivos:
+<ul>
+<li>“Rutas de SVG”: direcciones en las que QGIS busca símbolos de Gráficos Vectoriales Escalables.</li>
+<li>“Rutas a los complementos”: direcciones en las que buscar complementos adicionales para la visualización del proyecto. Por defecto, no viene ninguna predeterminada.</li>
+<li>“Rutas de documentación”: direcciones en las que buscar ayuda para utilizar QGIS. Por defecto, se encuentra seleccionada la que conduce al manual del usuario, en la web oficial de QGIS.</li>
+</ul>
+</li>
+</ul>
+<p>Para modificar cualquiera de estas rutas, basta con copiar el enlace de la nueva que queremos incluir, y pulsar en el botón “Añadir nueva ruta”. Si deseamos borrar una de las ya existentes, pulsamos sobre “Eliminar ruta”.
+* “Representación”: en ella tenemos la posibilidad de modificar diversos aspectos relacionados con la representación de las capas, tales como la segmentación de curvas, la calidad de la representación, o las ca
+racterísticas de las bandas de los ráster.
+* “Herramientas de mapa”: aquí podemos cambiar el modo de identificación de objetos espaciales, las herramientas de medida, el zoom, y las escalas predefinidas.</p>
+<p>Existen otras pestañas con funciones muy útiles a la hora de personalizar nuestro proyecto, como “Colores”, “Digitalización”, o “Composiciones”, las cuales iremos investigando en el futuro.</p>
+<div class="infobox caution">
+<p>Mientras estés dando tus primeros pasos en QGIS, no es recomendable pinchar en la pestaña “Avanzado”, ya que, como verás, cualquiera de los cambios que realices se guardará automáticamente, y puede estropear la instalación de QGIS en tu equipo. Es aconsejable que te familiarices con el programa antes de realizar modificaciones más profundas.</p>
+</div>
+</div>
+<div id="trabajar-con-datos-vía-web" class="section level2" number="5.6">
+<h2>
+<span class="header-section-number">5.6</span> Trabajar con datos vía web<a class="anchor" aria-label="anchor" href="#trabajar-con-datos-v%C3%ADa-web"><i class="fas fa-link"></i></a>
+</h2>
+<p>No siempre es cómodo tener que descargarse los datos y los archivos de la nube, ya sea por la cantidad de espacio que ocupan en nuestro dispositivo, como la dificultad de navegar por los archivos hasta encontrar lo que buscamos. Por eso, QGIS permite trabajar con información geográfica online gracias a los recursos <strong>WMS</strong> (<em>Web Mapping Service</em>) y <strong>WMTS</strong> (<em>Web Map Tile Service</em>) que pone a nuestra disposición.</p>
+<p>Para cargar estos datos, pinchamos en la pestaña “Capa” y en la opción “Añadir capa”. En el desplegable seleccionamos “Añadir capa WMS/WMTS”, apareciendo ante nosotros una nueva ventana del “Administrador de capas”. En ella, seleccionamos la pestaña “Búsqueda de servidor”, e insertamos la URL de la que necesitamos extraer información. En la parte inferior, es posible poner nombre a la nueva capa, así como añadir la dirección a la lista de WMS.</p>
+<div class="inline-figure"><img src="imagenes/Pantallazo_WMS.png" width="125%" style="display: block; margin: auto;"></div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-4" class="exercise"><strong>Exercise 5.4  </strong></span>Para practicar, vamos a añadir una capa de ortofotografía de toda la Comunidad de Madrid, que nos puede ser de utilidad más adelante. Todas las capas de índole, relativas a esta región, se pueden encontrar en el Catálogo de Información Geográfica de la Comunidad de Madrid (IDEM). Los pasos a seguir serán:</p>
+<ol style="list-style-type: decimal">
+<li>Entrar en el IDEM y localizar la capa Mosaico de ortofotografías aéreas de 25 cm de resolución del PNOA.
+<ul>
+<li><a href="https://www.comunidad.madrid/servicios/mapas/geoportal-comunidad-madrid" class="uri">https://www.comunidad.madrid/servicios/mapas/geoportal-comunidad-madrid</a></li>
+<li><a href="https://idem.comunidad.madrid/catalogocartografia/srv/spa/catalog.search#/home" class="uri">https://idem.comunidad.madrid/catalogocartografia/srv/spa/catalog.search#/home</a></li>
+</ul>
+</li>
+<li>Copiar en el portapapeles el enlace correspondiente al servicio WMS.</li>
+<li>Ya en QGIS, abrimos el menú “Añadir capa WMS/WMTS” &gt; “Nuevo”, para generar una nueva conexión rápida a este servidor.</li>
+<li>En el apartado nombre, elegimos una denominación que distinga a esta capa de las demás (ej.: Ortofotografía Madrid PNOA), mientras que en URL pegamos la dirección anteriormente copiada.</li>
+</ol>
+<p>Al pinchar en “Aceptar”, veremos que se ha creado un acceso rápido a esa información en concreto. Puedes volver a utilizarlo todas las veces que quieras, pinchando en “Conectar” (para que QGIS tenga acceso a la información <em>online</em>), y seleccionando la capa a añadir en el proyecto.</p>
+</div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-5" class="exercise"><strong>Exercise 5.5  </strong></span>Ir al IDEE idee.se &gt; directorio de servicios &gt; elegir (p.e., ocupación suelo histórico, que da CORINEs y SIOSEs), para evaluar cualitativamente la coincidencia de los usos del suelo descritos por CORINE y SIOSE con los registrados en el parcelario.
++ <a href="https://www.idee.es/" class="uri">https://www.idee.es/</a>
++ <a href="https://www.idee.es/web/idee/segun-tipo-de-servicio" class="uri">https://www.idee.es/web/idee/segun-tipo-de-servicio</a></p>
+</div>
+<div class="infobox exercise">
+<p><span id="exr:unlabeled-div-6" class="exercise"><strong>Exercise 5.6  </strong></span>Representar el catastro para identificar las parcelas donde se observaron sisones.
++ <a href="https://www.catastro.minhap.es/webinspire/index.html" class="uri">https://www.catastro.minhap.es/webinspire/index.html</a>
++ <a href="http://ovc.catastro.meh.es/cartografia/INSPIRE/spadgcwms.aspx" class="uri">http://ovc.catastro.meh.es/cartografia/INSPIRE/spadgcwms.aspx</a></p>
+</div>
+<div class="rmdtip">
+<p>¡RECUERDA!
+Gran parte de la información geográfica de un territorio está disponible en los Servicios de Información Geográfica de las CCAA, por lo que, en muchos casos, no tendrás que generar la información desde cero, pero sí pulirla y ajustarla al objetivo de tu proyecto.</p>
+<p>Puedes previsualizar el contenido de la capa en la web del IDEM, para comprobar que, efectivamente, es la que necesitas.</p>
+</div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="fundamentos-cartograf%C3%ADa.html"><span class="header-section-number">4</span> Fundamentos cartografía</a></div>
+<div class="next"><a href="geodatabases.html"><span class="header-section-number">6</span> Geodatabases</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#presentaci%C3%B3n-de-qgis"><span class="header-section-number">5</span> Presentación de QGIS</a></li>
+<li><a class="nav-link" href="#pesta%C3%B1a-de-proyectos-y-propiedades"><span class="header-section-number">5.1</span> Pestaña de proyectos y propiedades</a></li>
+<li><a class="nav-link" href="#a%C3%B1adir-capas-y-navegar-por-la-vista"><span class="header-section-number">5.2</span> Añadir capas y navegar por la vista</a></li>
+<li>
+<a class="nav-link" href="#capas-vectoriales"><span class="header-section-number">5.3</span> Capas vectoriales</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#propiedades-de-la-capa"><span class="header-section-number">5.3.1</span> Propiedades de la capa</a></li>
+<li><a class="nav-link" href="#crear-un-shapefile"><span class="header-section-number">5.3.2</span> Crear un shapefile</a></li>
+<li><a class="nav-link" href="#crear-un-shapefile-desde-un-archivo-de-excel"><span class="header-section-number">5.3.3</span> Crear un shapefile desde un archivo de Excel</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#capas-r%C3%A1ster"><span class="header-section-number">5.4</span> Capas ráster</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#propiedades"><span class="header-section-number">5.4.1</span> Propiedades</a></li>
+<li><a class="nav-link" href="#visualizaci%C3%B3n"><span class="header-section-number">5.4.2</span> Visualización</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#configuraci%C3%B3n-y-personalizaci%C3%B3n-de-qgis"><span class="header-section-number">5.5</span> Configuración y personalización de QGIS</a></li>
+<li><a class="nav-link" href="#trabajar-con-datos-v%C3%ADa-web"><span class="header-section-number">5.6</span> Trabajar con datos vía web</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/02-Operaciones_con_SIG.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/02-Operaciones_con_SIG.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Aplicaciones de SIG y TD en Ecología</strong>: Manual de prácticas en QGIS" was written by <a href="http://teguam.es/miembros/javier-seoane/">Javier Seoane Pinilla</a>, <a href="https://teguam.es/miembros/pablo-acebes-vives/">Pablo Acebes Vives</a>. It was last built on 20 September, 2024.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
