@@ -1,0 +1,11 @@
+book_filename: "Guion-SIG-TD"
+new_session: true # TRUE: first Knit and then Merge, FALSE: M and then K
+before_chapter_script: _common.R
+delete_merged_file: true
+output_dir: docs # nombre de la carpeta donde GitHub Pages busca los html
+language:
+  ui:
+    chapter_name: "Capítulo " 
+    exercise_name: "Ejercicio"
+    fig: "Figura " 
+    tab: "Tabla " 
